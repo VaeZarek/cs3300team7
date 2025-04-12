@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create/Update Recruiter Profile</title>
+</head>
+<body>
+    <h1>Create/Update Recruiter Profile</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ profile_form.as_p }}
+        <button type="submit">Save Profile</button>
+    </form>
+    <p><a href="{% url 'recruiter_dashboard' %}">Back to Dashboard</a></p>
+</body>
+</html>

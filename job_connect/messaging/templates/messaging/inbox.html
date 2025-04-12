@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inbox</title>
+</head>
+<body>
+    <h1>Inbox</h1>
+    <ul>
+        {% for message in messages %}
+            <li>
+                {% if message.read %}
+                    <a href="{% url 'view_message' message.id %}">From: {{ message.sender.username }} - {{ message.subject }} ({{ message.created_at }})</a>
+                {% else %}
+                    <strong><a href="{% url 'view_message' message.id %}">From: {{ message.sender.username }} - {{ message.subject }} ({{ message.created_at }}) - Unread</a></strong>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No messages in your inbox.</li>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'compose_message' %}">Compose New Message</a> | <a href="{% url 'sent_messages' %}">Sent Messages</a></p>
+</body>
+</html>

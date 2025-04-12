@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sent Messages</title>
+</head>
+<body>
+    <h1>Sent Messages</h1>
+    <ul>
+        {% for message in messages %}
+            <li><a href="{% url 'view_message' message.id %}">To: {{ message.recipient.username }} - {{ message.subject }} ({{ message.created_at }})</a></li>
+        {% empty %}
+            <li>No messages sent.</li>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'compose_message' %}">Compose New Message</a> | <a href="{% url 'inbox' %}">Inbox</a></p>
+</body>
+</html>
