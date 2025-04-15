@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Applications</title>
+</head>
+<body>
+    <h1>Your Job Applications</h1>
+
+    {% if applications %}
+        <ul>
+            {% for application in applications %}
+                <li>Applied for: {{ application.job.title }} on {{ application.applied_date }} (Status: {{ application.status }})</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't applied for any jobs yet.</p>
+        <p><a href="{% url 'job_list' %}">Browse available jobs</a></p>
+    {% endif %}
+
+    <p><a href="{% url 'applicant_dashboard' %}">Back to Dashboard</a></p>
+</body>
+</html>

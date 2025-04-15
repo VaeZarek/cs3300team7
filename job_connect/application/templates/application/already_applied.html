@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Already Applied</title>
+</head>
+<body>
+    <h1>Already Applied</h1>
+    <p>You have already applied for the job "{{ job.title }}".</p>
+    <p><a href="{% url 'job_detail' job.id %}">Back to Job Details</a></p>
+</body>
+</html>

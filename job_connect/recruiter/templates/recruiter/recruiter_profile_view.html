@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recruiter Profile</title>
+</head>
+<body>
+    <h1>{{ profile.user.username }}'s Company Profile</h1>
+    <p><strong>Company Name:</strong> {{ profile.company_name }}</p>
+    {% if profile.company_website %}
+        <p><strong>Website:</strong> <a href="{{ profile.company_website }}" target="_blank">{{ profile.company_website }}</a></p>
+    {% endif %}
+    <p><strong>Description:</strong> {{ profile.description|linebreaksbr }}</p>
+    <p><a href="{% url 'recruiter_profile_update' %}">Edit Profile</a> | <a href="{% url 'recruiter_dashboard' %}">Back to Dashboard</a></p>
+</body>
+</html>
