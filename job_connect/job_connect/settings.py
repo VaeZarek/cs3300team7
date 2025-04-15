@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'recruiter',
     'job',
     'application',
-    'messaging',
+    #'messaging',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +128,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+"""
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField' ensures that when you 
+don't explicitly define a primary key in your Django models, Django will 
+automatically create a 64-bit auto-incrementing integer field for you, 
+providing a larger range of values for your database records. 
+"""

@@ -1,0 +1,77 @@
+job package
+===========
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   job.migrations
+
+Submodules
+----------
+
+job.admin module
+----------------
+
+.. automodule:: job.admin
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+job.apps module
+---------------
+
+.. automodule:: job.apps
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+job.forms module
+----------------
+
+.. automodule:: job.forms
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+job.models module
+-----------------
+
+.. automodule:: job.models
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+job.tests module
+----------------
+
+.. automodule:: job.tests
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+job.urls module
+---------------
+
+.. automodule:: job.urls
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+job.views module
+----------------
+
+.. automodule:: job.views
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: job
+   :members:
+   :show-inheritance:
+   :undoc-members:
