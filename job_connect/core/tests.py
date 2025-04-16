@@ -196,7 +196,7 @@ class LoginViewTest(TestCase):
         response = self.client.post(self.login_url, form_data)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'core/login.html')
-        self.assertIn('Invalid username and/or password.', str(response.content))
+        self.assertIn('Please enter a correct username and password.', str(response.content))
         self.assertFalse(self.client.session.get('_auth_user_id'))
 
 class LogoutViewTest(TestCase):

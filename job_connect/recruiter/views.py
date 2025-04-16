@@ -79,8 +79,14 @@ class ApplicationUpdateStatusView(RecruiterRequiredMixin, FormView):
 
 @login_required
 def recruiter_dashboard(request):
-    """View for the recruiter's main dashboard."""
-    return render(request, 'recruiter/recruiter_dashboard.html')
+    job_postings = Job.objects.filter(recruiter=request.user)  # Get recruiter's job postings
+    applications = Application.objects.filter(job__recruiter=request.user) # Get applications to those jobs
+
+    context = {
+        'job_postings': job_postings,
+        'applications': applications,
+    }
+    return render(request, 'recruiter/recruiter_dashboard.html', context)
 
 @login_required
 def recruiter_job_list(request):
