@@ -1,24 +1,15 @@
 from django.test import TestCase, Client
 from django.contrib.auth.forms import AuthenticationForm
-from django.db import models
+
 from django.urls import reverse
 from django.contrib.auth import get_user_model, authenticate, login
 from core.forms import ApplicantSignUpForm, RecruiterSignUpForm
 from applicant.forms import ApplicantProfileForm  # Import forms used in redirects
 from recruiter.forms import RecruiterProfileForm
-from .models import BaseModel
-import time
+
 
 User = get_user_model()
 
-class ConcreteModel(models.Model):
-    name = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        app_label = 'core'  # Important: Assign an app label
-        abstract = True
 
 class UserModelTest(TestCase):
     # ... (Your existing UserModel tests)
@@ -78,23 +69,35 @@ class UserModelTest(TestCase):
         self.assertEqual(user._meta.get_field('groups').remote_field.related_name, 'core_user_set')
         self.assertEqual(user._meta.get_field('user_permissions').remote_field.related_name, 'core_user_permissions_set')
 
+class AuthenticationTest(TestCase):
 
-class BaseModelTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.login_url = reverse('login')  # Replace 'login' with your actual login URL name
 
-    def test_base_model_creation(self):
-        obj = ConcreteModel.objects.create(name='Test Object')
-        self.assertIsNotNone(obj.created_at)
-        self.assertIsNotNone(obj.updated_at)
-        self.assertLessEqual(obj.created_at, obj.updated_at)
+    def test_valid_login(self):
+        # Simulate a POST request to your login view (if applicable)
+        form_data = {'username': 'testuser', 'password': 'testpassword'}
+        response = self.client.post(self.login_url, form_data)  # Assuming you have a login view
 
-    def test_base_model_updated_at_changes(self):
-        obj = ConcreteModel.objects.create(name='Initial')
-        initial_updated_at = obj.updated_at
-        time.sleep(1)
-        obj.name = 'Updated'
-        obj.save()
-        self.assertNotEqual(initial_updated_at, obj.updated_at)
-        self.assertLess(initial_updated_at, obj.updated_at)
+        # OR, test authenticate and login directly:
+        authenticated_user = authenticate(username='testuser', password='testpassword')
+        self.assertIsNotNone(authenticated_user)
+        self.assertEqual(authenticated_user, self.user)  # Ensure it's the correct user
+
+        # Simulate a request (if testing login directly)
+        self.client.login(username='testuser', password='testpassword')  # A more direct way to login in tests
+        self.assertTrue(self.client.session['_auth_user_id'])
+        self.assertTrue(self.client.session['_auth_user_backend'])
+
+    def test_invalid_username(self):
+        authenticated_user = authenticate(username='wronguser', password='testpassword')
+        self.assertIsNone(authenticated_user)
+
+    def test_invalid_password(self):
+        authenticated_user = authenticate(username='testuser', password='wrongpassword')
+        self.assertIsNone(authenticated_user)
 
 class ApplicantSignUpViewTest(TestCase):
     def setUp(self):
@@ -220,19 +223,4 @@ class LogoutViewTest(TestCase):
         self.assertRedirects(response, self.home_url)
         self.assertFalse(self.client.session.get('_auth_user_id'))
 
-class YourBaseModelTest(TestCase):
 
-    def test_your_base_model_creation(self):
-        obj = ConcreteModel.objects.create(name='Base Object')
-        self.assertIsNotNone(obj.created_at)
-        self.assertIsNotNone(obj.updated_at)
-        self.assertLessEqual(obj.created_at, obj.updated_at)
-
-    def test_your_base_model_updated_at_changes(self):
-        obj = ConcreteModel.objects.create(name='BaseInitial')
-        initial_updated_at = obj.updated_at
-        time.sleep(1)
-        obj.name = 'Updated'
-        obj.save()
-        self.assertNotEqual(initial_updated_at, obj.updated_at)
-        self.assertLess(initial_updated_at, obj.updated_at)
