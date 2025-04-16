@@ -1,13 +1,24 @@
 from django.test import TestCase, Client
 from django.contrib.auth.forms import AuthenticationForm
+from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model, authenticate, login
 from core.forms import ApplicantSignUpForm, RecruiterSignUpForm
 from applicant.forms import ApplicantProfileForm  # Import forms used in redirects
 from recruiter.forms import RecruiterProfileForm
-from . import models  # Import your models
+from .models import BaseModel
+import time
 
 User = get_user_model()
+
+class ConcreteModel(models.Model):
+    name = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        app_label = 'core'  # Important: Assign an app label
+        abstract = True
 
 class UserModelTest(TestCase):
     # ... (Your existing UserModel tests)
@@ -69,45 +80,21 @@ class UserModelTest(TestCase):
 
 
 class BaseModelTest(TestCase):
-    # ... (Your existing BaseModel tests)
+
     def test_base_model_creation(self):
-        class TestModel(models.Model):  # Use models from import
-            name = models.CharField(max_length=100)
-            created_at = models.DateTimeField(auto_now_add=True)
-            updated_at = models.DateTimeField(auto_now=True)
-
-            class Meta:
-                abstract = True
-
-        class ConcreteModel(TestModel):
-            pass
-
         obj = ConcreteModel.objects.create(name='Test Object')
         self.assertIsNotNone(obj.created_at)
         self.assertIsNotNone(obj.updated_at)
         self.assertLessEqual(obj.created_at, obj.updated_at)
 
     def test_base_model_updated_at_changes(self):
-        import time
-        class TestModel(models.Model):  # Use models from import
-            name = models.CharField(max_length=100)
-            created_at = models.DateTimeField(auto_now_add=True)
-            updated_at = models.DateTimeField(auto_now=True)
-
-            class Meta:
-                abstract = True
-
-        class ConcreteModel(TestModel):
-            pass
-
         obj = ConcreteModel.objects.create(name='Initial')
         initial_updated_at = obj.updated_at
-        time.sleep(1) # Ensure some time passes
+        time.sleep(1)
         obj.name = 'Updated'
         obj.save()
         self.assertNotEqual(initial_updated_at, obj.updated_at)
         self.assertLess(initial_updated_at, obj.updated_at)
-
 
 class ApplicantSignUpViewTest(TestCase):
     def setUp(self):
@@ -232,3 +219,20 @@ class LogoutViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertRedirects(response, self.home_url)
         self.assertFalse(self.client.session.get('_auth_user_id'))
+
+class YourBaseModelTest(TestCase):
+
+    def test_your_base_model_creation(self):
+        obj = ConcreteModel.objects.create(name='Base Object')
+        self.assertIsNotNone(obj.created_at)
+        self.assertIsNotNone(obj.updated_at)
+        self.assertLessEqual(obj.created_at, obj.updated_at)
+
+    def test_your_base_model_updated_at_changes(self):
+        obj = ConcreteModel.objects.create(name='BaseInitial')
+        initial_updated_at = obj.updated_at
+        time.sleep(1)
+        obj.name = 'Updated'
+        obj.save()
+        self.assertNotEqual(initial_updated_at, obj.updated_at)
+        self.assertLess(initial_updated_at, obj.updated_at)
