@@ -7,4 +7,7 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('', views.home, name='home'),
+    # Add these lines:
+    #path('profile/applicant/create/', views.applicant_profile_create, name='applicant_profile_create'),
+    #path('profile/recruiter/create/', views.recruiter_profile_create, name='recruiter_profile_create'),
 ]
