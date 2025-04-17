@@ -17,12 +17,12 @@
                 {% if application.cover_letter %}
                     <p><strong>Cover Letter:</strong><br>{{ application.cover_letter|linebreaksbr|truncatewords:50 }} <a href="#">Read More</a></p>
                 {% endif %}
-                <a href="{% url 'application_update_status' application.id %}">Update Status</a>
+                <a href="{% url 'application:application_update_status' application.id %}">Update Status</a>
             </li>
         {% empty %}
             <li>No applications received yet.</li>
         {% endfor %}
     </ul>
-    <p><a href="{% url 'recruiter_job_list' %}">Back to My Job Listings</a></p>
+    <p><a href="{% url 'recruiter:recruiter_job_list' %}">Back to My Job Listings</a></p>
 </body>
 </html>

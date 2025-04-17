@@ -64,7 +64,7 @@ class ApplicationUpdateStatusView(RecruiterRequiredMixin, FormView):
         return get_object_or_404(Application, pk=self.kwargs['pk'], job__recruiter__user=self.request.user)
 
     def get_success_url(self):
-        return reverse('recruiter_job_applications_list') # Redirect back to the list
+        return reverse('recruiter:recruiter_job_applications_list') # Redirect back to the list
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -79,8 +79,15 @@ class ApplicationUpdateStatusView(RecruiterRequiredMixin, FormView):
 
 @login_required
 def recruiter_dashboard(request):
-    """View for the recruiter's main dashboard."""
-    return render(request, 'recruiter/recruiter_dashboard.html')
+    recruiter_profile = RecruiterProfile.objects.get(user=request.user)
+    job_postings = Job.objects.filter(recruiter=recruiter_profile)
+    applications = Application.objects.filter(job__recruiter=recruiter_profile) # Use recruiter_profile
+
+    context = {
+        'job_postings': job_postings,
+        'applications': applications,
+    }
+    return render(request, 'recruiter/recruiter_dashboard.html', context)
 
 @login_required
 def recruiter_job_list(request):

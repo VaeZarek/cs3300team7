@@ -4,8 +4,8 @@ from core.models import BaseModel
 
 class ApplicantProfile(BaseModel):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='applicant_profile')
-    headline = models.CharField(max_length=255, blank=True)
-    summary = models.TextField(blank=True)
+    headline = models.CharField(max_length=255)
+    summary = models.TextField(max_length=255)
     skills = models.ManyToManyField('self', symmetrical=False, blank=True, related_name='skilled_applicants') # Example: Tags for skills
     experience = models.ManyToManyField('Experience', blank=True)
     education = models.ManyToManyField('Education', blank=True)
