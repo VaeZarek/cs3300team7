@@ -2,8 +2,9 @@ from django.test import TestCase, Client
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse
 from django.contrib.auth import get_user_model, authenticate, login
-
+from recruiter.models import RecruiterProfile
 from core.forms import ApplicantSignUpForm, RecruiterSignUpForm
+from core.tests._test_helpers import SignUpViewTest
 
 User = get_user_model()
 
@@ -107,11 +108,18 @@ class LoginViewTest(TestCase):
 class LogoutViewTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.logout_url = reverse('logout')
+        self.login_url = reverse('login')
+        self.applicant = get_user_model().objects.create_user(
+            username='test_applicant', password='testpass', user_type='applicant'
+        )
+        self.recruiter = get_user_model().objects.create_user(
+            username='test_recruiter', password='testpass', user_type='recruiter'
+        )
+        # Create a RecruiterProfile for the recruiter user
+        RecruiterProfile.objects.create(user=self.recruiter)
+        self.applicant_dashboard_url = reverse('applicant_dashboard')  # Assuming this URL name
+        self.recruiter_dashboard_url = reverse('recruiter_dashboard')  # Assuming this URL name
         self.home_url = reverse('home')
-        self.user = User.objects.create_user(username='logged_in_user', password='password', user_type='applicant')
-        self.client.login(username='logged_in_user', password='password')
-        self.assertTrue(self.client.session.get('_auth_user_id'))
 
     def test_logout_get(self):
         response = self.client.get(self.logout_url, follow=True)
@@ -126,34 +134,6 @@ class LogoutViewTest(TestCase):
         self.assertFalse(self.client.session.get('_auth_user_id'))
 
 
-class SignUpViewTest(TestCase):  # Abstract class for shared signup tests
-    def setUp(self):
-        self.client = Client()
-
-    def test_signup_get(self):
-        response = self.client.get(self.signup_url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, self.template_name)
-        self.assertIsInstance(response.context['form'], self.form_class)
-
-    def test_signup_post_valid(self):
-        form_data = {'username': 'new_user', 'email': 'new_user@example.com', 'password': 'securepass', 'password2': 'securepass'}
-        response = self.client.post(self.signup_url, form_data)
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, self.profile_create_url)
-        self.assertEqual(User.objects.count(), 1)
-        user = User.objects.get(username='new_user')
-        self.assertEqual(user.user_type, self.user_type)
-        self.assertTrue(user.is_authenticated)
-
-    def test_signup_post_invalid(self):
-        form_data = {'username': 'bad_user', 'email': 'bad@example.com', 'password': 'short', 'password2': 'short'}
-        response = self.client.post(self.signup_url, form_data)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, self.template_name)
-        self.assertIsInstance(response.context['form'], self.form_class)
-        self.assertIn('password', response.context['form'].errors)
-        self.assertEqual(User.objects.count(), 0)
 
 
 class ApplicantSignUpViewTest(SignUpViewTest):
