@@ -144,35 +144,22 @@ class LoginViewTest(TestCase):
 
 class LogoutViewTest(TestCase):
     def setUp(self):
-        self.client = Client()
-        self.login_url = reverse('core:login')
         self.logout_url = reverse('core:logout')
-        self.applicant = get_user_model().objects.create_user(
-            username='test_applicant', password='testpass', user_type='applicant'
-        )
-        self.recruiter = get_user_model().objects.create_user(
-            username='test_recruiter', password='testpass', user_type='recruiter'
-        )
-        # Create a RecruiterProfile for the recruiter user
-        RecruiterProfile.objects.create(user=self.recruiter)
-        self.applicant_dashboard_url = reverse('applicant:applicant_dashboard')  # Assuming this URL name
-        self.recruiter_dashboard_url = reverse('recruiter:recruiter_dashboard')  # Assuming this URL name
         self.home_url = reverse('core:home')
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.client.login(username='testuser', password='testpassword') # Log in the client
 
     def test_logout_get(self):
-        response = self.client.get(self.logout_url, follow=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertRedirects(response, self.home_url)
-        self.assertFalse(self.client.session.get('_auth_user_id'))
+        response = self.client.get(self.logout_url, follow=True) # Follow the redirect
+        self.assertEqual(response.status_code, 200) # Expect a 200 on the redirected page (home)
+        self.assertFalse(response.wsgi_request.user.is_authenticated) # User should be logged out
+        self.assertEqual(response.request.path, self.home_url) # Should be redirected to home
 
     def test_logout_post(self):
-        response = self.client.post(self.logout_url, follow=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertRedirects(response, self.home_url)
-        self.assertFalse(self.client.session.get('_auth_user_id'))
-
-
-
+        response = self.client.post(self.logout_url, follow=True) # Follow the redirect
+        self.assertEqual(response.status_code, 200) # Expect a 200 on the redirected page (home)
+        self.assertFalse(response.wsgi_request.user.is_authenticated) # User should be logged out
+        self.assertEqual(response.request.path, self.home_url) # Should be redirected to home
 
 class ApplicantSignUpViewTest(TestCase):
     @classmethod

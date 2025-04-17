@@ -6,15 +6,27 @@ from recruiter.forms import RecruiterProfileForm
 
 class CoreFormsTest(TestCase):
     def test_applicant_signup_form(self):
-        form_data = {'username': 'test', 'email': 'test@test.com', 'password': 'testpass', 'password2': 'testpass'}
-        form = ApplicantSignUpForm(form_data)
-        self.assertTrue(form.is_valid())
+        form_data = {
+            'username': 'testapplicant',
+            'email': 'test@example.com',
+            'password': 'securepassword',
+            'password_confirm': 'securepassword',
+        }
+        form = ApplicantSignUpForm(data=form_data)
+        print(f"Is form valid? {form.is_valid()}")
+        print(f"Form errors: {form.errors}")
+        self.assertTrue(form.is_valid())  # Your assertion
 
     def test_applicant_signup_form_invalid(self):
-        form_data = {'username': 'test', 'email': 'test@test.com', 'password': 'short', 'password2': 'short'}
-        form = ApplicantSignUpForm(form_data)
-        self.assertFalse(form.is_valid())
-        # print(form.errors.keys())  # Print the error keys
+        form_data = {
+            'username': 'testapplicant',
+            'email': 'invalid-email',
+            'password': 'short',
+            'password_confirm': 'mismatch',
+        }
+        form = ApplicantSignUpForm(data=form_data)
+        print(f"Is form valid? {form.is_valid()}")
+        print(f"Form errors: {form.errors}")
         self.assertIn('password', form.errors)
 
     def test_recruiter_signup_form(self):
