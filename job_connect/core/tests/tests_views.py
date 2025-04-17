@@ -186,7 +186,7 @@ class ApplicantSignUpViewTest(SignUpViewTest):
         form_data = {
             'username': 'testapplicant',
             'email': 'test@example.com',
-            'password': 'testpassword123',
+            'password1': 'testpassword123',
             'password2': 'testpassword123'
         }
         print(f"\n--- Running test_signup_post_valid for applicant ---")
@@ -204,7 +204,8 @@ class ApplicantSignUpViewTest(SignUpViewTest):
 
         print(f"Response status code: {response.status_code}")
         print(f"Response headers: {response.headers}")
-        print(f"Response content (first 500 chars): {response.content[:500].decode('utf-8') if response.content else 'No content'}")
+        print(
+            f"Response content (first 500 chars): {response.content[:500].decode('utf-8') if response.content else 'No content'}")
 
         try:
             created_user = User.objects.get(username='testapplicant')
@@ -216,8 +217,7 @@ class ApplicantSignUpViewTest(SignUpViewTest):
 
         self.assertRedirects(response, self.profile_create_url)
         self.assertTrue(User.objects.filter(username='testapplicant').exists())
-        # You can add more assertions here, like checking if the user is in the 'Applicant' group
-
+        # You can add more assertions here
 
 class RecruiterSignUpViewTest(SignUpViewTest):
     def setUp(self):
