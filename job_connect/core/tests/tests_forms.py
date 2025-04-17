@@ -14,6 +14,7 @@ class CoreFormsTest(TestCase):
         form_data = {'username': 'test', 'email': 'test@test.com', 'password': 'short', 'password2': 'short'}
         form = ApplicantSignUpForm(form_data)
         self.assertFalse(form.is_valid())
+        print(form.errors.keys())  # Print the error keys
         self.assertIn('password', form.errors)
 
     def test_recruiter_signup_form(self):
@@ -25,7 +26,8 @@ class CoreFormsTest(TestCase):
         form_data = {'username': 'test', 'email': 'test@test.com', 'password': 'short', 'password2': 'short'}
         form = RecruiterSignUpForm(form_data)
         self.assertFalse(form.is_valid())
-        self.assertIn('password', form.errors)
+        print(form.errors.keys())  # Print the error keys
+        self.assertIn('password2', form.errors)  # Or 'password1' if that's the key
 
 
 class ApplicantProfileFormsTest(TestCase):

@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -10,9 +11,19 @@ def applicant_signup(request):
     if request.method == 'POST':
         form = ApplicantSignUpForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            user = form.save()  # Create the user
+            # Assign the user to the 'Applicant' group
+            try:
+                applicant_group = Group.objects.get(name='Applicant')
+                user.groups.add(applicant_group)
+            except Group.DoesNotExist:
+                print("Error: Applicant group does not exist!")
+                # Create the group if it doesn't exist:
+                applicant_group = Group.objects.create(name='Applicant')
+                user.groups.add(applicant_group)
+
             login(request, user)
-            return redirect('applicant_profile_create') # Redirect to create profile
+            return redirect('applicant/applicant_profile_create')  # Redirect to create profile
     else:
         form = ApplicantSignUpForm()
     return render(request, 'core/applicant_signup.html', {'form': form})
@@ -22,8 +33,18 @@ def recruiter_signup(request):
         form = RecruiterSignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
+            # Assign the user to the 'Applicant' group
+            try:
+                recruiter_group = Group.objects.get(name='Recruiter')
+                user.groups.add(recruiter_group)
+            except Group.DoesNotExist:
+                print("Error: Applicant group does not exist!")
+                # Create the group if it doesn't exist:
+                recruiter_group = Group.objects.create(name='Recruiter')
+                user.groups.add(recruiter_group)
+
             login(request, user)
-            return redirect('recruiter_profile_create') # Redirect to create profile
+            return redirect('recruiter/recruiter_profile_create') # Redirect to create profile
     else:
         form = RecruiterSignUpForm()
     return render(request, 'core/recruiter_signup.html', {'form': form})
