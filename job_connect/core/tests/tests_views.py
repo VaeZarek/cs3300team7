@@ -209,7 +209,7 @@ class ApplicantSignUpViewTest(TestCase):
         print(f"Response headers: {response.headers}")
         print(
             f"Response content (first 500 chars): {response.content[:500].decode('utf-8') if response.content else 'No content'}")
-        print(f"Final request path: {response.request.path}")  # Correct way to get the final URL path
+        print(f"Final request PATH: {response.wsgi_request.path}")  # Correct way to get the final URL path
 
         try:
             created_user = User.objects.get(username='testapplicant')
@@ -220,7 +220,7 @@ class ApplicantSignUpViewTest(TestCase):
         print(f"Is user authenticated after post? {response.wsgi_request.user.is_authenticated}")
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.request.path, self.profile_create_url)  # Assert the final path
+        self.assertEqual(response.wsgi_request.path, self.profile_create_url)  # Assert the final path
         self.assertTrue(User.objects.filter(username='testapplicant').exists())
         self.assertTrue(created_user.groups.filter(name='Applicant').exists())
 
