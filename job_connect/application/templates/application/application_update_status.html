@@ -10,6 +10,6 @@
         {{ form.as_p }}
         <button type="submit">Update Status</button>
     </form>
-    <p><a href="{% url 'job_applications_list' application.job.id %}">Back to Applications for {{ application.job.title }}</a></p>
+    <p><a href="{% url 'job:job_applications_list' application.job.id %}">Back to Applications for {{ application.job.title }}</a></p>
 </body>
 </html>

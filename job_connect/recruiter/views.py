@@ -64,7 +64,7 @@ class ApplicationUpdateStatusView(RecruiterRequiredMixin, FormView):
         return get_object_or_404(Application, pk=self.kwargs['pk'], job__recruiter__user=self.request.user)
 
     def get_success_url(self):
-        return reverse('recruiter_job_applications_list') # Redirect back to the list
+        return reverse('recruiter:recruiter_job_applications_list') # Redirect back to the list
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

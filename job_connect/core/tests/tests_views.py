@@ -16,7 +16,7 @@ class AuthenticationViewTest(TestCase):  # Renamed for clarity
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_user(username='testuser', password='testpassword')
-        self.login_url = reverse('login')  # Replace 'login' with your actual login URL name
+        self.login_url = reverse('core:login')  # Replace 'login' with your actual login URL name
 
     def test_valid_login(self):
         # Simulate a POST request to your login view (if applicable)
@@ -87,9 +87,9 @@ class LoginViewTest(TestCase):
         )
         # Create the RecruiterProfile here:
         RecruiterProfile.objects.create(user=self.recruiter)  # Assuming 'RecruiterProfile' model exists
-        self.applicant_dashboard_url = reverse('applicant_dashboard')
-        self.recruiter_dashboard_url = reverse('recruiter_dashboard')
-        self.home_url = reverse('home')
+        self.applicant_dashboard_url = reverse('applicant:applicant_dashboard')
+        self.recruiter_dashboard_url = reverse('recruiter:recruiter_dashboard')
+        self.home_url = reverse('core:home')
 
     def test_login_get(self):
         response = self.client.get(self.login_url)
@@ -154,8 +154,8 @@ class LogoutViewTest(TestCase):
         )
         # Create a RecruiterProfile for the recruiter user
         RecruiterProfile.objects.create(user=self.recruiter)
-        self.applicant_dashboard_url = reverse('applicant_dashboard')  # Assuming this URL name
-        self.recruiter_dashboard_url = reverse('recruiter_dashboard')  # Assuming this URL name
+        self.applicant_dashboard_url = reverse('applicant:applicant_dashboard')  # Assuming this URL name
+        self.recruiter_dashboard_url = reverse('applicant:recruiter_dashboard')  # Assuming this URL name
         self.home_url = reverse('core:home')
 
     def test_logout_get(self):
@@ -177,7 +177,7 @@ class ApplicantSignUpViewTest(SignUpViewTest):
     def setUp(self):
         super().setUp()
         self.signup_url = reverse('core:applicant_signup')
-        self.profile_create_url = reverse('applicant:applicant_profile_createapplicant_profile_create')  # Assuming this URL name
+        self.profile_create_url = reverse('applicant:applicant_profile_create')  # Assuming this URL name
         self.template_name = 'core/applicant_signup.html'
         self.form_class = ApplicantSignUpForm
         self.user_type = 'applicant'

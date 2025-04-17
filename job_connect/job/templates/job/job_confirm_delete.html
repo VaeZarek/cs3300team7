@@ -9,7 +9,7 @@
     <form method="post">
         {% csrf_token %}
         <button type="submit">Yes, Delete</button>
-        <a href="{% url 'recruiter_job_list' %}">No, Go Back</a>
+        <a href="{% url 'recruiter:recruiter_job_list' %}">No, Go Back</a>
     </form>
 </body>
 </html>
