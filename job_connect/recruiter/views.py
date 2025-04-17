@@ -81,7 +81,7 @@ class ApplicationUpdateStatusView(RecruiterRequiredMixin, FormView):
 def recruiter_dashboard(request):
     recruiter_profile = RecruiterProfile.objects.get(user=request.user)
     job_postings = Job.objects.filter(recruiter=recruiter_profile)
-    applications = Application.objects.filter(job__recruiter=request.user) # Get applications to those jobs
+    applications = Application.objects.filter(job__recruiter=recruiter_profile) # Use recruiter_profile
 
     context = {
         'job_postings': job_postings,

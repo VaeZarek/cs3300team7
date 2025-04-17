@@ -155,7 +155,7 @@ class LogoutViewTest(TestCase):
         # Create a RecruiterProfile for the recruiter user
         RecruiterProfile.objects.create(user=self.recruiter)
         self.applicant_dashboard_url = reverse('applicant:applicant_dashboard')  # Assuming this URL name
-        self.recruiter_dashboard_url = reverse('applicant:recruiter_dashboard')  # Assuming this URL name
+        self.recruiter_dashboard_url = reverse('recruiter:recruiter_dashboard')  # Assuming this URL name
         self.home_url = reverse('core:home')
 
     def test_logout_get(self):

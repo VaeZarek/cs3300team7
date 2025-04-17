@@ -60,7 +60,7 @@ def login_view(request):
             elif user.is_recruiter():
                 return redirect('recruiter:recruiter_dashboard') # Define recruiter dashboard URL
             else:
-                return redirect('home') # Default redirect
+                return redirect('core:home') # Default redirect
     else:
         form = AuthenticationForm()
     return render(request, 'core/login.html', {'form': form})
