@@ -45,6 +45,7 @@ class LoginViewTest(TestCase):
     def setUp(self):
         self.client = Client()
         self.login_url = reverse('login')
+        self.logout_url = reverse('logout')
         self.applicant = get_user_model().objects.create_user(
             username='test_applicant', password='testpass', user_type='applicant'
         )
@@ -109,6 +110,7 @@ class LogoutViewTest(TestCase):
     def setUp(self):
         self.client = Client()
         self.login_url = reverse('login')
+        self.logout_url = reverse('logout')
         self.applicant = get_user_model().objects.create_user(
             username='test_applicant', password='testpass', user_type='applicant'
         )
