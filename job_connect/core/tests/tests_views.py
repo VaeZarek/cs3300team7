@@ -1,4 +1,5 @@
 import unittest
+from django.contrib.auth.models import Group
 from django.test import TestCase, Client
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse
@@ -173,11 +174,14 @@ class LogoutViewTest(TestCase):
 
 
 
-class ApplicantSignUpViewTest(SignUpViewTest):
+class ApplicantSignUpViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        Group.objects.create(name='Applicant')
+
     def setUp(self):
-        super().setUp()
         self.signup_url = reverse('core:applicant_signup')
-        self.profile_create_url = reverse('applicant:applicant_profile_create')  # Assuming this URL name
+        self.profile_create_url = reverse('applicant:applicant_profile_create')
         self.template_name = 'core/applicant_signup.html'
         self.form_class = ApplicantSignUpForm
         self.user_type = 'applicant'
@@ -194,7 +198,6 @@ class ApplicantSignUpViewTest(SignUpViewTest):
         print(f"Profile Create URL: {self.profile_create_url}")
         print(f"Form Data: {form_data}")
 
-        # Manually instantiate the form and check validity
         form = ApplicantSignUpForm(form_data)
         print(f"Is form valid before post? {form.is_valid()}")
         if not form.is_valid():
@@ -204,8 +207,7 @@ class ApplicantSignUpViewTest(SignUpViewTest):
 
         print(f"Response status code: {response.status_code}")
         print(f"Response headers: {response.headers}")
-        print(
-            f"Response content (first 500 chars): {response.content[:500].decode('utf-8') if response.content else 'No content'}")
+        print(f"Response content (first 500 chars): {response.content[:500].decode('utf-8') if response.content else 'No content'}")
 
         try:
             created_user = User.objects.get(username='testapplicant')
@@ -217,13 +219,30 @@ class ApplicantSignUpViewTest(SignUpViewTest):
 
         self.assertRedirects(response, self.profile_create_url)
         self.assertTrue(User.objects.filter(username='testapplicant').exists())
-        # You can add more assertions here
+        self.assertTrue(created_user.groups.filter(name='Applicant').exists()) # Verify group assignment
 
-class RecruiterSignUpViewTest(SignUpViewTest):
+
+class RecruiterSignUpViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        Group.objects.create(name='Recruiter')
+
     def setUp(self):
-        super().setUp()
         self.signup_url = reverse('core:recruiter_signup')
-        self.profile_create_url = reverse('recruiter:recruiter_profile_create')  # Assuming this URL name
+        self.profile_create_url = reverse('recruiter:recruiter_profile_create')
         self.template_name = 'core/recruiter_signup.html'
         self.form_class = RecruiterSignUpForm
         self.user_type = 'recruiter'
+
+    def test_signup_post_valid(self):
+        form_data = {
+            'username': 'testrecruiter',
+            'email': 'recruiter@example.com',
+            'password1': 'testpassword123',
+            'password2': 'testpassword123'
+        }
+        response = self.client.post(self.signup_url, form_data, follow=True)
+        self.assertRedirects(response, self.profile_create_url)
+        self.assertTrue(User.objects.filter(username='testrecruiter').exists())
+        created_user = User.objects.get(username='testrecruiter')
+        self.assertTrue(created_user.groups.filter(name='Recruiter').exists())
