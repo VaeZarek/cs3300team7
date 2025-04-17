@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model, authenticate, login
 from recruiter.models import RecruiterProfile
 from core.forms import ApplicantSignUpForm, RecruiterSignUpForm
+from core.urls import urlpatterns
 
 
 User = get_user_model()
@@ -76,8 +77,8 @@ class LoginViewTest(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.login_url = reverse('login')
-        self.logout_url = reverse('logout')
+        self.login_url = reverse('core:login')
+        self.logout_url = reverse('core:logout')
         self.applicant = get_user_model().objects.create_user(
             username='test_applicant', password='testpass', user_type='applicant'
         )
@@ -143,8 +144,8 @@ class LoginViewTest(TestCase):
 class LogoutViewTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.login_url = reverse('login')
-        self.logout_url = reverse('logout')
+        self.login_url = reverse('core:login')
+        self.logout_url = reverse('core:logout')
         self.applicant = get_user_model().objects.create_user(
             username='test_applicant', password='testpass', user_type='applicant'
         )
@@ -155,7 +156,7 @@ class LogoutViewTest(TestCase):
         RecruiterProfile.objects.create(user=self.recruiter)
         self.applicant_dashboard_url = reverse('applicant_dashboard')  # Assuming this URL name
         self.recruiter_dashboard_url = reverse('recruiter_dashboard')  # Assuming this URL name
-        self.home_url = reverse('home')
+        self.home_url = reverse('core:home')
 
     def test_logout_get(self):
         response = self.client.get(self.logout_url, follow=True)
@@ -175,8 +176,8 @@ class LogoutViewTest(TestCase):
 class ApplicantSignUpViewTest(SignUpViewTest):
     def setUp(self):
         super().setUp()
-        self.signup_url = reverse('applicant_signup')
-        self.profile_create_url = reverse('applicant_profile_create')  # Assuming this URL name
+        self.signup_url = reverse('core:applicant_signup')
+        self.profile_create_url = reverse('applicant:applicant_profile_createapplicant_profile_create')  # Assuming this URL name
         self.template_name = 'core/applicant_signup.html'
         self.form_class = ApplicantSignUpForm
         self.user_type = 'applicant'
@@ -185,8 +186,8 @@ class ApplicantSignUpViewTest(SignUpViewTest):
 class RecruiterSignUpViewTest(SignUpViewTest):
     def setUp(self):
         super().setUp()
-        self.signup_url = reverse('recruiter_signup')
-        self.profile_create_url = reverse('recruiter_profile_create')  # Assuming this URL name
+        self.signup_url = reverse('core:recruiter_signup')
+        self.profile_create_url = reverse('recruiter:recruiter_profile_create')  # Assuming this URL name
         self.template_name = 'core/recruiter_signup.html'
         self.form_class = RecruiterSignUpForm
         self.user_type = 'recruiter'
