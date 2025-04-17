@@ -71,4 +71,4 @@ def home(request):
 @login_required
 def logout_view(request):
     logout(request)
-    return redirect('home') # Redirect to homepage
+    return redirect('core:home') # Redirect to homepage

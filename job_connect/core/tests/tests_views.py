@@ -182,6 +182,42 @@ class ApplicantSignUpViewTest(SignUpViewTest):
         self.form_class = ApplicantSignUpForm
         self.user_type = 'applicant'
 
+    def test_signup_post_valid(self):
+        form_data = {
+            'username': 'testapplicant',
+            'email': 'test@example.com',
+            'password': 'testpassword123',
+            'password2': 'testpassword123'
+        }
+        print(f"\n--- Running test_signup_post_valid for applicant ---")
+        print(f"Signup URL: {self.signup_url}")
+        print(f"Profile Create URL: {self.profile_create_url}")
+        print(f"Form Data: {form_data}")
+
+        # Manually instantiate the form and check validity
+        form = ApplicantSignUpForm(form_data)
+        print(f"Is form valid before post? {form.is_valid()}")
+        if not form.is_valid():
+            print(f"Form errors: {form.errors}")
+
+        response = self.client.post(self.signup_url, form_data, follow=True)
+
+        print(f"Response status code: {response.status_code}")
+        print(f"Response headers: {response.headers}")
+        print(f"Response content (first 500 chars): {response.content[:500].decode('utf-8') if response.content else 'No content'}")
+
+        try:
+            created_user = User.objects.get(username='testapplicant')
+            print(f"User created successfully: {created_user}")
+        except User.DoesNotExist:
+            print("User NOT created!")
+
+        print(f"Is user authenticated after post? {response.wsgi_request.user.is_authenticated}")
+
+        self.assertRedirects(response, self.profile_create_url)
+        self.assertTrue(User.objects.filter(username='testapplicant').exists())
+        # You can add more assertions here, like checking if the user is in the 'Applicant' group
+
 
 class RecruiterSignUpViewTest(SignUpViewTest):
     def setUp(self):
