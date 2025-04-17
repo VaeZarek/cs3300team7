@@ -153,13 +153,13 @@ class LogoutViewTest(TestCase):
         response = self.client.get(self.logout_url, follow=True) # Follow the redirect
         self.assertEqual(response.status_code, 200) # Expect a 200 on the redirected page (home)
         self.assertFalse(response.wsgi_request.user.is_authenticated) # User should be logged out
-        self.assertEqual(response.request.path, self.home_url) # Should be redirected to home
+        self.assertEqual(response.wsgi_request.path, self.home_url) # Should be redirected to home
 
     def test_logout_post(self):
         response = self.client.post(self.logout_url, follow=True) # Follow the redirect
         self.assertEqual(response.status_code, 200) # Expect a 200 on the redirected page (home)
         self.assertFalse(response.wsgi_request.user.is_authenticated) # User should be logged out
-        self.assertEqual(response.request.path, self.home_url) # Should be redirected to home
+        self.assertEqual(response.wsgi_request.path, self.home_url) # Should be redirected to home
 
 class ApplicantSignUpViewTest(TestCase):
     @classmethod
