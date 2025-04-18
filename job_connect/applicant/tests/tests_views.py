@@ -6,7 +6,6 @@ from applicant.forms import ApplicantProfileForm, ExperienceFormSet, EducationFo
 from django.contrib.auth.models import Group
 from django.shortcuts import get_object_or_404
 
-
 User = get_user_model()  # Get your custom User model
 
 class ApplicantDashboardViewTest(TestCase):
