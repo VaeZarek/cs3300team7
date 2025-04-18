@@ -45,7 +45,6 @@ def applicant_profile_update(request):
             education_valid = education_formset.is_valid()
 
         if profile_valid and experience_valid and education_valid:
-            print("DEBUG: Redirecting now!")
             profile.headline = profile_form.cleaned_data['headline']
             profile.summary = profile_form.cleaned_data['summary']
             if 'skills' in profile_form.cleaned_data:
@@ -86,4 +85,3 @@ def applicant_applications(request):
         # Handle the case where the user doesn't have an ApplicantProfile
         applications = Application.objects.none()  # Empty queryset
         return render(request, 'applicant/applicant_applications_list.html', {'applications': applications})
-
