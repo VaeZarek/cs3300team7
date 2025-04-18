@@ -55,9 +55,14 @@ class ApplicantProfileUpdateViewTest(TestCase):
             'headline': 'Simple Update',
             'summary': 'Simple Summary',
         }
+        profile = ApplicantProfile.objects.get(user=self.user)
+        profile_form_test = ApplicantProfileForm(post_data, instance=profile)
+        print("\n--- test_post_request_only_profile_form ---")
+        print("Profile Form Valid:", profile_form_test.is_valid())
+        print("Profile Form Errors:", profile_form_test.errors)
+
         response = self.client.post(self.update_url, post_data, follow=True)
         self.assertEqual(response.status_code, 200)
-        print(f"Final URL (Only Profile Form): {response.wsgi_request.path}") # Debug print
         self.assertEqual(response.wsgi_request.path, self.profile_view_url)
         self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Simple Update')
 
@@ -89,13 +94,28 @@ class ApplicantProfileUpdateViewTest(TestCase):
             'education-0-major': 'Computer Science',
             'education-0-DELETE': False,
         }
+        profile = ApplicantProfile.objects.get(user=self.user)
+        profile_form_test = ApplicantProfileForm(post_data, instance=profile)
+        experience_formset_test = ExperienceFormSet(post_data, instance=profile)
+        education_formset_test = EducationFormSet(post_data, instance=profile)
+
+        print("\n--- test_post_request_updates_profile ---")
+        print("Profile Form Valid:", profile_form_test.is_valid())
+        print("Profile Form Errors:", profile_form_test.errors)
+        print("Experience Formset Valid:", experience_formset_test.is_valid())
+        print("Experience Formset Errors:", experience_formset_test.errors)
+        print("Education Formset Valid:", education_formset_test.is_valid())
+        print("Education Formset Errors:", education_formset_test.errors)
+
         response = self.client.post(self.update_url, post_data, follow=True)
         self.assertEqual(response.status_code, 200)
-        print(f"Final URL (All Forms): {response.wsgi_request.path}") # Debug print
         self.assertEqual(response.wsgi_request.path, self.profile_view_url)
         self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Updated Headline')
-        self.assertTrue(Experience.objects.filter(applicant_profile=self.applicant_profile, title='Software Engineer').exists())
-        self.assertTrue(Education.objects.filter(applicant_profile=self.applicant_profile, degree='Master of Science').exists())
+        self.assertTrue(
+            Experience.objects.filter(applicant_profile=self.applicant_profile, title='Software Engineer').exists())
+        self.assertTrue(
+            Education.objects.filter(applicant_profile=self.applicant_profile, degree='Master of Science').exists())
+
 
 class ApplicantProfileViewViewTest(TestCase):
     def setUp(self):
