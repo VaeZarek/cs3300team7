@@ -96,7 +96,7 @@ class ApplicantProfileUpdateViewTest(TestCase):
             'education-TOTAL_FORMS': '1',
             'education-INITIAL_FORMS': '0',
             'education-MIN_NUM_FORMS': '0',
-            'education-MAX_NUM_FORMS': '1000', # Typo here? Should be MAX_NUM_FORMS
+            'education-MAX_NUM_FORMS': '1000',
             'education-0-degree': 'Master of Science',
             'education-0-institution': 'University X',
             'education-0-graduation_date': '2022-05-01',
@@ -110,14 +110,12 @@ class ApplicantProfileUpdateViewTest(TestCase):
         print("\n--- test_post_request_updates_profile (Pre-POST Check) ---")
         print("Experience Formset Valid:", experience_formset_test.is_valid())
         print("Experience Formset Errors:", experience_formset_test.errors)
-        if experience_formset_test.is_valid():
-            for form in experience_formset_test.forms:
-                print("Experience Form Cleaned Data:", form.cleaned_data)
+        for form in experience_formset_test.forms:
+            print("Experience Form Cleaned Data:", form.cleaned_data)
         print("Education Formset Valid:", education_formset_test.is_valid())
         print("Education Formset Errors:", education_formset_test.errors)
-        if education_formset_test.is_valid():
-            for form in education_formset_test.forms:
-                print("Education Form Cleaned Data:", form.cleaned_data)
+        for form in education_formset_test.forms:
+            print("Education Form Cleaned Data:", form.cleaned_data)
 
         response = self.client.post(self.update_url, post_data, follow=True)
         self.assertEqual(response.status_code, 200)
