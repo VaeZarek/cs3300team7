@@ -74,7 +74,6 @@ class ApplicantProfileUpdateViewTest(TestCase):
         self.assertEqual(response.wsgi_request.path, self.profile_view_url)
         self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Simple Update')
 
-
     def test_post_request_updates_profile(self):
         post_data = {
             'headline': 'Updated Headline',
@@ -110,18 +109,16 @@ class ApplicantProfileUpdateViewTest(TestCase):
         print("\n--- test_post_request_updates_profile (Pre-POST Check) ---")
         print("Experience Formset Valid:", experience_formset_test.is_valid())
         print("Experience Formset Errors:", experience_formset_test.errors)
-        for form in experience_formset_test.forms:
-            print("Experience Form Cleaned Data:", form.cleaned_data)
         print("Education Formset Valid:", education_formset_test.is_valid())
         print("Education Formset Errors:", education_formset_test.errors)
-        for form in education_formset_test.forms:
-            print("Education Form Cleaned Data:", form.cleaned_data)
 
         response = self.client.post(self.update_url, post_data, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.wsgi_request.path, self.profile_view_url)
-        self.assertTrue(Experience.objects.filter(applicant_profile=self.applicant_profile, title='Software Engineer').exists())
-        self.assertTrue(Education.objects.filter(applicant_profile=self.applicant_profile, degree='Master of Science').exists())
+        self.assertTrue(
+            Experience.objects.filter(applicant_profile=self.applicant_profile, title='Software Engineer').exists())
+        self.assertTrue(
+            Education.objects.filter(applicant_profile=self.applicant_profile, degree='Master of Science').exists())
 
 class ApplicantProfileViewViewTest(TestCase):
     def setUp(self):
