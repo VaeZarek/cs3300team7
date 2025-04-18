@@ -70,6 +70,7 @@ class ApplicantProfileFormsTest(TestCase):
         print(f"\n--- test_experience_formset_valid_single_form ---")
         print(f"Is formset valid? {formset.is_valid()}")
         print(f"Formset errors: {formset.errors}")
+        print(f"Formset _errors: {formset._errors}")
         print(f"Non-form errors: {formset.non_form_errors()}")
         print(f"Formset error class: {formset.error_class}")
         for i, form in enumerate(formset.forms):
@@ -77,8 +78,7 @@ class ApplicantProfileFormsTest(TestCase):
             print(f"Form {i} cleaned_data: {form.cleaned_data}")
 
         self.assertTrue(formset.is_valid())
-        if formset.is_valid():
-            self.assertEqual(len(formset.errors), 0)
+        self.assertEqual(formset._errors, [])  # Check the internal _errors attribute
         self.assertTrue(formset.forms[0].is_valid())
         self.assertEqual(len(formset.forms[0].errors), 0)
 
