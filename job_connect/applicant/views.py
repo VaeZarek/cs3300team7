@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import ApplicantProfile #, Experience, Education
+from django.db import transaction
 from .forms import ApplicantProfileForm, ExperienceFormSet, EducationFormSet
 from application.models import Application
 # from django.urls import reverse
@@ -36,6 +37,7 @@ def applicant_profile_update(request):
             profile_form.save()
             experience_formset.save()
             education_formset.save()
+            transaction.commit()  # Use the imported transaction module
             return redirect('applicant:applicant_profile_view')
     else:
         profile_form = ApplicantProfileForm(instance=profile)
