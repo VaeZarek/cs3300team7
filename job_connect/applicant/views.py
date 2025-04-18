@@ -59,7 +59,7 @@ def applicant_profile_view(request):
 def applicant_applications(request):
     try:
         applicant_profile = request.user.applicant_profile
-        applications = Application.objects.filter(applicant=applicant_profile).order_by('-applied_date')
+        applications = Application.objects.filter(applicant=applicant_profile).order_by('-application_date')
         return render(request, 'applicant/applicant_applications_list.html', {'applications': applications})
     except AttributeError:
         # Handle the case where the user doesn't have an ApplicantProfile
