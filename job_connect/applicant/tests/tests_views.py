@@ -32,16 +32,16 @@ class ApplicantProfileUpdateViewTest(TestCase):
         self.user = User.objects.create_user(username='testapplicant', password='testpassword')
         self.applicant_profile = ApplicantProfile.objects.create(user=self.user, headline='Existing Headline', summary='Existing Summary')
         self.client.force_login(self.user)
-        self.view_url = reverse('applicant:applicant_profile_update') # Ensure namespace is correct
+        self.update_url = reverse('applicant:applicant_profile_update')
 
     def test_login_required(self):
         self.client.logout()
-        response = self.client.get(self.view_url)
+        response = self.client.get(self.update_url)
         self.assertEqual(response.status_code, 302)
         self.assertIn(reverse('core:login'), response.url) # Ensure correct reverse for login
 
     def test_get_request_renders_form(self):
-        response = self.client.get(self.view_url)
+        response = self.client.get(self.update_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'applicant/applicant_profile_update.html')
         self.assertIsInstance(response.context['form'], ApplicantProfileForm)
@@ -96,7 +96,7 @@ class ApplicantProfileUpdateViewTest(TestCase):
             'education-MIN_NUM_FORMS': '0',
             'education-MAX_NUM_FORMS': '1000',
         }
-        response = self.client.post(self.view_url, post_data)
+        response = self.client.post(self.update_url, post_data)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'applicant/applicant_profile_update.html')
         self.assertTrue(response.context['form'].errors)
