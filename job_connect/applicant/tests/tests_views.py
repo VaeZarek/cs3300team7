@@ -19,7 +19,7 @@ class ApplicantDashboardViewTest(TestCase):
         self.client.logout()
         response = self.client.get(self.dashboard_url)
         self.assertEqual(response.status_code, 302)
-        self.assertIn(reverse('login'), response.url)
+        self.assertIn(reverse('core:login'), response.url)
 
     def test_authenticated_user_can_access(self):
         response = self.client.get(self.dashboard_url)
@@ -32,41 +32,57 @@ class ApplicantProfileUpdateViewTest(TestCase):
         self.user = User.objects.create_user(username='testapplicant', password='testpassword')
         self.applicant_profile = ApplicantProfile.objects.create(user=self.user, headline='Existing Headline', summary='Existing Summary')
         self.client.force_login(self.user)
-        self.update_url = reverse('applicant:applicant_profile_update')
+        self.update_url = reverse('applicant:applicant_profile_update') # Ensure namespace is correct
 
     def test_login_required(self):
         self.client.logout()
-        response = self.client.get(self.create_url)
+        response = self.client.get(self.update_url)
         self.assertEqual(response.status_code, 302)
-        self.assertIn(reverse('login'), response.url)
-
-    def test_redirect_if_profile_exists(self):
-        ApplicantProfile.objects.create(user=self.user, headline='Test', summary='Summary')
-        response = self.client.get(self.create_url)
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse('applicant:applicant_profile_update'))
+        self.assertIn(reverse('login'), response.url) # Ensure correct reverse for login
 
     def test_get_request_renders_form(self):
-        response = self.client.get(self.create_url)
+        response = self.client.get(self.update_url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'applicant/applicant_profile_create.html')
-        self.assertIsInstance(response.context['profile_form'], ApplicantProfileForm)
+        self.assertTemplateUsed(response, 'applicant/applicant_profile_form.html')
+        self.assertIsInstance(response.context['form'], ApplicantProfileForm)
+        self.assertIsInstance(response.context['experience_formset'], ExperienceFormSet)
+        self.assertIsInstance(response.context['education_formset'], EducationFormSet)
 
-    def test_post_request_creates_profile(self):
-        post_data = {'headline': 'New Headline', 'summary': 'New Summary'}
-        response = self.client.post(self.create_url, post_data)
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse('applicant:applicant_dashboard'))
-        self.assertTrue(ApplicantProfile.objects.filter(user=self.user, headline='New Headline').exists())
+    def test_post_request_updates_profile(self):
+        post_data = {
+            'headline': 'Updated Headline',
+            'summary': 'Updated Summary',
+            'experience-TOTAL_FORMS': '1',
+            'experience-INITIAL_FORMS': '0',
+            'experience-MIN_NUM_FORMS': '0',
+            'experience-MAX_NUM_FORMS': '1000',
+            'education-TOTAL_FORMS': '1',
+            'education-INITIAL_FORMS': '0',
+            'education-MIN_NUM_FORMS': '0',
+            'education-MAX_NUM_FORMS': '1000',
+        }
+        response = self.client.post(self.update_url, post_data)
+        self.assertEqual(response.status_code, 302) # Expect a redirect after successful update
+        self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Updated Headline')
 
     def test_post_request_with_invalid_data(self):
-        post_data = {'headline': '', 'summary': 'New Summary'} # Missing required headline
-        response = self.client.post(self.create_url, post_data)
+        post_data = {
+            'headline': '', # Invalid data
+            'summary': 'Updated Summary',
+            'experience-TOTAL_FORMS': '0',
+            'experience-INITIAL_FORMS': '0',
+            'experience-MIN_NUM_FORMS': '0',
+            'experience-MAX_NUM_FORMS': '1000',
+            'education-TOTAL_FORMS': '0',
+            'education-INITIAL_FORMS': '0',
+            'education-MIN_NUM_FORMS': '0',
+            'education-MAX_NUM_FORMS': '1000',
+        }
+        response = self.client.post(self.update_url, post_data)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'applicant/applicant_profile_create.html')
-        self.assertIsInstance(response.context['profile_form'], ApplicantProfileForm)
-        self.assertTrue(response.context['profile_form'].errors)
-        self.assertFalse(ApplicantProfile.objects.filter(user=self.user, summary='New Summary').exists())
+        self.assertTemplateUsed(response, 'applicant/applicant_profile_form.html')
+        self.assertTrue(response.context['form'].errors)
+
 
 class ApplicantProfileViewViewTest(TestCase):
     def setUp(self):
@@ -80,7 +96,7 @@ class ApplicantProfileViewViewTest(TestCase):
         self.client.logout()
         response = self.client.get(self.update_url)
         self.assertEqual(response.status_code, 302)
-        self.assertIn(reverse('login'), response.url)
+        self.assertIn(reverse('core:login'), response.url)
 
     def test_get_request_renders_form(self):
         response = self.client.get(self.update_url)
@@ -116,7 +132,7 @@ class ApplicantApplicationsViewTest(TestCase):
         self.client.logout()
         response = self.client.get(self.view_url)
         self.assertEqual(response.status_code, 302)
-        self.assertIn(reverse('login'), response.url)
+        self.assertIn(reverse('core:login'), response.url)
 
     def test_authenticated_user_can_view_profile(self):
         response = self.client.get(self.view_url)
@@ -144,7 +160,7 @@ class ApplicantApplicationsViewTest(TestCase):
         self.client.logout()
         response = self.client.get(self.applications_url)
         self.assertEqual(response.status_code, 302)
-        self.assertIn(reverse('login'), response.url)
+        self.assertIn(reverse('core:login'), response.url)
 
     def test_authenticated_user_can_access(self):
         response = self.client.get(self.applications_url)
