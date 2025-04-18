@@ -54,21 +54,15 @@ class ApplicantProfileUpdateViewTest(TestCase):
         post_data = {
             'headline': 'Simple Update',
             'summary': 'Simple Summary',
-            'experience-TOTAL_FORMS': '0',
-            'experience-INITIAL_FORMS': '0',
-            'experience-MIN_NUM_FORMS': '0',
-            'experience-MAX_NUM_FORMS': '1000',
-            'education-TOTAL_FORMS': '0',
-            'education-INITIAL_FORMS': '0',
-            'education-MIN_NUM_FORMS': '0',
-            'education-MAX_NUM_FORMS': '1000',
+            'experiences-TOTAL_FORMS': '0',
+            'experiences-INITIAL_FORMS': '0',
+            'experiences-MIN_NUM_FORMS': '0',
+            'experiences-MAX_NUM_FORMS': '1000',
+            'educations-TOTAL_FORMS': '0',
+            'educations-INITIAL_FORMS': '0',
+            'educations-MIN_NUM_FORMS': '0',
+            'educations-MAX_NUM_FORMS': '1000',
         }
-        profile = ApplicantProfile.objects.get(user=self.user)
-        profile_form_test = ApplicantProfileForm(post_data, instance=profile)
-        print("\n--- test_post_request_only_profile_form ---")
-        print("Profile Form Valid:", profile_form_test.is_valid())
-        print("Profile Form Errors:", profile_form_test.errors)
-
         response = self.client.post(self.update_url, post_data, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.wsgi_request.path, self.profile_view_url)
@@ -102,16 +96,6 @@ class ApplicantProfileUpdateViewTest(TestCase):
             'educations-0-major': 'Computer Science',
             'educations-0-DELETE': False,
         }
-        profile = ApplicantProfile.objects.get(user=self.user)
-        experience_formset_test = ExperienceFormSet(post_data)
-        education_formset_test = EducationFormSet(post_data)
-
-        print("\n--- test_post_request_updates_profile (Pre-POST Check) ---")
-        print("Experience Formset Valid:", experience_formset_test.is_valid())
-        print("Experience Formset Errors:", experience_formset_test.errors)
-        print("Education Formset Valid:", education_formset_test.is_valid())
-        print("Education Formset Errors:", education_formset_test.errors)
-
         response = self.client.post(self.update_url, post_data, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.wsgi_request.path, self.profile_view_url)
