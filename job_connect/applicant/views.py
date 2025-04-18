@@ -34,10 +34,15 @@ def applicant_profile_update(request):
         experience_formset = ExperienceFormSet(request.POST, instance=profile)
         education_formset = EducationFormSet(request.POST, instance=profile)
         if profile_form.is_valid() and experience_formset.is_valid() and education_formset.is_valid():
-            profile_form.save()
+            profile.headline = profile_form.cleaned_data['headline']
+            profile.summary = profile_form.cleaned_data['summary']
+            if 'skills' in profile_form.cleaned_data:
+                profile.skills.set(profile_form.cleaned_data['skills'])
+            if 'resume' in profile_form.cleaned_data and profile_form.cleaned_data['resume']:
+                profile.resume = profile_form.cleaned_data['resume']
+            profile.save()
             experience_formset.save()
             education_formset.save()
-            transaction.commit()  # Use the imported transaction module
             return redirect('applicant:applicant_profile_view')
     else:
         profile_form = ApplicantProfileForm(instance=profile)
