@@ -4,6 +4,8 @@ from django.contrib.auth import get_user_model  # Import get_user_model
 from applicant.models import ApplicantProfile, Experience, Education
 from applicant.forms import ApplicantProfileForm, ExperienceFormSet, EducationFormSet
 from django.shortcuts import get_object_or_404
+from unittest import mock
+from django.urls import reverse
 
 User = get_user_model()  # Get your custom User model
 
@@ -49,35 +51,38 @@ class ApplicantProfileUpdateViewTest(TestCase):
         self.assertIsInstance(response.context['education_formset'], EducationFormSet)
 
     def test_post_request_updates_profile(self):
-        post_data = {
-            'headline': 'Updated Headline',
-            'summary': 'Updated Summary',
-            'skills': [],  # Or a list of skill IDs if you have skills defined
-            'resume': '',  # You might need to handle file uploads differently in tests
+        with mock.patch('applicant.views.redirect') as mock_redirect:
+            post_data = {
+                'headline': 'Updated Headline',
+                'summary': 'Updated Summary',
+                'skills': [],  # Or a list of skill IDs if you have skills defined
+                'resume': '',  # You might need to handle file uploads differently in tests
 
-            'experience-TOTAL_FORMS': '1',
-            'experience-INITIAL_FORMS': '0',
-            'experience-MIN_NUM_FORMS': '0',
-            'experience-MAX_NUM_FORMS': '1000',
-            'experience-0-title': 'Software Engineer',
-            'experience-0-company': 'Tech Corp',
-            'experience-0-start_date': '2023-01-01',
-            'experience-0-end_date': '2024-01-01',
-            'experience-0-description': 'Developed key features.',
+                'experience-TOTAL_FORMS': '1',
+                'experience-INITIAL_FORMS': '0',
+                'experience-MIN_NUM_FORMS': '0',
+                'experience-MAX_NUM_FORMS': '1000',
+                'experience-0-title': 'Software Engineer',
+                'experience-0-company': 'Tech Corp',
+                'experience-0-start_date': '2023-01-01',
+                'experience-0-end_date': '2024-01-01',
+                'experience-0-description': 'Developed key features.',
 
-            'education-TOTAL_FORMS': '1',
-            'education-INITIAL_FORMS': '0',
-            'education-MIN_NUM_FORMS': '0',
-            'education-MAX_NUM_FORMS': '1000',
-            'education-0-degree': 'Master of Science',
-            'education-0-institution': 'University X',
-            'education-0-graduation_date': '2022-05-01',
-            'education-0-major': 'Computer Science',
-        }
-        response = self.client.post(self.update_url, post_data, follow=True)
-        self.assertEqual(response.status_code, 200) # Expect 200 after following redirect
-        self.assertTemplateUsed(response, 'applicant/applicant_profile_view.html') # Check the final template
-        self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Updated Headline')
+                'education-TOTAL_FORMS': '1',
+                'education-INITIAL_FORMS': '0',
+                'education-MIN_NUM_FORMS': '0',
+                'education-MAX_NUM_FORMS': '1000',
+                'education-0-degree': 'Master of Science',
+                'education-0-institution': 'University X',
+                'education-0-graduation_date': '2022-05-01',
+                'education-0-major': 'Computer Science',
+            }
+            response = self.client.post(self.update_url, post_data)
+            self.assertEqual(response.status_code, 302) # We still expect a 302 initially
+
+            mock_redirect.assert_called_once_with(reverse('applicant:applicant_profile_view'))
+
+            self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Updated Headline')
 
 
     def test_post_request_with_invalid_data(self):
