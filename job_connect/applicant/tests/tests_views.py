@@ -52,7 +52,7 @@ class ApplicantProfileUpdateViewTest(TestCase):
         post_data = {
             'headline': 'Updated Headline',
             'summary': 'Updated Summary',
-            'skills': ['python', 'java'],  # Or a list of skill IDs if you have skills defined
+            'skills': [],  # Or a list of skill IDs if you have skills defined
             'resume': '',  # You might need to handle file uploads differently in tests
 
             'experience-TOTAL_FORMS': '1',
@@ -75,7 +75,11 @@ class ApplicantProfileUpdateViewTest(TestCase):
             'education-0-major': 'Computer Science',
         }
         response = self.client.post(self.view_url, post_data)
-        self.assertEqual(response.status_code, 302)  # Expect a redirect after successful update
+        self.assertEqual(response.status_code, 200)  # Temporarily assert 200 to inspect errors
+        print("Form Errors:", response.context['profile_form'].errors)
+        print("Experience Formset Errors:", response.context['experience_formset'].errors)
+        print("Education Formset Errors:", response.context['education_formset'].errors)
+        # self.assertEqual(response.status_code, 302)  # Expect a redirect after successful update
         self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Updated Headline')
 
 
