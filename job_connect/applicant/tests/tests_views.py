@@ -4,8 +4,7 @@ from django.contrib.auth import get_user_model  # Import get_user_model
 from applicant.models import ApplicantProfile, Experience, Education
 from applicant.forms import ApplicantProfileForm, ExperienceFormSet, EducationFormSet
 from django.shortcuts import get_object_or_404
-from unittest import mock
-from django.urls import reverse
+
 
 User = get_user_model()  # Get your custom User model
 
@@ -35,19 +34,6 @@ class ApplicantProfileUpdateViewTest(TestCase):
         self.applicant_profile = ApplicantProfile.objects.create(user=self.user, headline='Existing Headline', summary='Existing Summary')
         self.client.force_login(self.user)
         self.update_url = reverse('applicant:applicant_profile_update')
-
-        # Create existing Experience and Education objects
-        self.experience = Experience.objects.create(
-            applicant_profile=self.applicant_profile,
-            title='Old Title',
-            company='Old Company',
-            start_date='2022-01-01'
-        )
-        self.education = Education.objects.create(
-            applicant_profile=self.applicant_profile,
-            degree='Old Degree',
-            institution='Old Institution'
-        )
 
     def test_login_required(self):
         self.client.logout()
@@ -101,6 +87,15 @@ class ApplicantProfileUpdateViewTest(TestCase):
         self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Updated Headline')
         self.assertEqual(Experience.objects.get(id=self.experience.id).title, 'Updated Engineer')
         self.assertEqual(Education.objects.get(id=self.education.id).degree, 'Updated Master')
+
+    def test_post_request_only_profile_form(self):
+        post_data = {
+            'headline': 'Simple Update',
+            'summary': 'Simple Summary',
+        }
+        response = self.client.post(self.update_url, post_data)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Simple Update')
 
 
     def test_post_request_with_invalid_data(self):
