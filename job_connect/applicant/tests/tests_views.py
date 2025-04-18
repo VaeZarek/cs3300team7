@@ -74,14 +74,11 @@ class ApplicantProfileUpdateViewTest(TestCase):
             'education-0-graduation_date': '2022-05-01',
             'education-0-major': 'Computer Science',
         }
-        response = self.client.post(self.update_url, post_data)
-        self.assertEqual(response.status_code, 302)  # Expect a redirect
+        response = self.client.post(self.update_url, post_data, follow=True)
+        self.assertEqual(response.status_code, 200) # Expect 200 after following redirect
+        self.assertTemplateUsed(response, 'applicant/applicant_profile_view.html') # Check the final template
+        self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Updated Headline')
 
-        # Directly query and refresh the object
-        updated_profile = ApplicantProfile.objects.get(user=self.user)
-        updated_profile.refresh_from_db()
-
-        self.assertEqual(updated_profile.headline, 'Updated Headline')
 
     def test_post_request_with_invalid_data(self):
         post_data = {
