@@ -58,18 +58,17 @@ class ApplicantProfileUpdateViewTest(TestCase):
             'resume': '',
 
             'experience-TOTAL_FORMS': '1',
-            'experience-INITIAL_FORMS': '0',
+            'experience-INITIAL_FORMS': '0',  # Ensure this is '0'
             'experience-MIN_NUM_FORMS': '0',
             'experience-MAX_NUM_FORMS': '1000',
             'experience-0-title': 'Software Engineer',
             'experience-0-company': 'Tech Corp',
             'experience-0-start_date': '2023-01-01',
-
             'experience-0-end_date': '2024-01-01',
             'experience-0-description': 'Developed key features.',
 
             'education-TOTAL_FORMS': '1',
-            'education-INITIAL_FORMS': '0',
+            'education-INITIAL_FORMS': '0',  # Ensure this is '0'
             'education-MIN_NUM_FORMS': '0',
             'education-MAX_NUM_FORMS': '1000',
             'education-0-degree': 'Master of Science',
