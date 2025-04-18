@@ -32,18 +32,18 @@ class ApplicantProfileUpdateViewTest(TestCase):
         self.user = User.objects.create_user(username='testapplicant', password='testpassword')
         self.applicant_profile = ApplicantProfile.objects.create(user=self.user, headline='Existing Headline', summary='Existing Summary')
         self.client.force_login(self.user)
-        self.update_url = reverse('applicant:applicant_profile_update') # Ensure namespace is correct
+        self.view_url = reverse('applicant:applicant_profile_update') # Ensure namespace is correct
 
     def test_login_required(self):
         self.client.logout()
-        response = self.client.get(self.update_url)
+        response = self.client.get(self.view_url)
         self.assertEqual(response.status_code, 302)
         self.assertIn(reverse('core:login'), response.url) # Ensure correct reverse for login
 
     def test_get_request_renders_form(self):
-        response = self.client.get(self.update_url)
+        response = self.client.get(self.view_url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'applicant/applicant_profile_form.html')
+        self.assertTemplateUsed(response, 'applicant/applicant_profile_update.html')
         self.assertIsInstance(response.context['form'], ApplicantProfileForm)
         self.assertIsInstance(response.context['experience_formset'], ExperienceFormSet)
         self.assertIsInstance(response.context['education_formset'], EducationFormSet)
@@ -52,18 +52,32 @@ class ApplicantProfileUpdateViewTest(TestCase):
         post_data = {
             'headline': 'Updated Headline',
             'summary': 'Updated Summary',
+            'skills': [],  # Or a list of skill IDs if you have skills defined
+            'resume': '',  # You might need to handle file uploads differently in tests
+
             'experience-TOTAL_FORMS': '1',
             'experience-INITIAL_FORMS': '0',
             'experience-MIN_NUM_FORMS': '0',
             'experience-MAX_NUM_FORMS': '1000',
+            'experience-0-title': 'Software Engineer',
+            'experience-0-company': 'Tech Corp',
+            'experience-0-start_date': '2023-01-01',
+            'experience-0-end_date': '2024-01-01',
+            'experience-0-description': 'Developed key features.',
+
             'education-TOTAL_FORMS': '1',
             'education-INITIAL_FORMS': '0',
             'education-MIN_NUM_FORMS': '0',
             'education-MAX_NUM_FORMS': '1000',
+            'education-0-degree': 'Master of Science',
+            'education-0-institution': 'University X',
+            'education-0-graduation_date': '2022-05-01',
+            'education-0-major': 'Computer Science',
         }
         response = self.client.post(self.update_url, post_data)
-        self.assertEqual(response.status_code, 302) # Expect a redirect after successful update
+        self.assertEqual(response.status_code, 302)  # Expect a redirect after successful update
         self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Updated Headline')
+
 
     def test_post_request_with_invalid_data(self):
         post_data = {
@@ -78,9 +92,9 @@ class ApplicantProfileUpdateViewTest(TestCase):
             'education-MIN_NUM_FORMS': '0',
             'education-MAX_NUM_FORMS': '1000',
         }
-        response = self.client.post(self.update_url, post_data)
+        response = self.client.post(self.view_url, post_data)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'applicant/applicant_profile_form.html')
+        self.assertTemplateUsed(response, 'applicant/applicant_profile_update.html')
         self.assertTrue(response.context['form'].errors)
 
 
@@ -94,12 +108,12 @@ class ApplicantProfileViewViewTest(TestCase):
 
     def test_login_required(self):
         self.client.logout()
-        response = self.client.get(self.update_url)
+        response = self.client.get(self.view_url)
         self.assertEqual(response.status_code, 302)
         self.assertIn(reverse('core:login'), response.url)
 
     def test_get_request_renders_form(self):
-        response = self.client.get(self.update_url)
+        response = self.client.get(self.view_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'applicant/applicant_profile_update.html')
         self.assertIsInstance(response.context['profile_form'], ApplicantProfileForm)
@@ -109,7 +123,7 @@ class ApplicantProfileViewViewTest(TestCase):
 
     def test_post_request_updates_profile(self):
         post_data = {'headline': 'Updated Headline', 'summary': 'Updated Summary'}
-        response = self.client.post(self.update_url, post_data)
+        response = self.client.post(self.view_url, post_data)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, reverse('applicant:applicant_profile_view'))
         self.applicant_profile.refresh_from_db()
