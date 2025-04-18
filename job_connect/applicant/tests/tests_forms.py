@@ -66,15 +66,15 @@ class ApplicantProfileFormsTest(TestCase):
             'experiences-0-description': 'Developed key features.',
             'experiences-0-DELETE': False,
         }
-        formset = ExperienceFormSet(data=form_data)  # Initialize without instance
+        formset = ExperienceFormSet(data=form_data, instance=self.applicant_profile)
         print(f"\n--- test_experience_formset_valid_single_form ---")
         print(f"Is formset valid? {formset.is_valid()}")
         print(f"Formset errors: {formset.errors}")
         print(f"Non-form errors: {formset.non_form_errors()}")
         print(f"Formset error class: {formset.error_class}")
-        for form in formset.forms:
-            print(f"Form errors: {form.errors}")
-            print(f"Form cleaned_data: {form.cleaned_data}")
+        for i, form in enumerate(formset.forms):
+            print(f"Form {i} errors: {form.errors}")
+            print(f"Form {i} cleaned_data: {form.cleaned_data}")
 
         self.assertTrue(formset.is_valid())
         self.assertEqual(formset.errors, [])
