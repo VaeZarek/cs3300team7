@@ -53,6 +53,7 @@ class ApplicantProfileFormsTest(TestCase):
         self.assertIn('headline', form.errors)
 
     def test_experience_formset_valid_single_form(self):
+        from datetime import date
         form_data = {
             'experiences-TOTAL_FORMS': '1',
             'experiences-INITIAL_FORMS': '0',
@@ -60,12 +61,18 @@ class ApplicantProfileFormsTest(TestCase):
             'experiences-MAX_NUM_FORMS': '1000',
             'experiences-0-title': 'Software Engineer',
             'experiences-0-company': 'Tech Corp',
-            'experiences-0-start_date': date(2023, 1, 1),  # Use date object
-            'experiences-0-end_date': date(2024, 1, 1),    # Use date object
+            'experiences-0-start_date': date(2023, 1, 1),
+            'experiences-0-end_date': date(2024, 1, 1),
             'experiences-0-description': 'Developed key features.',
             'experiences-0-DELETE': False,
         }
         formset = ExperienceFormSet(data=form_data, instance=self.applicant_profile)
+        print(f"\n--- test_experience_formset_valid_single_form ---")
+        print(f"Is formset valid? {formset.is_valid()}")
+        print(f"Formset errors: {formset.errors}")
+        for form in formset.forms:
+            print(f"Form errors: {form.errors}")
+            print(f"Form cleaned_data: {form.cleaned_data}")
         self.assertTrue(formset.is_valid())
         self.assertEqual(len(formset.errors), 0)
         self.assertTrue(formset.forms[0].is_valid())
