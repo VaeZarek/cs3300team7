@@ -115,7 +115,7 @@ class ApplicantProfileViewViewTest(TestCase):
     def test_get_request_renders_form(self):
         response = self.client.get(self.view_url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'applicant/applicant_profile_update.html')
+        self.assertTemplateUsed(response, 'applicant/applicant_profile_view.html')
         self.assertIsInstance(response.context['profile_form'], ApplicantProfileForm)
         self.assertIsInstance(response.context['experience_formset'], ExperienceFormSet)
         self.assertIsInstance(response.context['education_formset'], EducationFormSet)
