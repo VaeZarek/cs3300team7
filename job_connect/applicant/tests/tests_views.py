@@ -36,6 +36,19 @@ class ApplicantProfileUpdateViewTest(TestCase):
         self.client.force_login(self.user)
         self.update_url = reverse('applicant:applicant_profile_update')
 
+        # Create existing Experience and Education objects
+        self.experience = Experience.objects.create(
+            applicant_profile=self.applicant_profile,
+            title='Old Title',
+            company='Old Company',
+            start_date='2022-01-01'
+        )
+        self.education = Education.objects.create(
+            applicant_profile=self.applicant_profile,
+            degree='Old Degree',
+            institution='Old Institution'
+        )
+
     def test_login_required(self):
         self.client.logout()
         response = self.client.get(self.update_url)
@@ -57,47 +70,37 @@ class ApplicantProfileUpdateViewTest(TestCase):
             'skills': [],
             'resume': '',
 
-            # Experience Formset Management
+            # Experience Formset (Updating existing)
             'experience-TOTAL_FORMS': '1',
-            'experience-INITIAL_FORMS': '0',
+            'experience-INITIAL_FORMS': '1',  # Now 1
             'experience-MIN_NUM_FORMS': '0',
             'experience-MAX_NUM_FORMS': '1000',
+            'experience-0-id': self.experience.id,  # Include the ID
+            'experience-0-title': 'Updated Engineer',
+            'experience-0-company': 'New Corp',
+            'experience-0-start_date': '2023-02-01',
+            'experience-0-end_date': '2024-02-01',
+            'experience-0-description': 'Updated features.',
             'experience-0-DELETE': False,
-            # Experience Form Data
-            'experience-0-title': 'Software Engineer',
-            'experience-0-company': 'Tech Corp',
-            'experience-0-start_date': '2023-01-01',
-            'experience-0-end_date': '2024-01-01',
-            'experience-0-description': 'Developed key features.',
 
-            # Education Formset Management
+            # Education Formset (Updating existing)
             'education-TOTAL_FORMS': '1',
-            'education-INITIAL_FORMS': '0',
+            'education-INITIAL_FORMS': '1',  # Now 1
             'education-MIN_NUM_FORMS': '0',
             'education-MAX_NUM_FORMS': '1000',
+            'education-0-id': self.education.id,  # Include the ID
+            'education-0-degree': 'Updated Master',
+            'education-0-institution': 'New University',
+            'education-0-graduation_date': '2023-06-01',
+            'education-0-major': 'Updated Science',
             'education-0-DELETE': False,
-            # Education Form Data
-            'education-0-degree': 'Master of Science',
-            'education-0-institution': 'University X',
-            'education-0-graduation_date': '2022-05-01',
-            'education-0-major': 'Computer Science',
         }
         response = self.client.post(self.update_url, post_data)
-        self.assertEqual(response.status_code, 200)  # Temporarily assert 200
-
-        profile = ApplicantProfile.objects.get(user=self.user)
-        profile_form_test = ApplicantProfileForm(post_data, instance=profile)
-        experience_formset_test = ExperienceFormSet(post_data, instance=profile)
-        education_formset_test = EducationFormSet(post_data, instance=profile)
-
-        print("Profile Form Valid:", profile_form_test.is_valid())
-        print("Profile Form Errors:", profile_form_test.errors)
-        print("Experience Formset Valid:", experience_formset_test.is_valid())
-        print("Experience Formset Errors:", experience_formset_test.errors)
-        print("Education Formset Valid:", education_formset_test.is_valid())
-        print("Education Formset Errors:", education_formset_test.errors)
+        self.assertEqual(response.status_code, 302)  # Expect a redirect
 
         self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Updated Headline')
+        self.assertEqual(Experience.objects.get(id=self.experience.id).title, 'Updated Engineer')
+        self.assertEqual(Education.objects.get(id=self.education.id).degree, 'Updated Master')
 
 
     def test_post_request_with_invalid_data(self):
