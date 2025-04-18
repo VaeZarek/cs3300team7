@@ -77,7 +77,8 @@ class ApplicantProfileFormsTest(TestCase):
             print(f"Form {i} cleaned_data: {form.cleaned_data}")
 
         self.assertTrue(formset.is_valid())
-        self.assertEqual(formset.errors, [])
+        if formset.is_valid():
+            self.assertEqual(len(formset.errors), 0)
         self.assertTrue(formset.forms[0].is_valid())
         self.assertEqual(len(formset.forms[0].errors), 0)
 
