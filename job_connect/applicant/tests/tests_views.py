@@ -54,6 +54,14 @@ class ApplicantProfileUpdateViewTest(TestCase):
         post_data = {
             'headline': 'Simple Update',
             'summary': 'Simple Summary',
+            'experience-TOTAL_FORMS': '0',
+            'experience-INITIAL_FORMS': '0',
+            'experience-MIN_NUM_FORMS': '0',
+            'experience-MAX_NUM_FORMS': '1000',
+            'education-TOTAL_FORMS': '0',
+            'education-INITIAL_FORMS': '0',
+            'education-MIN_NUM_FORMS': '0',
+            'education-MAX_NUM_FORMS': '1000',
         }
         profile = ApplicantProfile.objects.get(user=self.user)
         profile_form_test = ApplicantProfileForm(post_data, instance=profile)
@@ -65,6 +73,7 @@ class ApplicantProfileUpdateViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.wsgi_request.path, self.profile_view_url)
         self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Simple Update')
+
 
     def test_post_request_updates_profile(self):
         post_data = {
