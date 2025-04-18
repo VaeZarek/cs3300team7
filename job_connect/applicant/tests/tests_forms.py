@@ -70,6 +70,7 @@ class ApplicantProfileFormsTest(TestCase):
         print(f"\n--- test_experience_formset_valid_single_form ---")
         print(f"Is formset valid? {formset.is_valid()}")
         print(f"Formset errors: {formset.errors}")
+        print(f"Non-form errors: {formset.non_form_errors()}")
         for form in formset.forms:
             print(f"Form errors: {form.errors}")
             print(f"Form cleaned_data: {form.cleaned_data}")
