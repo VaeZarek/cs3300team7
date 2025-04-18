@@ -4,7 +4,7 @@ from .models import ApplicantProfile #, Experience, Education
 from django.db import transaction
 from .forms import ApplicantProfileForm, ExperienceFormSet, EducationFormSet
 from application.models import Application
-# from django.urls import reverse
+from django.urls import reverse
 
 @login_required
 def applicant_dashboard(request):
@@ -43,7 +43,7 @@ def applicant_profile_update(request):
             profile.save()
             experience_formset.save()
             education_formset.save()
-            return redirect('applicant:applicant_profile_view')
+            return redirect(reverse('applicant:applicant_profile_view')) # Explicitly use reverse here
     else:
         profile_form = ApplicantProfileForm(instance=profile)
         experience_formset = ExperienceFormSet(instance=profile)
