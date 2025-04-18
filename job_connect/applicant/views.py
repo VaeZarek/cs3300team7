@@ -34,6 +34,7 @@ def applicant_profile_update(request):
         experience_formset = ExperienceFormSet(request.POST, instance=profile)
         education_formset = EducationFormSet(request.POST, instance=profile)
         if profile_form.is_valid() and experience_formset.is_valid() and education_formset.is_valid():
+            print("DEBUG: Redirecting now!")  # Add this line
             profile.headline = profile_form.cleaned_data['headline']
             profile.summary = profile_form.cleaned_data['summary']
             if 'skills' in profile_form.cleaned_data:
@@ -54,6 +55,7 @@ def applicant_profile_update(request):
         'experience_formset': experience_formset,
         'education_formset': education_formset,
     })
+
 
 @login_required
 def applicant_profile_view(request):
