@@ -35,6 +35,19 @@ class ApplicantProfileUpdateViewTest(TestCase):
         self.client.force_login(self.user)
         self.update_url = reverse('applicant:applicant_profile_update')
 
+        # Create existing Experience and Education objects and store them as instance attributes
+        self.experience = Experience.objects.create(
+            applicant_profile=self.applicant_profile,
+            title='Old Title',
+            company='Old Company',
+            start_date='2022-01-01'
+        )
+        self.education = Education.objects.create(
+            applicant_profile=self.applicant_profile,
+            degree='Old Degree',
+            institution='Old Institution'
+        )
+
     def test_login_required(self):
         self.client.logout()
         response = self.client.get(self.update_url)
