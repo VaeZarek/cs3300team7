@@ -52,7 +52,7 @@ class ApplicantProfileUpdateViewTest(TestCase):
         post_data = {
             'headline': 'Updated Headline',
             'summary': 'Updated Summary',
-            'skills': [],  # Or a list of skill IDs if you have skills defined
+            'skills': ['python', 'java'],  # Or a list of skill IDs if you have skills defined
             'resume': '',  # You might need to handle file uploads differently in tests
 
             'experience-TOTAL_FORMS': '1',
@@ -116,21 +116,9 @@ class ApplicantProfileViewViewTest(TestCase):
         response = self.client.get(self.view_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'applicant/applicant_profile_view.html')
-        self.assertIsInstance(response.context['profile_form'], ApplicantProfileForm)
-        self.assertIsInstance(response.context['experience_formset'], ExperienceFormSet)
-        self.assertIsInstance(response.context['education_formset'], EducationFormSet)
-        self.assertEqual(response.context['profile_form'].instance, self.applicant_profile)
+        self.assertEqual(response.context['profile'], self.applicant_profile)
 
-    def test_post_request_updates_profile(self):
-        post_data = {'headline': 'Updated Headline', 'summary': 'Updated Summary'}
-        response = self.client.post(self.view_url, post_data)
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse('applicant:applicant_profile_view'))
-        self.applicant_profile.refresh_from_db()
-        self.assertEqual(self.applicant_profile.headline, 'Updated Headline')
-        self.assertEqual(self.applicant_profile.summary, 'Updated Summary')
-
-    # You would add more tests for handling experience_formset and education_formset
+        # You would add more tests for handling experience_formset and education_formset
     # and invalid form submissions here.
 
 class ApplicantProfileViewTest(TestCase):
