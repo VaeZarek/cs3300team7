@@ -1,13 +1,16 @@
 from django.test import TestCase
 from core.models import User
 from applicant.forms import ApplicantProfileForm, ExperienceFormSet, EducationFormSet
-from applicant.models import ApplicantProfile
+from applicant.models import ApplicantProfile, Skill
 
 
 class ApplicantProfileFormsTest(TestCase):
-    def setUp(self):
-        self.user = User.objects.create_user(username='testapplicant', password='testpassword')
-        self.applicant_profile = ApplicantProfile.objects.create(user=self.user)
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create_user(username='testapplicant', password='testpassword')
+        cls.applicant_profile = ApplicantProfile.objects.create(user=cls.user)
+        cls.python_skill = Skill.objects.create(name='Python')
+        cls.django_skill = Skill.objects.create(name='Django')
 
     def test_applicant_profile_form_valid(self):
         form_data = {'headline': 'Test Headline', 'summary': 'Test Summary', 'skills': [], 'resume': None}
@@ -36,15 +39,11 @@ class ApplicantProfileFormsTest(TestCase):
         self.assertEqual(len(form.errors), 0)
 
     def test_applicant_profile_form_with_skills(self):
-        form_data = {'headline': 'Test Headline', 'summary': 'Test Summary', 'skills': [1, 2], 'resume': None}
-        # Assuming you have some Skill objects with IDs 1 and 2 in your test database
-        # If not, you might need to create them in setUpTestData or setUp
+        form_data = {'headline': 'Test Headline', 'summary': 'Test Summary', 'skills': [self.python_skill.id, self.django_skill.id], 'resume': None}
         form = ApplicantProfileForm(data=form_data, instance=self.applicant_profile)
         self.assertTrue(form.is_valid())
         self.assertEqual(len(form.errors), 0)
 
-    # Add tests for max_length if defined in your ApplicantProfile model
-    # Example (assuming headline has max_length=255 in the model):
     def test_applicant_profile_form_invalid_headline_too_long(self):
         long_headline = 'a' * 300
         form_data = {'headline': long_headline, 'summary': 'Test Summary', 'skills': [], 'resume': None}

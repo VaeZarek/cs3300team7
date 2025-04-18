@@ -2,11 +2,12 @@ from django.db import models
 from django.conf import settings
 from core.models import BaseModel
 
+
 class ApplicantProfile(BaseModel):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='applicant_profile')
     headline = models.CharField(max_length=255)
     summary = models.TextField(max_length=255)
-    skills = models.ManyToManyField('self', symmetrical=False, blank=True, related_name='skilled_applicants') # Example: Tags for skills
+    skills = models.ManyToManyField('Skill', blank=True, related_name='applicants')
     experience = models.ManyToManyField('Experience', blank=True)
     education = models.ManyToManyField('Education', blank=True)
     resume = models.FileField(upload_to='resumes/', blank=True, null=True)
@@ -14,6 +15,13 @@ class ApplicantProfile(BaseModel):
 
     def __str__(self):
         return self.user.username
+
+
+class Skill(BaseModel):
+    name = models.CharField(max_length=100, unique=True, db_index=True)  # Unique and indexed for efficiency
+
+    def __str__(self):
+        return self.name
 
 class Experience(BaseModel):
     applicant_profile = models.ForeignKey(ApplicantProfile, on_delete=models.CASCADE, related_name='experiences')
