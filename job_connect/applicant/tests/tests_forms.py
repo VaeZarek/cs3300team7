@@ -71,13 +71,13 @@ class ApplicantProfileFormsTest(TestCase):
         print(f"Is formset valid? {formset.is_valid()}")
         print(f"Formset errors: {formset.errors}")
         print(f"Non-form errors: {formset.non_form_errors()}")
+        print(f"Formset error class: {formset.error_class}")
         for form in formset.forms:
             print(f"Form errors: {form.errors}")
             print(f"Form cleaned_data: {form.cleaned_data}")
 
         self.assertTrue(formset.is_valid())
-        print(f"Formset errors list: {formset.errors}")
-        self.assertEqual(formset.errors, [])  # Check if the list is empty
+        self.assertEqual(formset.errors, [])
         self.assertTrue(formset.forms[0].is_valid())
         self.assertEqual(len(formset.forms[0].errors), 0)
 
