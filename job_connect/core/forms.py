@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group  # Import Group
-from core.models import User
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class ApplicantSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -12,8 +14,6 @@ class ApplicantSignUpForm(UserCreationForm):
         user.user_type = 'applicant'
         if commit:
             user.save()
-            applicant_group = Group.objects.get(name='Applicant')  # Get Applicant group
-            user.groups.add(applicant_group)  # Add user to group
         return user
 
 class RecruiterSignUpForm(UserCreationForm):
@@ -25,6 +25,4 @@ class RecruiterSignUpForm(UserCreationForm):
         user.user_type = 'recruiter'
         if commit:
             user.save()
-            recruiter_group = Group.objects.get(name='Recruiter')  # Get Recruiter group
-            user.groups.add(recruiter_group)  # Add user to group
         return user
