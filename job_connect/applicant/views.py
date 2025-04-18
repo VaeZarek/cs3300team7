@@ -33,8 +33,19 @@ def applicant_profile_update(request):
         profile_form = ApplicantProfileForm(request.POST, request.FILES, instance=profile)
         experience_formset = ExperienceFormSet(request.POST, instance=profile)
         education_formset = EducationFormSet(request.POST, instance=profile)
-        if profile_form.is_valid() and experience_formset.is_valid() and education_formset.is_valid():
-            print("DEBUG: Redirecting now!")  # Add this line
+
+        profile_valid = profile_form.is_valid()
+        experience_valid = True  # Assume valid if no forms
+        education_valid = True    # Assume valid if no forms
+
+        if experience_formset.total_form_count() > 0:
+            experience_valid = experience_formset.is_valid()
+
+        if education_formset.total_form_count() > 0:
+            education_valid = education_formset.is_valid()
+
+        if profile_valid and experience_valid and education_valid:
+            print("DEBUG: Redirecting now!")
             profile.headline = profile_form.cleaned_data['headline']
             profile.summary = profile_form.cleaned_data['summary']
             if 'skills' in profile_form.cleaned_data:
