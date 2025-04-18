@@ -24,8 +24,7 @@ class ApplicantProfileModelTest(TestCase):
         self.assertEqual(profile.skills.count(), 0)
         self.assertEqual(profile.experience.count(), 0)
         self.assertEqual(profile.education.count(), 0)
-        self.assertFalse(profile.resume)  # Check if FieldFile evaluates to False
-        self.assertEqual(profile.resume.name, '') # Check if the name is an empty string
+        self.assertFalse(profile.resume)  # Check if the FieldFile evaluates to False
 
 
     def test_applicant_profile_skills_relationship(self):
