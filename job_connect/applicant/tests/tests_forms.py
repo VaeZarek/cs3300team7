@@ -2,6 +2,7 @@ from django.test import TestCase
 from core.models import User
 from applicant.forms import ApplicantProfileForm, ExperienceFormSet, EducationFormSet
 from applicant.models import ApplicantProfile, Skill
+from datetime import date
 
 
 class ApplicantProfileFormsTest(TestCase):
@@ -59,8 +60,8 @@ class ApplicantProfileFormsTest(TestCase):
             'experiences-MAX_NUM_FORMS': '1000',
             'experiences-0-title': 'Software Engineer',
             'experiences-0-company': 'Tech Corp',
-            'experiences-0-start_date': '2023-01-01',
-            'experiences-0-end_date': '2024-01-01',
+            'experiences-0-start_date': date(2023, 1, 1),  # Use date object
+            'experiences-0-end_date': date(2024, 1, 1),    # Use date object
             'experiences-0-description': 'Developed key features.',
             'experiences-0-DELETE': False,
         }
