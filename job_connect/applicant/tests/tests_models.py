@@ -24,7 +24,11 @@ class ApplicantProfileModelTest(TestCase):
         self.assertEqual(profile.skills.count(), 0)
         self.assertEqual(profile.experience.count(), 0)
         self.assertEqual(profile.education.count(), 0)
-        self.assertEqual(profile.resume, '') # Default for blank FileField
+        self.assertIsNone(profile.resume)  # Check for None
+        # Or you could check the FieldFile object if you prefer:
+        # from django.db.models.fields.files import FieldFile
+        # self.assertIsInstance(profile.resume, FieldFile)
+        # self.assertFalse(profile.resume) # FieldFile evaluates to False if no file
 
     def test_applicant_profile_skills_relationship(self):
         profile1 = ApplicantProfile.objects.create(user=self.user, headline='Test 1', summary='Summary 1')
