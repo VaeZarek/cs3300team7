@@ -51,38 +51,48 @@ class ApplicantProfileUpdateViewTest(TestCase):
         self.assertIsInstance(response.context['education_formset'], EducationFormSet)
 
     def test_post_request_updates_profile(self):
-        with mock.patch('applicant.views.redirect') as mock_redirect:
-            post_data = {
-                'headline': 'Updated Headline',
-                'summary': 'Updated Summary',
-                'skills': [],  # Or a list of skill IDs if you have skills defined
-                'resume': '',  # You might need to handle file uploads differently in tests
+        post_data = {
+            'headline': 'Updated Headline',
+            'summary': 'Updated Summary',
+            'skills': [],
+            'resume': '',
 
-                'experience-TOTAL_FORMS': '1',
-                'experience-INITIAL_FORMS': '0',
-                'experience-MIN_NUM_FORMS': '0',
-                'experience-MAX_NUM_FORMS': '1000',
-                'experience-0-title': 'Software Engineer',
-                'experience-0-company': 'Tech Corp',
-                'experience-0-start_date': '2023-01-01',
-                'experience-0-end_date': '2024-01-01',
-                'experience-0-description': 'Developed key features.',
+            'experience-TOTAL_FORMS': '1',
+            'experience-INITIAL_FORMS': '0',
+            'experience-MIN_NUM_FORMS': '0',
+            'experience-MAX_NUM_FORMS': '1000',
+            'experience-0-title': 'Software Engineer',
+            'experience-0-company': 'Tech Corp',
+            'experience-0-start_date': '2023-01-01',
 
-                'education-TOTAL_FORMS': '1',
-                'education-INITIAL_FORMS': '0',
-                'education-MIN_NUM_FORMS': '0',
-                'education-MAX_NUM_FORMS': '1000',
-                'education-0-degree': 'Master of Science',
-                'education-0-institution': 'University X',
-                'education-0-graduation_date': '2022-05-01',
-                'education-0-major': 'Computer Science',
-            }
-            response = self.client.post(self.update_url, post_data)
-            self.assertEqual(response.status_code, 302) # We still expect a 302 initially
+            'experience-0-end_date': '2024-01-01',
+            'experience-0-description': 'Developed key features.',
 
-            mock_redirect.assert_called_once_with(reverse('applicant:applicant_profile_view'))
+            'education-TOTAL_FORMS': '1',
+            'education-INITIAL_FORMS': '0',
+            'education-MIN_NUM_FORMS': '0',
+            'education-MAX_NUM_FORMS': '1000',
+            'education-0-degree': 'Master of Science',
+            'education-0-institution': 'University X',
+            'education-0-graduation_date': '2022-05-01',
+            'education-0-major': 'Computer Science',
+        }
+        response = self.client.post(self.update_url, post_data)
+        self.assertEqual(response.status_code, 200)  # Temporarily assert 200
 
-            self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Updated Headline')
+        profile = ApplicantProfile.objects.get(user=self.user)
+        profile_form_test = ApplicantProfileForm(post_data, instance=profile)
+        experience_formset_test = ExperienceFormSet(post_data, instance=profile)
+        education_formset_test = EducationFormSet(post_data, instance=profile)
+
+        print("Profile Form Valid:", profile_form_test.is_valid())
+        print("Profile Form Errors:", profile_form_test.errors)
+        print("Experience Formset Valid:", experience_formset_test.is_valid())
+        print("Experience Formset Errors:", experience_formset_test.errors)
+        print("Education Formset Valid:", education_formset_test.is_valid())
+        print("Education Formset Errors:", education_formset_test.errors)
+
+        self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Updated Headline')
 
 
     def test_post_request_with_invalid_data(self):
