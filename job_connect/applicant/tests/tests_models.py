@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-from applicant.models import ApplicantProfile, Experience, Education
+from applicant.models import ApplicantProfile, Experience, Education, Skill
 from django.utils import timezone
 
 User = get_user_model()
@@ -26,12 +26,12 @@ class ApplicantProfileModelTest(TestCase):
         self.assertEqual(profile.education.count(), 0)
         self.assertFalse(profile.resume)  # Check if the FieldFile evaluates to False
 
-
     def test_applicant_profile_skills_relationship(self):
         profile1 = ApplicantProfile.objects.create(user=self.user, headline='Test 1', summary='Summary 1')
-        profile2 = ApplicantProfile.objects.create(user=User.objects.create_user(username='testapplicant2'), headline='Test 2', summary='Summary 2')
-        python_skill = ApplicantProfile.objects.create(user=User.objects.create_user(username='python'), headline='Python Skill', summary='A skill')
-        django_skill = ApplicantProfile.objects.create(user=User.objects.create_user(username='django'), headline='Django Skill', summary='A skill')
+        profile2 = ApplicantProfile.objects.create(user=User.objects.create_user(username='testapplicant2'),
+                                                   headline='Test 2', summary='Summary 2')
+        python_skill = Skill.objects.create(name='Python')  # Corrected: Creating a Skill instance
+        django_skill = Skill.objects.create(name='Django')  # Corrected: Creating a Skill instance
 
         profile1.skills.add(python_skill)
         profile1.skills.add(django_skill)
@@ -45,10 +45,10 @@ class ApplicantProfileModelTest(TestCase):
         self.assertIn(python_skill, profile2.skills.all())
         self.assertNotIn(django_skill, profile2.skills.all())
 
-        self.assertIn(profile1, python_skill.skilled_applicants.all())
-        self.assertIn(profile2, python_skill.skilled_applicants.all())
-        self.assertIn(profile1, django_skill.skilled_applicants.all())
-        self.assertEqual(django_skill.skilled_applicants.count(), 1)
+        self.assertIn(profile1, python_skill.applicants.all())  # Corrected: Using the correct related_name
+        self.assertIn(profile2, python_skill.applicants.all())  # Corrected: Using the correct related_name
+        self.assertIn(profile1, django_skill.applicants.all())  # Corrected: Using the correct related_name
+        self.assertEqual(django_skill.applicants.count(), 1)  # Corrected: Using the correct related_name
 
     def test_applicant_profile_resume_upload(self):
         profile = ApplicantProfile.objects.create(user=self.user, headline='Test', summary='Summary')
