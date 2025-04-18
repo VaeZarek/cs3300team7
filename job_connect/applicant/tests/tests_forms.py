@@ -14,40 +14,38 @@ class ApplicantProfileFormsTest(TestCase):
         cls.django_skill = Skill.objects.create(name='Django')
 
     def test_applicant_profile_form_valid(self):
-        form_data = {'headline': 'Test Headline', 'summary': 'Test Summary', 'skills': [cls.python_skill.id, cls.django_skill.id], 'resume': None}
-        form = ApplicantProfileForm(data=form_data, instance=cls.applicant_profile)
+        form_data = {'headline': 'Test Headline', 'summary': 'Test Summary', 'skills': [self.python_skill.id, self.django_skill.id], 'resume': None}
+        form = ApplicantProfileForm(data=form_data, instance=self.applicant_profile)
         self.assertTrue(form.is_valid())
         self.assertEqual(len(form.errors), 0)
 
     def test_applicant_profile_form_invalid_missing_headline(self):
-        form_data = {'summary': 'Test Summary', 'skills': [cls.python_skill.id, cls.django_skill.id], 'resume': None}
+        form_data = {'summary': 'Test Summary', 'skills': [self.python_skill.id, self.django_skill.id], 'resume': None}
         form = ApplicantProfileForm(data=form_data)
         self.assertFalse(form.is_valid())
         self.assertIn('headline', form.errors)
         self.assertEqual(len(form.errors), 1)
 
     def test_applicant_profile_form_invalid_missing_summary(self):
-        form_data = {'headline': 'Test Headline', 'skills': [cls.python_skill.id, cls.django_skill.id], 'resume': None}
+        form_data = {'headline': 'Test Headline', 'skills': [self.python_skill.id, self.django_skill.id], 'resume': None}
         form = ApplicantProfileForm(data=form_data)
         self.assertFalse(form.is_valid())
         self.assertIn('summary', form.errors)
         self.assertEqual(len(form.errors), 1)
 
     def test_applicant_profile_form_valid_empty_skills_resume(self):
-        form_data = {'headline': 'Test Headline', 'summary': 'Test Summary', 'skills': [], 'resume': ''}
-        form = ApplicantProfileForm(data=form_data, instance=cls.applicant_profile)
+        form = ApplicantProfileForm(data={'headline': 'Test Headline', 'summary': 'Test Summary', 'skills': [], 'resume': ''}, instance=self.applicant_profile)
         self.assertTrue(form.is_valid())
         self.assertEqual(len(form.errors), 0)
 
     def test_applicant_profile_form_with_skills(self):
-        form_data = {'headline': 'Test Headline', 'summary': 'Test Summary', 'skills': [cls.python_skill.id, cls.django_skill.id], 'resume': None}
-        form = ApplicantProfileForm(data=form_data, instance=cls.applicant_profile)
+        form_data = {'headline': 'Test Headline', 'summary': 'Test Summary', 'skills': [self.python_skill.id, self.django_skill.id], 'resume': None}
+        form = ApplicantProfileForm(data=form_data, instance=self.applicant_profile)
         self.assertTrue(form.is_valid())
         self.assertEqual(len(form.errors), 0)
 
     def test_applicant_profile_form_invalid_headline_too_long(self):
-        long_headline = 'a' * 300
-        form_data = {'headline': long_headline, 'summary': 'Test Summary', 'skills': [], 'resume': None}
+        form_data = {'headline': 'a' * 300, 'summary': 'Test Summary', 'skills': [], 'resume': None}
         form = ApplicantProfileForm(data=form_data)
         self.assertFalse(form.is_valid())
         self.assertIn('headline', form.errors)
@@ -65,9 +63,9 @@ class ApplicantProfileFormsTest(TestCase):
             'experiences-0-description': 'Developed key features.',
             'experiences-0-DELETE': False,
         }
-        formset = ExperienceFormSet(data=form_data, instance=cls.applicant_profile)
+        formset = ExperienceFormSet(data=form_data, instance=self.applicant_profile)
         self.assertTrue(formset.is_valid())
-        self.assertEqual(formset.errors, [{}])
+        self.assertEqual(formset.errors, [{}])  # Formset.errors unexpectedly contains [{}] for a valid formset
         self.assertTrue(formset.forms[0].is_valid())
         self.assertEqual(len(formset.forms[0].errors), 0)
 
@@ -84,7 +82,7 @@ class ApplicantProfileFormsTest(TestCase):
             'experiences-0-description': 'Developed key features.',
             'experiences-0-DELETE': False,
         }
-        formset = ExperienceFormSet(data=form_data, instance=cls.applicant_profile)
+        formset = ExperienceFormSet(data=form_data, instance=self.applicant_profile)
         self.assertFalse(formset.is_valid())
         self.assertEqual(len(formset.errors), 1)
         self.assertFalse(formset.forms[0].is_valid())
@@ -102,9 +100,9 @@ class ApplicantProfileFormsTest(TestCase):
             'educations-0-major': 'Computer Science',
             'educations-0-DELETE': False,
         }
-        formset = EducationFormSet(data=form_data, instance=cls.applicant_profile)
+        formset = EducationFormSet(data=form_data, instance=self.applicant_profile)
         self.assertTrue(formset.is_valid())
-        self.assertEqual(formset.errors, [{}])
+        self.assertEqual(formset.errors, [{}])  # Formset.errors unexpectedly contains [{}] for a valid formset
         self.assertTrue(formset.forms[0].is_valid())
         self.assertEqual(len(formset.forms[0].errors), 0)
 
@@ -120,10 +118,8 @@ class ApplicantProfileFormsTest(TestCase):
             'educations-0-major': 'Computer Science',
             'educations-0-DELETE': False,
         }
-        formset = EducationFormSet(data=form_data, instance=cls.applicant_profile)
+        formset = EducationFormSet(data=form_data, instance=self.applicant_profile)
         self.assertFalse(formset.is_valid())
         self.assertEqual(len(formset.errors), 1)
         self.assertFalse(formset.forms[0].is_valid())
         self.assertIn('degree', formset.forms[0].errors)
-
-    # Add more tests for EducationFormSet (e.g., missing institution)
