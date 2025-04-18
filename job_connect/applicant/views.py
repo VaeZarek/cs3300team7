@@ -48,6 +48,7 @@ def applicant_profile_update(request):
         profile_form = ApplicantProfileForm(instance=profile)
         experience_formset = ExperienceFormSet(instance=profile)
         education_formset = EducationFormSet(instance=profile)
+
     return render(request, 'applicant/applicant_profile_update.html', {
         'profile_form': profile_form,
         'experience_formset': experience_formset,

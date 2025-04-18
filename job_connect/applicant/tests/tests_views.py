@@ -57,6 +57,7 @@ class ApplicantProfileUpdateViewTest(TestCase):
         }
         response = self.client.post(self.update_url, post_data, follow=True)
         self.assertEqual(response.status_code, 200)
+        print(f"Final URL (Only Profile Form): {response.wsgi_request.path}") # Debug print
         self.assertEqual(response.wsgi_request.path, self.profile_view_url)
         self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Simple Update')
 
@@ -90,11 +91,11 @@ class ApplicantProfileUpdateViewTest(TestCase):
         }
         response = self.client.post(self.update_url, post_data, follow=True)
         self.assertEqual(response.status_code, 200)
+        print(f"Final URL (All Forms): {response.wsgi_request.path}") # Debug print
         self.assertEqual(response.wsgi_request.path, self.profile_view_url)
         self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Updated Headline')
         self.assertTrue(Experience.objects.filter(applicant_profile=self.applicant_profile, title='Software Engineer').exists())
         self.assertTrue(Education.objects.filter(applicant_profile=self.applicant_profile, degree='Master of Science').exists())
-
 
 class ApplicantProfileViewViewTest(TestCase):
     def setUp(self):
