@@ -13,14 +13,14 @@ def applicant_dashboard(request):
 @login_required
 def applicant_profile_create(request):
     if hasattr(request.user, 'applicant_profile'):
-        return redirect('applicant_profile_update') # Profile already exists
+        return redirect('applicant:applicant_profile_update') # Profile already exists
     if request.method == 'POST':
         profile_form = ApplicantProfileForm(request.POST, request.FILES)
         if profile_form.is_valid():
             profile = profile_form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return redirect('applicant_dashboard')
+            return redirect('applicant:applicant_dashboard')
     else:
         profile_form = ApplicantProfileForm()
     return render(request, 'applicant/applicant_profile_create.html', {'profile_form': profile_form})
@@ -36,7 +36,7 @@ def applicant_profile_update(request):
             profile_form.save()
             experience_formset.save()
             education_formset.save()
-            return redirect('applicant_profile_view')
+            return redirect('applicant:applicant_profile_view')
     else:
         profile_form = ApplicantProfileForm(instance=profile)
         experience_formset = ExperienceFormSet(instance=profile)
@@ -53,7 +53,7 @@ def applicant_profile_view(request):
         profile = request.user.applicant_profile
         return render(request, 'applicant/applicant_profile_view.html', {'profile': profile})
     except ApplicantProfile.DoesNotExist:
-        return redirect('applicant_profile_create')
+        return redirect('applicant:applicant_profile_create')
 
 @login_required
 def applicant_applications(request):

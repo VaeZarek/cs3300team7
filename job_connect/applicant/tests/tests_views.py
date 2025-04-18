@@ -38,7 +38,7 @@ class ApplicantProfileUpdateViewTest(TestCase):
         self.client.logout()
         response = self.client.get(self.update_url)
         self.assertEqual(response.status_code, 302)
-        self.assertIn(reverse('login'), response.url) # Ensure correct reverse for login
+        self.assertIn(reverse('core:login'), response.url) # Ensure correct reverse for login
 
     def test_get_request_renders_form(self):
         response = self.client.get(self.update_url)
@@ -119,14 +119,13 @@ class ApplicantProfileViewViewTest(TestCase):
     # You would add more tests for handling experience_formset and education_formset
     # and invalid form submissions here.
 
-class ApplicantApplicationsViewTest(TestCase):
+class ApplicantProfileViewTest(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_user(username='testapplicant', password='testpassword')
         self.applicant_profile = ApplicantProfile.objects.create(user=self.user, headline='Test', summary='Summary')
         self.client.force_login(self.user)
-        self.applications_url = reverse('applicant:applicant_applications')
-        # Create some dummy applications if needed for testing the list
+        self.view_url = reverse('applicant:applicant_profile_view')
 
     def test_login_required(self):
         self.client.logout()
@@ -146,6 +145,7 @@ class ApplicantApplicationsViewTest(TestCase):
         response = self.client.get(self.view_url)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, reverse('applicant:applicant_profile_create'))
+
 
 class ApplicantApplicationsViewTest(TestCase):
     def setUp(self):
