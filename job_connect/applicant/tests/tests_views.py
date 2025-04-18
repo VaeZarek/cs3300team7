@@ -57,26 +57,30 @@ class ApplicantProfileUpdateViewTest(TestCase):
             'skills': [],
             'resume': '',
 
+            # Experience Formset Management
             'experience-TOTAL_FORMS': '1',
             'experience-INITIAL_FORMS': '0',
             'experience-MIN_NUM_FORMS': '0',
             'experience-MAX_NUM_FORMS': '1000',
+            'experience-0-DELETE': False,
+            # Experience Form Data
             'experience-0-title': 'Software Engineer',
             'experience-0-company': 'Tech Corp',
             'experience-0-start_date': '2023-01-01',
             'experience-0-end_date': '2024-01-01',
             'experience-0-description': 'Developed key features.',
-            'experience-0-DELETE': False,  # Add this line
 
+            # Education Formset Management
             'education-TOTAL_FORMS': '1',
             'education-INITIAL_FORMS': '0',
             'education-MIN_NUM_FORMS': '0',
             'education-MAX_NUM_FORMS': '1000',
+            'education-0-DELETE': False,
+            # Education Form Data
             'education-0-degree': 'Master of Science',
             'education-0-institution': 'University X',
             'education-0-graduation_date': '2022-05-01',
             'education-0-major': 'Computer Science',
-            'education-0-DELETE': False,  # Add this line
         }
         response = self.client.post(self.update_url, post_data)
         self.assertEqual(response.status_code, 200)  # Temporarily assert 200
