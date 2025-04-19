@@ -52,7 +52,7 @@ class JobUpdateView(UpdateView):
         if not hasattr(request.user, 'recruiter_profile'):
             recruiter_mixin = RecruiterRequiredMixin()
             recruiter_mixin.request = request
-            return recruiter_mixin.handle_no_permission(request)  # Pass request explicitly
+            return recruiter_mixin.handle_no_permission()  # Do not pass request here
 
         job = get_object_or_404(Job, pk=kwargs['pk'])
         if job.recruiter.user != request.user:
@@ -71,12 +71,12 @@ class JobDeleteView(LoginRequiredMixin, DeleteView):
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            return self.handle_no_permission()
+            return self.handle_no_permission(request)
 
         if not hasattr(request.user, 'recruiter_profile'):
             recruiter_mixin = RecruiterRequiredMixin()
             recruiter_mixin.request = request
-            return recruiter_mixin.handle_no_permission(request)
+            return recruiter_mixin.handle_no_permission() # Do not pass request here
 
         job = get_object_or_404(Job, pk=kwargs['pk'])
         if job.recruiter.user != request.user:
@@ -84,8 +84,9 @@ class JobDeleteView(LoginRequiredMixin, DeleteView):
 
         return super().dispatch(request, *args, **kwargs)
 
-    def handle_no_permission(self):
-        return redirect('core:login') # Or your login URL name
+    def handle_no_permission(self, request):
+        return redirect('core:login') # Replace 'your_login_url_name'
+
 
 class JobSearchView(ListView):
     model = Job

@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from job.models import Job
+from job.models import Job, Skill
 from recruiter.models import RecruiterProfile
 from django.contrib.auth import get_user_model
 from datetime import datetime, timedelta
@@ -216,3 +216,86 @@ class JobUpdateViewTest(TestCase):
         self.assertEqual(updated_job.description, 'Updated Job Description')
         self.assertEqual(updated_job.location, 'Updated Location')
 
+    def test_job_update_view_post_invalid_logged_in_recruiter_own_job(self):
+        self.client.force_login(self.user)
+        response = self.client.post(self.update_url, self.invalid_form_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'job/job_form.html')
+        self.assertIn('form', response.context)
+        self.assertTrue(response.context['form'].errors)
+        original_job = Job.objects.get(pk=self.job.pk)
+        self.assertEqual(original_job.title, 'Original Job Title') # Ensure it wasn't updated
+
+    def test_job_update_view_post_logged_in_recruiter_other_job(self):
+        self.client.force_login(self.user)
+        response = self.client.post(self.other_job_update_url, self.valid_form_data)
+        self.assertEqual(response.status_code, 403) # Expecting Forbidden
+        other_job = Job.objects.get(pk=self.other_job.pk)
+        self.assertEqual(other_job.title, 'Other Job') # Ensure it wasn't updated
+
+class JobDeleteViewTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_user(username='testrecruiter', password='testpassword')
+        self.recruiter = RecruiterProfile.objects.create(user=self.user, company_name='Test Corp')
+        self.job = Job.objects.create(
+            recruiter=self.recruiter,
+            title='Job to Delete',
+            description='Description to Delete',
+            location='Location to Delete'
+        )
+        self.delete_url = reverse('job:job_delete', kwargs={'pk': self.job.pk})
+        self.list_url = reverse('recruiter:recruiter_job_list')
+
+        self.non_recruiter = User.objects.create_user(username='testapplicant', password='testpassword')
+        self.other_recruiter = User.objects.create_user(username='otherrecruiter', password='testpassword')
+        self.other_recruiter_profile = RecruiterProfile.objects.create(user=self.other_recruiter, company_name='Other Corp')
+        self.other_job = Job.objects.create(
+            recruiter=self.other_recruiter_profile,
+            title='Other Job',
+            description='Other Description',
+            location='Other Location'
+        )
+        self.other_job_delete_url = reverse('job:job_delete', kwargs={'pk': self.other_job.pk})
+
+    def test_job_delete_view_login_required(self):
+        response = self.client.get(self.delete_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(reverse('core:login'), response.url)
+
+    def test_job_delete_view_recruiter_required(self):
+        self.client.force_login(self.non_recruiter)
+        response = self.client.get(self.delete_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('recruiter:recruiter_profile_create'))
+
+    def test_job_delete_view_get_logged_in_recruiter_own_job(self):
+        self.client.force_login(self.user)
+        response = self.client.get(self.delete_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'job/job_confirm_delete.html')
+        self.assertEqual(response.context['job'], self.job)
+
+    def test_job_delete_view_get_logged_in_recruiter_other_job(self):
+        self.client.force_login(self.user)
+        response = self.client.get(self.other_job_delete_url)
+        self.assertEqual(response.status_code, 404) # Expecting Not Found as per your views
+
+    def test_job_delete_view_post_logged_in_recruiter_own_job(self):
+        self.client.force_login(self.user)
+        response = self.client.post(self.delete_url, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(response, '/jobs/recruiter/jobs/')
+        with self.assertRaises(Job.DoesNotExist):
+            Job.objects.get(pk=self.job.pk)
+
+    def test_job_delete_view_post_logged_in_recruiter_other_job(self):
+        self.client.force_login(self.user)
+        response = self.client.post(self.other_job_delete_url, follow=True)
+        self.assertEqual(response.status_code, 404) # Expecting Not Found as per your views
+        self.assertEqual(Job.objects.count(), 2) # Ensure the other job wasn't deleted
+
+class JobSearchViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        user = User.objects.create
