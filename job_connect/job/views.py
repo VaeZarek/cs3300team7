@@ -5,11 +5,17 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from job.models import Job
 from job.forms import JobForm
 from django.db.models import Q
+from django.urls import reverse
 
 
 class RecruiterRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
     def test_func(self):
         return hasattr(self.request.user, 'recruiter_profile')
+
+    def handle_no_permission(self):
+        if self.request.user.is_authenticated:
+            return redirect(reverse('recruiter:recruiter_profile_create'))
+        return super().handle_no_permission()
 
 class JobListView(ListView):
     model = Job
@@ -59,7 +65,7 @@ def recruiter_job_list(request):
         jobs = Job.objects.filter(recruiter__user=request.user).order_by('-posted_date')
         return render(request, 'job/recruiter_job_list.html', {'jobs': jobs})
     else:
-        return redirect('recruiter_profile_create') # Or handle appropriately
+        return redirect('recruiter:recruiter_profile_create') # Or handle appropriately
 
 class JobSearchView(ListView):
     model = Job
