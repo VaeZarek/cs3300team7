@@ -46,14 +46,12 @@ class JobUpdateView(UpdateView):
     context_object_name = 'job'
 
     def dispatch(self, request, *args, **kwargs):
-        login_mixin = LoginRequiredMixin()
-        login_mixin.request = request
-        if not login_mixin.test_func():
-            return login_mixin.handle_no_permission(request)
+        if not request.user.is_authenticated:
+            return self.handle_no_permission(request) # Use the view's handle_no_permission
 
-        recruiter_mixin = RecruiterRequiredMixin()
-        recruiter_mixin.request = request
-        if not recruiter_mixin.test_func():
+        if not hasattr(request.user, 'recruiter_profile'):
+            recruiter_mixin = RecruiterRequiredMixin()
+            recruiter_mixin.request = request
             return recruiter_mixin.handle_no_permission(request)
 
         job = get_object_or_404(Job, pk=kwargs['pk'])
@@ -61,6 +59,9 @@ class JobUpdateView(UpdateView):
             return HttpResponseForbidden("You are not authorized to update this job.")
 
         return super().dispatch(request, *args, **kwargs)
+
+    def handle_no_permission(self, request):
+        return redirect('login') # Or your login URL name
 
 class JobDeleteView(LoginRequiredMixin, DeleteView):
     model = Job
@@ -73,13 +74,18 @@ class JobDeleteView(LoginRequiredMixin, DeleteView):
             return self.handle_no_permission()
 
         if not hasattr(request.user, 'recruiter_profile'):
-            return RecruiterRequiredMixin.handle_no_permission(self)
+            recruiter_mixin = RecruiterRequiredMixin()
+            recruiter_mixin.request = request
+            return recruiter_mixin.handle_no_permission(request)
 
         job = get_object_or_404(Job, pk=kwargs['pk'])
         if job.recruiter.user != request.user:
             raise Http404("You are not authorized to delete this job.")
 
         return super().dispatch(request, *args, **kwargs)
+
+    def handle_no_permission(self):
+        return redirect('login') # Or your login URL name
 
 class JobSearchView(ListView):
     model = Job
