@@ -19,7 +19,7 @@ class JobCreateView(RecruiterRequiredMixin, CreateView):
     model = Job
     form_class = JobForm
     template_name = 'job/job_form.html'
-    success_url = '/recruiter/jobs/' # Redirect to recruiter's job list
+    success_url = 'recruiter/jobs/' # Redirect to recruiter's job list
 
     def form_valid(self, form):
         form.instance.recruiter = self.request.user.recruiter_profile
@@ -49,7 +49,7 @@ class JobUpdateView(RecruiterRequiredMixin, UpdateView):
 class JobDeleteView(RecruiterRequiredMixin, DeleteView):
     model = Job
     template_name = 'job/job_confirm_delete.html'
-    success_url = '/recruiter/jobs/' # Redirect to recruiter's job list after deletion
+    success_url = 'recruiter/jobs/' # Redirect to recruiter's job list after deletion
     context_object_name = 'job'
 
     # Override get_queryset to ensure the recruiter can only delete their own jobs
