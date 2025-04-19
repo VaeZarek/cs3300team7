@@ -204,7 +204,7 @@ class JobUpdateViewTest(TestCase):
     def test_job_update_view_get_logged_in_recruiter_other_job(self):
         self.client.force_login(self.user)
         response = self.client.get(self.other_job_update_url)
-        self.assertEqual(response.status_code, 403) # Expecting Forbidden
+        self.assertEqual(response.status_code, 403)  # Expecting Forbidden
 
     def test_job_update_view_post_valid_logged_in_recruiter_own_job(self):
         self.client.force_login(self.user)

@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, HttpResponseForbidden
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from job.models import Job
@@ -18,15 +17,6 @@ class RecruiterRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
             return redirect(reverse('recruiter:recruiter_profile_create'))
         return super().handle_no_permission()
 
-class RecruiterJobList(RecruiterRequiredMixin, ListView):
-    model = Job
-    template_name = 'job/recruiter_job_list.html' # You might need to create this template
-    context_object_name = 'jobs'
-    ordering = ['-posted_date']
-
-    def get_queryset(self):
-        return Job.objects.filter(recruiter=self.request.user.recruiter_profile).order_by('-posted_date')
-
 class JobListView(ListView):
     model = Job
     template_name = 'job/job_list.html'
@@ -42,22 +32,31 @@ class JobCreateView(RecruiterRequiredMixin, CreateView):
     model = Job
     form_class = JobForm
     template_name = 'job/job_form.html'
-    success_url = '/jobs/recruiter/jobs/' # Consistent with the URL structure
+    success_url = '/jobs/recruiter/jobs/'
 
     def form_valid(self, form):
         form.instance.recruiter = self.request.user.recruiter_profile
         return super().form_valid(form)
 
-class JobUpdateView(RecruiterRequiredMixin, UserPassesTestMixin, UpdateView):
+class JobUpdateView(UpdateView):
     model = Job
     form_class = JobForm
     template_name = 'job/job_form.html'
     success_url = '/recruiter/jobs/'
     context_object_name = 'job'
 
-    def test_func(self):
-        job = self.get_object()
-        return job.recruiter.user == self.request.user
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return LoginRequiredMixin.as_view()(request, *args, **kwargs)
+
+        if not hasattr(request.user, 'recruiter_profile'):
+            return RecruiterRequiredMixin.as_view()(request, *args, **kwargs)
+
+        job = get_object_or_404(Job, pk=kwargs['pk'])
+        if job.recruiter.user != request.user:
+            return HttpResponseForbidden("You are not authorized to update this job.")
+
+        return super().dispatch(request, *args, **kwargs)
 
 class JobDeleteView(LoginRequiredMixin, DeleteView):
     model = Job
@@ -67,7 +66,7 @@ class JobDeleteView(LoginRequiredMixin, DeleteView):
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            return self.handle_no_permission()  # From LoginRequiredMixin
+            return self.handle_no_permission()
 
         if not hasattr(request.user, 'recruiter_profile'):
             return RecruiterRequiredMixin.handle_no_permission(self)
@@ -95,3 +94,12 @@ class JobSearchView(ListView):
         context = super().get_context_data(**kwargs)
         context['search_query'] = self.request.GET.get('q', '')
         return context
+
+class RecruiterJobList(RecruiterRequiredMixin, ListView):
+    model = Job
+    template_name = 'job/recruiter_job_list.html'
+    context_object_name = 'jobs'
+    ordering = ['-posted_date']
+
+    def get_queryset(self):
+        return Job.objects.filter(recruiter=self.request.user.recruiter_profile).order_by('-posted_date')
