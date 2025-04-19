@@ -46,11 +46,15 @@ class JobUpdateView(UpdateView):
     context_object_name = 'job'
 
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return LoginRequiredMixin.as_view()(request, *args, **kwargs)
+        login_mixin = LoginRequiredMixin()
+        login_mixin.request = request
+        if not login_mixin.test_func():
+            return login_mixin.handle_no_permission()
 
-        if not hasattr(request.user, 'recruiter_profile'):
-            return RecruiterRequiredMixin.as_view()(request, *args, **kwargs)
+        recruiter_mixin = RecruiterRequiredMixin()
+        recruiter_mixin.request = request
+        if not recruiter_mixin.test_func():
+            return recruiter_mixin.handle_no_permission()
 
         job = get_object_or_404(Job, pk=kwargs['pk'])
         if job.recruiter.user != request.user:
