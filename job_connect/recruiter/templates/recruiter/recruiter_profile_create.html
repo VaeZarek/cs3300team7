@@ -7,7 +7,10 @@
     <h1>Create/Update Recruiter Profile</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ profile_form.as_p }}
+        <p>{{ profile_form.company_name.label_tag }} {{ profile_form.company_name }} {{ profile_form.company_name.errors }}</p>
+        <p>{{ profile_form.company_website.label_tag }} {{ profile_form.company_website }} {{ profile_form.company_website.errors }}</p>
+        <p>{{ profile_form.description.label_tag }} {{ profile_form.description }} {{ profile_form.description.errors }}</p>
+        <p>{{ profile_form.location.label_tag }} {{ profile_form.location }} {{ profile_form.location.errors }}</p>
         <button type="submit">Save Profile</button>
     </form>
     <p><a href="{% url 'recruiter:recruiter_dashboard' %}">Back to Dashboard</a></p>
