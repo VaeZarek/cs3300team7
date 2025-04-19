@@ -207,4 +207,12 @@ class JobUpdateViewTest(TestCase):
         self.assertEqual(response.status_code, 403) # Expecting Forbidden
 
     def test_job_update_view_post_valid_logged_in_recruiter_own_job(self):
-        self.client.force
+        self.client.force_login(self.user)
+        response = self.client.post(self.update_url, self.valid_form_data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(response, reverse('recruiter:recruiter_job_list'))
+        updated_job = Job.objects.get(pk=self.job.pk)
+        self.assertEqual(updated_job.title, 'Updated Job Title')
+        self.assertEqual(updated_job.description, 'Updated Job Description')
+        self.assertEqual(updated_job.location, 'Updated Location')
+

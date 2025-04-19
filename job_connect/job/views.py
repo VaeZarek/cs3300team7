@@ -52,15 +52,12 @@ class JobUpdateView(RecruiterRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Job
     form_class = JobForm
     template_name = 'job/job_form.html'
-    success_url = '/recruiter/jobs/' # Use absolute URL
+    success_url = '/recruiter/jobs/'
     context_object_name = 'job'
 
     def test_func(self):
         job = self.get_object()
         return job.recruiter.user == self.request.user
-
-    def handle_no_permission(self):
-        return HttpResponseForbidden("You are not authorized to update this job.")
 
 class JobDeleteView(LoginRequiredMixin, DeleteView):
     model = Job
