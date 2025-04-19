@@ -271,3 +271,4 @@ class JobDeleteViewTest(TestCase):
         response = self.client.post(self.other_delete_url, follow=True)
         self.assertEqual(response.status_code, 404)
         self.assertTrue(Job.objects.filter(pk=self.other_job.pk).exists())
+

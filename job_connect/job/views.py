@@ -54,15 +54,15 @@ class JobUpdateView(RecruiterRequiredMixin, UserPassesTestMixin, UpdateView):
 class JobDeleteView(RecruiterRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Job
     template_name = 'job/job_confirm_delete.html'
-    success_url = 'recruiter/jobs/'  # No leading slash
+    success_url = '/jobs/recruiter/jobs/'  # Ensure leading slash for consistency with reverse()
     context_object_name = 'job'
 
-    def test_func(self):
+    def test_func(self, user):
         try:
             job = self.get_object()
         except Http404:
             return False
-        return job.recruiter.user == self.request.user
+        return job.recruiter.user == user
 
     def handle_no_permission(self):
         raise Http404("You are not authorized to delete this job.")
