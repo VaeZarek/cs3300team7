@@ -84,5 +84,62 @@ class JobDetailViewTest(TestCase):
         response = self.client.get(self.invalid_detail_url)
         self.assertEqual(response.status_code, 404)
 
+class JobCreateViewTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.create_url = reverse('job:job_create')
+        self.list_url = reverse('job:recruiter_job_list') # Assuming this is where recruiters see their jobs
 
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.recruiter = RecruiterProfile.objects.create(user=self.user, company_name='Test Corp')
+
+        self.non_recruiter = User.objects.create_user(username='testapplicant', password='testpassword')
+
+        self.valid_form_data = {
+            'title': 'New Job Title',
+            'description': 'New Job Description',
+            'location': 'New Location',
+        }
+        self.invalid_form_data = {
+            'title': '',  # Missing required field
+            'description': 'New Job Description',
+            'location': 'New Location',
+        }
+
+    def test_job_create_view_login_required(self):
+        response = self.client.get(self.create_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(reverse('core:login'), response.url)
+
+    def test_job_create_view_recruiter_required(self):
+        self.client.force_login(self.non_recruiter)
+        response = self.client.get(self.create_url)
+        self.assertEqual(response.status_code, 302) # Or potentially 403 depending on your UserPassesTestMixin redirect
+        self.assertRedirects(response, reverse('recruiter:recruiter_profile_create')) # Assuming this is your redirect
+
+    def test_job_create_view_get_logged_in_recruiter(self):
+        self.client.force_login(self.user)
+        response = self.client.get(self.create_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'job/job_form.html')
+        self.assertIn('form', response.context)
+
+    def test_job_create_view_post_valid_logged_in_recruiter(self):
+        self.client.force_login(self.user)
+        response = self.client.post(self.create_url, self.valid_form_data, follow=True)
+        self.assertEqual(response.status_code, 200) # Assuming redirect to recruiter's job list
+        self.assertRedirects(response, self.list_url)
+        self.assertEqual(Job.objects.count(), 1)
+        new_job = Job.objects.first()
+        self.assertEqual(new_job.title, 'New Job Title')
+        self.assertEqual(new_job.recruiter, self.recruiter)
+
+    def test_job_create_view_post_invalid_logged_in_recruiter(self):
+        self.client.force_login(self.user)
+        response = self.client.post(self.create_url, self.invalid_form_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'job/job_form.html')
+        self.assertIn('form', response.context)
+        self.assertTrue(response.context['form'].errors)
+        self.assertEqual(Job.objects.count(), 0)
 
