@@ -1,6 +1,7 @@
 from django.db import models
 #from django.conf import settings
 from core.models import BaseModel
+from applicant.models import Skill
 from recruiter.models import RecruiterProfile
 
 class Job(BaseModel):
@@ -14,7 +15,6 @@ class Job(BaseModel):
     posted_date = models.DateTimeField(auto_now_add=True)
     application_deadline = models.DateField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
-    skills_required = models.ManyToManyField('self', symmetrical=False, blank=True, related_name='required_in_jobs') # Example: Tags for required skills
-
+    skills_required = models.ManyToManyField(Skill, blank=True, related_name='required_in_jobs')
     def __str__(self):
         return self.title
