@@ -114,8 +114,10 @@ class JobCreateViewTest(TestCase):
     def test_job_create_view_recruiter_required(self):
         self.client.force_login(self.non_recruiter)
         response = self.client.get(self.create_url)
-        self.assertEqual(response.status_code, 302) # Or potentially 403 depending on your UserPassesTestMixin redirect
-        self.assertRedirects(response, reverse('recruiter:recruiter_profile_create')) # Assuming this is your redirect
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse(
+            'recruiter:recruiter_profile_create'))
+        # Assuming this URL is in your recruiter app's urls
 
     def test_job_create_view_get_logged_in_recruiter(self):
         self.client.force_login(self.user)
