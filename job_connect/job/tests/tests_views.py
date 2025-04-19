@@ -129,8 +129,8 @@ class JobCreateViewTest(TestCase):
     def test_job_create_view_post_valid_logged_in_recruiter(self):
         self.client.force_login(self.user)
         response = self.client.post(self.create_url, self.valid_form_data, follow=True)
-        self.assertEqual(response.status_code, 200) # Assuming redirect to recruiter's job list
-        self.assertRedirects(response, self.list_url)
+        self.assertEqual(response.status_code, 200)  # Assuming redirect to recruiter's job list
+        self.assertRedirects(response, '/recruiter/jobs/')  # Update the expected URL
         self.assertEqual(Job.objects.count(), 1)
         new_job = Job.objects.first()
         self.assertEqual(new_job.title, 'New Job Title')
@@ -145,3 +145,66 @@ class JobCreateViewTest(TestCase):
         self.assertTrue(response.context['form'].errors)
         self.assertEqual(Job.objects.count(), 0)
 
+class JobUpdateViewTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_user(username='testrecruiter', password='testpassword')
+        self.recruiter = RecruiterProfile.objects.create(user=self.user, company_name='Test Corp')
+        self.job = Job.objects.create(
+            recruiter=self.recruiter,
+            title='Original Job Title',
+            description='Original Job Description',
+            location='Original Location'
+        )
+        self.update_url = reverse('job:job_update', kwargs={'pk': self.job.pk})
+        self.list_url = reverse('job:recruiter_job_list')
+
+        self.non_recruiter = User.objects.create_user(username='testapplicant', password='testpassword')
+        self.other_recruiter = User.objects.create_user(username='otherrecruiter', password='testpassword')
+        self.other_recruiter_profile = RecruiterProfile.objects.create(user=self.other_recruiter, company_name='Other Corp')
+        self.other_job = Job.objects.create(
+            recruiter=self.other_recruiter_profile,
+            title='Other Job',
+            description='Other Description',
+            location='Other Location'
+        )
+
+        self.valid_form_data = {
+            'title': 'Updated Job Title',
+            'description': 'Updated Job Description',
+            'location': 'Updated Location'
+        }
+        self.invalid_form_data = {
+            'title': '',  # Missing required field
+            'description': 'Updated Job Description',
+            'location': 'Updated Location'
+        }
+
+    def test_job_update_view_login_required(self):
+        response = self.client.get(self.update_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(reverse('core:login'), response.url)
+
+    def test_job_update_view_recruiter_required(self):
+        self.client.force_login(self.non_recruiter)
+        response = self.client.get(self.update_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('recruiter:recruiter_profile_create'))
+
+    def test_job_update_view_get_logged_in_recruiter_own_job(self):
+        self.client.force_login(self.user)
+        response = self.client.get(self.update_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'job/job_form.html')
+        self.assertIn('form', response.context)
+        self.assertEqual(response.context['job'], self.job)
+        self.assertEqual(response.context['form'].initial['title'], 'Original Job Title')
+
+    def test_job_update_view_get_logged_in_recruiter_other_job(self):
+        self.client.force_login(self.user)
+        other_job_update_url = reverse('job:job_update', kwargs={'pk': self.other_job.pk})
+        response = self.client.get(other_job_update_url)
+        self.assertEqual(response.status_code, 404) # Or potentially 302 depending on your get_queryset
+
+    # Add more test methods below for POST requests (valid and invalid data)
+    # and ensure the job is updated correctly and access is restricted.
