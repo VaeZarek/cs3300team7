@@ -51,17 +51,21 @@ class JobUpdateView(RecruiterRequiredMixin, UserPassesTestMixin, UpdateView):
         job = self.get_object()
         return job.recruiter.user == self.request.user
 
-class JobDeleteView(RecruiterRequiredMixin, DeleteView):
+class JobDeleteView(RecruiterRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Job
     template_name = 'job/job_confirm_delete.html'
-    success_url = '/recruiter/jobs/'
+    success_url = 'recruiter/jobs/'  # No leading slash
     context_object_name = 'job'
 
-    def dispatch(self, request, *args, **kwargs):
-        job = get_object_or_404(Job, pk=kwargs['pk'])
-        if not hasattr(request.user, 'recruiter_profile') or job.recruiter.user != request.user:
-            raise Http404("You are not authorized to delete this job.")
-        return super().dispatch(request, *args, **kwargs)
+    def test_func(self):
+        try:
+            job = self.get_object()
+        except Http404:
+            return False
+        return job.recruiter.user == self.request.user
+
+    def handle_no_permission(self):
+        raise Http404("You are not authorized to delete this job.")
 
 @login_required
 def recruiter_job_list(request):

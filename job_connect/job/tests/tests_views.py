@@ -256,22 +256,18 @@ class JobDeleteViewTest(TestCase):
     def test_job_delete_view_get_logged_in_recruiter_other_job(self):
         self.client.force_login(self.user)
         response = self.client.get(self.other_delete_url)
-        self.assertEqual(response.status_code, 302)
-        # Expecting a 302 redirect But should probably be a 404
+        self.assertEqual(response.status_code, 404)
+        # Expecting a 404 was getting 302 redirect for a bit
 
     def test_job_delete_view_post_logged_in_recruiter_own_job(self):
         self.client.force_login(self.user)
         response = self.client.post(self.delete_url, follow=True)
-        self.assertEqual(response.status_code, 200) # Should redirect to success_url
+        self.assertEqual(response.status_code, 200)
         self.assertRedirects(response, self.list_url)
         self.assertFalse(Job.objects.filter(pk=self.job.pk).exists()) # Ensure job is deleted
 
     def test_job_delete_view_post_logged_in_recruiter_other_job(self):
         self.client.force_login(self.user)
-        logged_in_user = User.objects.get(username='testrecruiter')
-        print(f"User has recruiter_profile: {hasattr(logged_in_user, 'recruiter_profile')}")
         response = self.client.post(self.other_delete_url, follow=True)
-        print(f"Status Code: {response.status_code}")
-        print(f"Redirect URL: {response.url}")
         self.assertEqual(response.status_code, 404)
         self.assertTrue(Job.objects.filter(pk=self.other_job.pk).exists())
