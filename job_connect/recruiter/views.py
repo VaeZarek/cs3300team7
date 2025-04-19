@@ -10,6 +10,7 @@ from job.forms import JobForm
 from application.models import Application
 from application.forms import ApplicationStatusForm  # You'll need to create this form
 
+
 class RecruiterRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
     def test_func(self):
         return hasattr(self.request.user, 'recruiter_profile')
@@ -18,7 +19,7 @@ class JobCreateView(RecruiterRequiredMixin, CreateView):
     model = Job
     form_class = JobForm
     template_name = 'job/job_form.html'
-    success_url = '/recruiter/jobs/' # Redirect to recruiter's job list
+    success_url = 'recruiter/jobs/' # Redirect to recruiter's job list
 
     def form_valid(self, form):
         form.instance.recruiter = self.request.user.recruiter_profile
@@ -48,7 +49,7 @@ class JobUpdateView(RecruiterRequiredMixin, UpdateView):
 class JobDeleteView(RecruiterRequiredMixin, DeleteView):
     model = Job
     template_name = 'job/job_confirm_delete.html'
-    success_url = '/recruiter/jobs/' # Redirect to recruiter's job list after deletion
+    success_url = 'recruiter/jobs/' # Redirect to recruiter's job list after deletion
     context_object_name = 'job'
 
     # Override get_queryset to ensure the recruiter can only delete their own jobs
@@ -125,12 +126,16 @@ def recruiter_profile_create(request):
 
 @login_required
 def recruiter_profile_update(request):
-    profile = get_object_or_404(RecruiterProfile, user=request.user)
+    try:
+        profile = RecruiterProfile.objects.get(user=request.user)
+    except RecruiterProfile.DoesNotExist:
+        return redirect(reverse('recruiter:recruiter_profile_create'))
+
     if request.method == 'POST':
         profile_form = RecruiterProfileForm(request.POST, request.FILES, instance=profile)
         if profile_form.is_valid():
             profile_form.save()
-            return redirect('recruiter_profile_view')
+            return redirect(reverse('recruiter:recruiter_profile_view'))
     else:
         profile_form = RecruiterProfileForm(instance=profile)
     return render(request, 'recruiter/recruiter_profile_update.html', {'profile_form': profile_form})

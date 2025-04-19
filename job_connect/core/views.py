@@ -12,18 +12,15 @@ def applicant_signup(request):
         form = ApplicantSignUpForm(request.POST)
         if form.is_valid():
             user = form.save()  # Create the user
-            # Assign the user to the 'Applicant' group
-            try:
-                applicant_group = Group.objects.get(name='Applicant')
-                user.groups.add(applicant_group)
-            except Group.DoesNotExist:
-                print("Error: Applicant group does not exist!")
-                # Create the group if it doesn't exist:
-                applicant_group = Group.objects.create(name='Applicant')
-                user.groups.add(applicant_group)
+
+            # Get or create the 'Applicant' group
+            applicant_group, created = Group.objects.get_or_create(name='Applicant')
+
+            # Add the new user to the 'Applicant' group
+            user.groups.add(applicant_group)
 
             login(request, user)
-            return redirect('applicant:applicant_profile_create')  # Redirect to create profile
+            return redirect('applicant:applicant_profile_create')
     else:
         form = ApplicantSignUpForm()
     return render(request, 'core/applicant_signup.html', {'form': form})
@@ -32,19 +29,16 @@ def recruiter_signup(request):
     if request.method == 'POST':
         form = RecruiterSignUpForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            # Assign the user to the 'Recruiter' group
-            try:
-                recruiter_group = Group.objects.get(name='Recruiter')
-                user.groups.add(recruiter_group)
-            except Group.DoesNotExist:
-                print("Error: Recruiter group does not exist!")
-                # Create the group if it doesn't exist:
-                recruiter_group = Group.objects.create(name='Recruiter')
-                user.groups.add(recruiter_group)
+            user = form.save()  # Create the recruiter user
+
+            # Get or create the 'Recruiter' group
+            recruiter_group, created = Group.objects.get_or_create(name='Recruiter')
+
+            # Add the new user to the 'Recruiter' group
+            user.groups.add(recruiter_group)
 
             login(request, user)
-            return redirect('recruiter:recruiter_profile_create') # Redirect to create profile
+            return redirect('recruiter:recruiter_profile_create')
     else:
         form = RecruiterSignUpForm()
     return render(request, 'core/recruiter_signup.html', {'form': form})

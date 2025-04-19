@@ -7,6 +7,7 @@ class RecruiterProfile(BaseModel):
     company_name = models.CharField(max_length=255)
     company_website = models.URLField(blank=True)
     description = models.TextField(blank=True)
+    location = models.CharField(max_length=255, blank=True)  # Added location field
     # Add other relevant fields like company logo, industry, etc.
 
     def __str__(self):
