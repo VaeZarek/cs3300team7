@@ -32,7 +32,7 @@ class JobCreateView(RecruiterRequiredMixin, CreateView):
     model = Job
     form_class = JobForm
     template_name = 'job/job_form.html'
-    success_url = '/recruiter/jobs/' # Redirect to recruiter's job list
+    success_url = 'recruiter/jobs/' # Redirect to recruiter's job list
 
     def form_valid(self, form):
         form.instance.recruiter = self.request.user.recruiter_profile
@@ -42,7 +42,7 @@ class JobUpdateView(RecruiterRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Job
     form_class = JobForm
     template_name = 'job/job_form.html'
-    success_url = '/recruiter/jobs/'
+    success_url = 'recruiter/jobs/'
     context_object_name = 'job'
 
     def test_func(self):
@@ -52,7 +52,7 @@ class JobUpdateView(RecruiterRequiredMixin, UserPassesTestMixin, UpdateView):
 class JobDeleteView(RecruiterRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Job
     template_name = 'job/job_confirm_delete.html'
-    success_url = '/recruiter/jobs/'
+    success_url = 'recruiter/jobs/'
     context_object_name = 'job'
 
     def test_func(self):
