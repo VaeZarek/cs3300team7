@@ -2,6 +2,7 @@ from django.test import TestCase
 from job.models import Job
 from recruiter.models import RecruiterProfile
 from django.contrib.auth import get_user_model
+from datetime import date  # Import the date object
 
 User = get_user_model()
 
@@ -31,7 +32,7 @@ class JobModelTest(TestCase):
             location='New York',
             salary_range='$100k - $150k',
             employment_type='Full-time',
-            application_deadline='2025-05-01',
+            application_deadline=date(2025, 5, 1),  # Use date object here
             is_active=False
         )
         self.assertEqual(job.title, 'Product Manager')
@@ -61,5 +62,3 @@ class JobModelTest(TestCase):
             location='Austin'
         )
         self.assertEqual(str(job), 'UX Designer')
-
-    # Add tests for skills_required if you haven't changed it yet
