@@ -98,10 +98,10 @@ class RecruiterProfileViewTest(TestCase):
         self.client.logout()
         response = self.client.get(reverse('recruiter:recruiter_profile_create'))
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse('login') + '?next=' + reverse('recruiter:recruiter_profile_create'))
+        self.assertRedirects(response, reverse('core:login') + '?next=' + reverse('recruiter:recruiter_profile_create'))
 
     def test_recruiter_profile_update_view_non_logged_in(self):
         self.client.logout()
         response = self.client.get(reverse('recruiter:recruiter_profile_update'))
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse('login') + '?next=' + reverse('recruiter:recruiter_profile_update'))
+        self.assertRedirects(response, reverse('core:login') + '?next=' + reverse('recruiter:recruiter_profile_update'))

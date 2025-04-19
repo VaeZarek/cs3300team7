@@ -10,6 +10,7 @@ from job.forms import JobForm
 from application.models import Application
 from application.forms import ApplicationStatusForm  # You'll need to create this form
 
+
 class RecruiterRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
     def test_func(self):
         return hasattr(self.request.user, 'recruiter_profile')
@@ -125,12 +126,16 @@ def recruiter_profile_create(request):
 
 @login_required
 def recruiter_profile_update(request):
-    profile = get_object_or_404(RecruiterProfile, user=request.user)
+    try:
+        profile = RecruiterProfile.objects.get(user=request.user)
+    except RecruiterProfile.DoesNotExist:
+        return redirect(reverse('recruiter:recruiter_profile_create'))
+
     if request.method == 'POST':
         profile_form = RecruiterProfileForm(request.POST, request.FILES, instance=profile)
         if profile_form.is_valid():
             profile_form.save()
-            return redirect('recruiter_profile_view')
+            return redirect(reverse('recruiter:recruiter_profile_view'))
     else:
         profile_form = RecruiterProfileForm(instance=profile)
     return render(request, 'recruiter/recruiter_profile_update.html', {'profile_form': profile_form})
