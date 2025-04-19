@@ -88,7 +88,7 @@ class JobCreateViewTest(TestCase):
     def setUp(self):
         self.client = Client()
         self.create_url = reverse('job:job_create')
-        self.list_url = reverse('job:recruiter_job_list') # Assuming this is where recruiters see their jobs
+        self.list_url = '/jobs/recruiter/jobs/' # Assuming this is where recruiters see their jobs
 
         self.user = User.objects.create_user(username='testuser', password='testpassword')
         self.recruiter = RecruiterProfile.objects.create(user=self.user, company_name='Test Corp')
@@ -222,7 +222,7 @@ class JobDeleteViewTest(TestCase):
             location='Location to Delete'
         )
         self.delete_url = reverse('job:job_delete', kwargs={'pk': self.job.pk})
-        self.list_url = reverse('job:recruiter_job_list')
+        self.list_url = '/jobs/recruiter/jobs/'
 
         self.non_recruiter = User.objects.create_user(username='testapplicant', password='testpassword')
         self.other_recruiter = User.objects.create_user(username='otherrecruiter', password='testpassword')

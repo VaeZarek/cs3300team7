@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -6,6 +7,7 @@ from job.models import Job
 from job.forms import JobForm
 from django.db.models import Q
 from django.urls import reverse
+
 
 
 class RecruiterRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
@@ -32,7 +34,7 @@ class JobCreateView(RecruiterRequiredMixin, CreateView):
     model = Job
     form_class = JobForm
     template_name = 'job/job_form.html'
-    success_url = 'recruiter/jobs/' # Redirect to recruiter's job list
+    success_url = '/recruiter/jobs/' # Redirect to recruiter's job list
 
     def form_valid(self, form):
         form.instance.recruiter = self.request.user.recruiter_profile
@@ -49,15 +51,17 @@ class JobUpdateView(RecruiterRequiredMixin, UserPassesTestMixin, UpdateView):
         job = self.get_object()
         return job.recruiter.user == self.request.user
 
-class JobDeleteView(RecruiterRequiredMixin, UserPassesTestMixin, DeleteView):
+class JobDeleteView(RecruiterRequiredMixin, DeleteView):
     model = Job
     template_name = 'job/job_confirm_delete.html'
-    success_url = 'recruiter/jobs/'
+    success_url = '/recruiter/jobs/'
     context_object_name = 'job'
 
-    def test_func(self):
-        job = self.get_object()
-        return job.recruiter.user == self.request.user
+    def dispatch(self, request, *args, **kwargs):
+        job = get_object_or_404(Job, pk=kwargs['pk'])
+        if not hasattr(request.user, 'recruiter_profile') or job.recruiter.user != request.user:
+            raise Http404("You are not authorized to delete this job.")
+        return super().dispatch(request, *args, **kwargs)
 
 @login_required
 def recruiter_job_list(request):
