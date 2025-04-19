@@ -5,6 +5,8 @@ from recruiter.models import RecruiterProfile
 from django.contrib.auth import get_user_model
 from datetime import datetime, timedelta
 from django.utils import timezone
+import time
+
 
 User = get_user_model()
 
@@ -14,8 +16,13 @@ class JobListViewTest(TestCase):
         user = User.objects.create_user(username='testuser', password='testpassword')
         recruiter = RecruiterProfile.objects.create(user=user, company_name='Test Corp')
         now = timezone.now()
-        Job.objects.create(recruiter=recruiter, title='Job 1', posted_date=now - timedelta(days=2))
-        Job.objects.create(recruiter=recruiter, title='Job 2', posted_date=now - timedelta(days=1))
+
+        Job.objects.create(recruiter=recruiter, title='Job 1', posted_date=now - timedelta(seconds=2))
+        time.sleep(0.01)  # Small delay
+
+        Job.objects.create(recruiter=recruiter, title='Job 2', posted_date=now - timedelta(seconds=1))
+        time.sleep(0.01)  # Small delay
+
         Job.objects.create(recruiter=recruiter, title='Job 3', posted_date=now)
 
     def setUp(self):
@@ -37,6 +44,10 @@ class JobListViewTest(TestCase):
     def test_job_list_is_ordered_by_posted_date_descending(self):
         response = self.client.get(self.list_url)
         jobs = list(response.context['jobs'])
+        print(f"\n--- Job Order ---")
+        for job in jobs:
+            print(f"{job.title}: {job.posted_date}")
         self.assertEqual(jobs[0].title, 'Job 3')
         self.assertEqual(jobs[1].title, 'Job 2')
         self.assertEqual(jobs[2].title, 'Job 1')
+
