@@ -51,3 +51,38 @@ class JobListViewTest(TestCase):
         self.assertEqual(jobs[1].title, 'Job 2')
         self.assertEqual(jobs[2].title, 'Job 1')
 
+class JobDetailViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        user = User.objects.create_user(username='testuser', password='testpassword')
+        recruiter = RecruiterProfile.objects.create(user=user, company_name='Test Corp')
+        cls.job = Job.objects.create(
+            recruiter=recruiter,
+            title='Detailed Job',
+            description='This is a detailed job description.',
+            location='Anywhere'
+        )
+
+    def setUp(self):
+        self.client = Client()
+        self.detail_url = reverse('job:job_detail', kwargs={'pk': self.job.pk})
+        self.invalid_detail_url = reverse('job:job_detail', kwargs={'pk': 999}) # An ID that likely doesn't exist
+
+    def test_job_detail_view_exists(self):
+        response = self.client.get(self.detail_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'job/job_detail.html')
+
+    def test_job_detail_displays_correct_job(self):
+        response = self.client.get(self.detail_url)
+        self.assertEqual(response.context['job'], self.job)
+        self.assertContains(response, 'Detailed Job')
+        self.assertContains(response, 'This is a detailed job description.')
+        self.assertContains(response, 'Anywhere')
+
+    def test_job_detail_returns_404_for_nonexistent_job(self):
+        response = self.client.get(self.invalid_detail_url)
+        self.assertEqual(response.status_code, 404)
+
+
+
