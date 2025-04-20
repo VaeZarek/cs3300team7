@@ -21,13 +21,17 @@ obtained at <https://www.postgresql.org/download/>.  For more information
 look at our web site located at <https://www.postgresql.org/>.
 
 To run the database, create a postgres user on your VM/Instance:
+```
 adduser postgres
 mkdir -p /usr/local/pgsql/data
 chown postgres /usr/local/pgsql/data
 su - postgres
 /usr/local/pgsql/bin/initdb -D /usr/local/pgsql/data
 /usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile start
+```
 
 As the postgres user, add to your PATH variable for psql usage:
+```
 PATH=/usr/local/pgsql/bin:$PATH
 export PATH
+```
