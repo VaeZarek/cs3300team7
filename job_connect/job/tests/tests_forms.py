@@ -5,6 +5,7 @@ from applicant.models import Skill
 from recruiter.models import RecruiterProfile
 from django.contrib.auth import get_user_model  # Import get_user_model
 from datetime import date
+from job.models import Job
 
 User = get_user_model()  # Assign the custom user model to User
 
@@ -36,15 +37,18 @@ class JobFormTest(TestCase):
         job = form.save(commit=False)
         job.recruiter = self.recruiter_profile
         job.save()
-        self.assertEqual(job.title, 'Software Engineer')
-        self.assertEqual(job.description, 'Write code and stuff.')
-        self.assertEqual(job.location, 'Tech Hub')
-        self.assertEqual(job.requirements, 'Strong coding skills.')
-        self.assertEqual(job.salary_range, '$80k - $120k')
-        self.assertEqual(job.employment_type, 'Full-time')
-        self.assertEqual(job.application_deadline, date(2025, 5, 15))
-        self.assertTrue(job.is_active)
-        self.assertEqual(list(job.skills_required.all()), [self.python_skill, self.django_skill])
+        form.save_m2m()
+        # Retrieve the job from the database to ensure M2M is saved
+        retrieved_job = Job.objects.get(pk=job.pk)
+        self.assertEqual(retrieved_job.title, 'Software Engineer')
+        self.assertEqual(retrieved_job.description, 'Write code and stuff.')
+        self.assertEqual(retrieved_job.location, 'Tech Hub')
+        self.assertEqual(retrieved_job.requirements, 'Strong coding skills.')
+        self.assertEqual(retrieved_job.salary_range, '$80k - $120k')
+        self.assertEqual(retrieved_job.employment_type, 'Full-time')
+        self.assertEqual(retrieved_job.application_deadline, date(2025, 5, 15))
+        self.assertTrue(retrieved_job.is_active)
+        self.assertEqual(list(retrieved_job.skills_required.all()), [self.python_skill, self.django_skill])
 
     def test_invalid_job_form_missing_required_fields(self):
         required_fields = ['title', 'description', 'location']
