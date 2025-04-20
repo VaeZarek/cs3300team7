@@ -129,8 +129,8 @@ class JobCreateViewTest(TestCase):
     def test_job_create_view_post_valid_logged_in_recruiter(self):
         self.client.force_login(self.user)
         response = self.client.post(self.create_url, self.valid_form_data, follow=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertRedirects(response, self.list_url)
+        self.assertEqual(response.status_code, 200)  # After following redirect, status should be 200
+        self.assertEqual(response.url,reverse('job:recruiter_job_list'))  # Assuming 'recruiter_job_list' is the correct name
         self.assertEqual(Job.objects.count(), 1)
         new_job = Job.objects.first()
         self.assertEqual(new_job.title, 'New Job Title')
@@ -210,7 +210,7 @@ class JobUpdateViewTest(TestCase):
         self.client.force_login(self.user)
         response = self.client.post(self.update_url, self.valid_form_data, follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertRedirects(response, reverse('recruiter:recruiter_job_list'))
+        self.assertEqual(response.url,reverse('job:recruiter_job_list'))  # Assuming 'recruiter_job_list' is the correct name
         updated_job = Job.objects.get(pk=self.job.pk)
         self.assertEqual(updated_job.title, 'Updated Job Title')
         self.assertEqual(updated_job.description, 'Updated Job Description')

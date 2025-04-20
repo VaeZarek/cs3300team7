@@ -2,7 +2,7 @@ from django import forms
 from job.models import Job
 
 class JobForm(forms.ModelForm):
-    is_active = forms.BooleanField(initial=True, required=False)  # Explicitly set initial and not required
+    is_active = forms.BooleanField(initial=True)  # Set initial, and it will be required by default
 
     class Meta:
         model = Job
@@ -11,4 +11,3 @@ class JobForm(forms.ModelForm):
             'application_deadline': forms.DateInput(attrs={'type': 'date'}),
             'skills_required': forms.CheckboxSelectMultiple,
         }
-        

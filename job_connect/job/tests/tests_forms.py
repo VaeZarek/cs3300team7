@@ -76,7 +76,8 @@ class JobFormTest(TestCase):
             'title': 'Software Engineer',
             'description': 'Write code and stuff.',
             'location': 'Tech Hub',
-            # 'requirements', 'salary_range', 'employment_type', 'application_deadline', 'is_active', 'skills_required' are missing
+            'is_active': True,  # Explicitly set is_active to True
+            # 'requirements', 'salary_range', 'employment_type', 'application_deadline', 'skills_required' are missing
         }
         form = JobForm(data=form_data)
         self.assertTrue(form.is_valid())
@@ -90,7 +91,7 @@ class JobFormTest(TestCase):
         self.assertEqual(job.salary_range, '')
         self.assertEqual(job.employment_type, '')
         self.assertIsNone(job.application_deadline)
-        self.assertTrue(job.is_active)  # Should default to True
+        self.assertTrue(job.is_active)
         self.assertEqual(list(job.skills_required.all()), [])
 
     def test_job_form_invalid_application_deadline_type(self):
