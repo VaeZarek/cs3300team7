@@ -2,12 +2,18 @@ from django import forms
 from django.test import TestCase
 from job.forms import JobForm
 from applicant.models import Skill
+from recruiter.models import RecruiterProfile
+from django.contrib.auth import get_user_model  # Import get_user_model
 from datetime import date
+
+User = get_user_model()  # Assign the custom user model to User
 
 class JobFormTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        user = User.objects.create_user(username='test_recruiter', password='test_password')
+        cls.recruiter_profile = RecruiterProfile.objects.create(user=user, company_name='Test Corp')
         Skill.objects.create(name='Python')
         Skill.objects.create(name='Django')
         cls.python_skill = Skill.objects.get(name='Python')
@@ -27,7 +33,9 @@ class JobFormTest(TestCase):
         }
         form = JobForm(data=form_data)
         self.assertTrue(form.is_valid())
-        job = form.save()
+        job = form.save(commit=False)
+        job.recruiter = self.recruiter_profile
+        job.save()
         self.assertEqual(job.title, 'Software Engineer')
         self.assertEqual(job.description, 'Write code and stuff.')
         self.assertEqual(job.location, 'Tech Hub')
@@ -68,7 +76,9 @@ class JobFormTest(TestCase):
         }
         form = JobForm(data=form_data)
         self.assertTrue(form.is_valid())
-        job = form.save()
+        job = form.save(commit=False)
+        job.recruiter = self.recruiter_profile
+        job.save()
         self.assertEqual(job.title, 'Software Engineer')
         self.assertEqual(job.description, 'Write code and stuff.')
         self.assertEqual(job.location, 'Tech Hub')
@@ -76,7 +86,7 @@ class JobFormTest(TestCase):
         self.assertEqual(job.salary_range, '')
         self.assertEqual(job.employment_type, '')
         self.assertIsNone(job.application_deadline)
-        self.assertTrue(job.is_active) # Default is True
+        self.assertTrue(job.is_active)  # Should default to True
         self.assertEqual(list(job.skills_required.all()), [])
 
     def test_job_form_invalid_application_deadline_type(self):
@@ -111,5 +121,7 @@ class JobFormTest(TestCase):
         }
         form = JobForm(data=form_data)
         self.assertTrue(form.is_valid())
-        job = form.save()
+        job = form.save(commit=False)
+        job.recruiter = self.recruiter_profile
+        job.save()
         self.assertEqual(list(job.skills_required.all()), [])
