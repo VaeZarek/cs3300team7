@@ -3,9 +3,10 @@ from django.urls import reverse
 from job.models import Job, Skill
 from recruiter.models import RecruiterProfile
 from django.contrib.auth import get_user_model
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from django.utils import timezone
 import time
+
 
 
 User = get_user_model()
@@ -98,7 +99,14 @@ class JobCreateViewTest(TestCase):
         self.valid_form_data = {
             'title': 'New Job Title',
             'description': 'New Job Description',
+            'requirements': 'Some requirements.',
             'location': 'New Location',
+            'salary_range': '$50k - $70k',
+            'employment_type': 'Full-time',
+            'application_deadline': date(2025, 6, 30),
+            'is_active': True,
+            'skills_required': [self.python_skill.id] if hasattr(self, 'python_skill') else [],
+            # Include if you have skills set up
         }
         self.invalid_form_data = {
             'title': '',  # Missing required field
@@ -128,9 +136,11 @@ class JobCreateViewTest(TestCase):
 
     def test_job_create_view_post_valid_logged_in_recruiter(self):
         self.client.force_login(self.user)
-        response = self.client.post(self.create_url, self.valid_form_data, follow=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.request['PATH_INFO'], reverse('job:recruiter_job_list'))
+        response = self.client.post(self.create_url, self.valid_form_data)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('job:recruiter_job_list'))
+        followed_response = self.client.get(response.url)
+        self.assertEqual(followed_response.status_code, 200)
         self.assertEqual(Job.objects.count(), 1)
         new_job = Job.objects.first()
         self.assertEqual(new_job.title, 'New Job Title')
@@ -173,7 +183,14 @@ class JobUpdateViewTest(TestCase):
         self.valid_form_data = {
             'title': 'Updated Job Title',
             'description': 'Updated Job Description',
-            'location': 'Updated Location'
+            'requirements': 'Some requirements.',
+            'location': 'Updated Location',
+            'salary_range': '$50k - $70k',
+            'employment_type': 'Full-time',
+            'application_deadline': date(2025, 6, 30),
+            'is_active': True,
+            'skills_required': [self.python_skill.id] if hasattr(self, 'python_skill') else [],
+            # Include if you have skills set up
         }
         self.invalid_form_data = {
             'title': '',  # Missing required field
@@ -208,9 +225,11 @@ class JobUpdateViewTest(TestCase):
 
     def test_job_update_view_post_valid_logged_in_recruiter_own_job(self):
         self.client.force_login(self.user)
-        response = self.client.post(self.update_url, self.valid_form_data, follow=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.request['PATH_INFO'], reverse('job:recruiter_job_list'))
+        response = self.client.post(self.update_url, self.valid_form_data)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('job:recruiter_job_list'))
+        followed_response = self.client.get(response.url)
+        self.assertEqual(followed_response.status_code, 200)
         updated_job = Job.objects.get(pk=self.job.pk)
         self.assertEqual(updated_job.title, 'Updated Job Title')
         self.assertEqual(updated_job.description, 'Updated Job Description')

@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import Http404, HttpResponseForbidden
+from django.http import Http404, HttpResponseForbidden, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from job.models import Job
 from job.forms import JobForm
 from django.db.models import Q
-from django.urls import reverse
-from django.views.generic import DeleteView as BaseDeleteView
+from django.urls import reverse, reverse_lazy
+
 
 class RecruiterRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
     def test_func(self):
@@ -32,18 +32,30 @@ class JobCreateView(RecruiterRequiredMixin, CreateView):
     model = Job
     form_class = JobForm
     template_name = 'job/job_form.html'
-    success_url = '/jobs/recruiter/jobs/'
+    success_url = reverse_lazy('job:recruiter_job_list')
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        print(f"JobCreateView: Form is valid? {form.is_valid()}")
+        return super().post(request, *args, **kwargs)
 
     def form_valid(self, form):
         form.instance.recruiter = self.request.user.recruiter_profile
-        return super().form_valid(form)
+        self.object = form.save()
+        print("JobCreateView: form_valid() called, redirecting to:", self.get_success_url())
+        return HttpResponseRedirect(self.get_success_url())
 
 class JobUpdateView(UpdateView):
     model = Job
     form_class = JobForm
     template_name = 'job/job_form.html'
-    success_url = '/recruiter/jobs/'
+    success_url = reverse_lazy('job:recruiter_job_list')
     context_object_name = 'job'
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        print(f"JobUpdateView: Form is valid? {form.is_valid()}")
+        return super().post(request, *args, **kwargs)
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -62,6 +74,11 @@ class JobUpdateView(UpdateView):
 
     def handle_no_permission(self, request):
         return redirect('core:login') # Or your login URL name
+
+    def form_valid(self, form):
+        self.object = form.save()
+        print("JobUpdateView: form_valid() called, redirecting to:", self.get_success_url())
+        return HttpResponseRedirect(self.get_success_url())
 
 class JobDeleteView(LoginRequiredMixin, DeleteView):
     model = Job
