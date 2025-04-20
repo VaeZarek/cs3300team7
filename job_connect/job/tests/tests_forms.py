@@ -1,7 +1,7 @@
 from django import forms
 from django.test import TestCase
 from job.forms import JobForm
-from applicant.models import Skill  # Correct import
+from applicant.models import Skill
 from datetime import date
 
 class JobFormTest(TestCase):
@@ -27,16 +27,19 @@ class JobFormTest(TestCase):
         }
         form = JobForm(data=form_data)
         self.assertTrue(form.is_valid())
-        job = form.save(commit=False)
+        job = form.save()
         self.assertEqual(job.title, 'Software Engineer')
         self.assertEqual(job.description, 'Write code and stuff.')
         self.assertEqual(job.location, 'Tech Hub')
+        self.assertEqual(job.requirements, 'Strong coding skills.')
+        self.assertEqual(job.salary_range, '$80k - $120k')
+        self.assertEqual(job.employment_type, 'Full-time')
         self.assertEqual(job.application_deadline, date(2025, 5, 15))
         self.assertTrue(job.is_active)
         self.assertEqual(list(job.skills_required.all()), [self.python_skill, self.django_skill])
 
     def test_invalid_job_form_missing_required_fields(self):
-        required_fields = ['title', 'description', 'location', 'employment_type']
+        required_fields = ['title', 'description', 'location']
         for field in required_fields:
             form_data = {
                 'title': 'Software Engineer',
@@ -61,19 +64,19 @@ class JobFormTest(TestCase):
             'title': 'Software Engineer',
             'description': 'Write code and stuff.',
             'location': 'Tech Hub',
-            'employment_type': 'Full-time',
-            # 'requirements', 'salary_range', 'application_deadline', 'is_active', 'skills_required' are missing
+            # 'requirements', 'salary_range', 'employment_type', 'application_deadline', 'is_active', 'skills_required' are missing
         }
         form = JobForm(data=form_data)
         self.assertTrue(form.is_valid())
-        job = form.save(commit=False)
+        job = form.save()
         self.assertEqual(job.title, 'Software Engineer')
         self.assertEqual(job.description, 'Write code and stuff.')
         self.assertEqual(job.location, 'Tech Hub')
-        self.assertIsNone(job.requirements)
-        self.assertIsNone(job.salary_range)
+        self.assertEqual(job.requirements, '')
+        self.assertEqual(job.salary_range, '')
+        self.assertEqual(job.employment_type, '')
         self.assertIsNone(job.application_deadline)
-        self.assertFalse(job.is_active) # Default value in model? Adjust if different.
+        self.assertTrue(job.is_active) # Default is True
         self.assertEqual(list(job.skills_required.all()), [])
 
     def test_job_form_invalid_application_deadline_type(self):
@@ -108,5 +111,5 @@ class JobFormTest(TestCase):
         }
         form = JobForm(data=form_data)
         self.assertTrue(form.is_valid())
-        job = form.save(commit=False)
+        job = form.save()
         self.assertEqual(list(job.skills_required.all()), [])
