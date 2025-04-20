@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-d06&)o()vh@b34iktg^0jig&3=s71e)4vb0&m%d0rt&@!&duj&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '54.227.27.245'
+]
 
 
 # Application definition
@@ -80,8 +82,12 @@ WSGI_APPLICATION = 'job_connect.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'job_connect',
+        'USER': 'dhaggitt',
+        'PASSWORD': 'donnie5524',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
