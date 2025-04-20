@@ -298,4 +298,154 @@ class JobDeleteViewTest(TestCase):
 class JobSearchViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        user = User.objects.create
+        user = User.objects.create_user(username='testuser', password='testpassword')
+        recruiter = RecruiterProfile.objects.create(user=user, company_name='Test Corp')
+
+        skill_python = Skill.objects.create(name='Python')
+        skill_django = Skill.objects.create(name='Django')
+        skill_java = Skill.objects.create(name='Java')
+
+        Job.objects.create(
+            recruiter=recruiter,
+            title='Python Developer',
+            description='Looking for a skilled Python developer.',
+            location='Remote',
+        )
+        Job.objects.create(
+            recruiter=recruiter,
+            title='Django Engineer',
+            description='We need an experienced Django engineer.',
+            location='New York',
+        )
+        job_java = Job.objects.create(
+            recruiter=recruiter,
+            title='Java Backend Developer',
+            description='Hiring a Java backend expert.',
+            location='San Francisco',
+        )
+        job_java.skills_required.add(skill_java)
+
+        Job.objects.create(
+            recruiter=recruiter,
+            title='Full Stack Developer',
+            description='Seeking a full stack developer with Python and React.',
+            location='Remote',
+        )
+
+    def setUp(self):
+        self.client = Client()
+        self.search_url = reverse('job:job_search')
+
+    def test_job_search_view_exists(self):
+        response = self.client.get(self.search_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'job/job_list.html')
+
+    def test_job_search_no_query(self):
+        response = self.client.get(self.search_url)
+        self.assertEqual(len(response.context['jobs']), 4)
+        self.assertEqual(response.context['search_query'], '')
+
+    def test_job_search_by_title(self):
+        response = self.client.get(self.search_url, {'q': 'Python'})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['jobs']), 2)
+        self.assertContains(response, 'Python Developer')
+        self.assertContains(response, 'Full Stack Developer')
+        self.assertNotContains(response, 'Django Engineer')
+        self.assertNotContains(response, 'Java Backend Developer')
+        self.assertEqual(response.context['search_query'], 'Python')
+
+    def test_job_search_by_description(self):
+        response = self.client.get(self.search_url, {'q': 'experienced Django'})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['jobs']), 1)
+        self.assertContains(response, 'Django Engineer')
+        self.assertNotContains(response, 'Python Developer')
+        self.assertEqual(response.context['search_query'], 'experienced Django')
+
+    def test_job_search_by_location(self):
+        response = self.client.get(self.search_url, {'q': 'Remote'})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['jobs']), 2)
+        self.assertContains(response, 'Python Developer')
+        self.assertContains(response, 'Full Stack Developer')
+        self.assertEqual(response.context['search_query'], 'Remote')
+
+    def test_job_search_by_skill(self):
+        response = self.client.get(self.search_url, {'q': 'Java'})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['jobs']), 1)
+        self.assertContains(response, 'Java Backend Developer')
+        self.assertEqual(response.context['search_query'], 'Java')
+
+    def test_job_search_case_insensitive(self):
+        response = self.client.get(self.search_url, {'q': 'python'})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['jobs']), 2)
+        self.assertContains(response, 'Python Developer')
+        self.assertContains(response, 'Full Stack Developer')
+        self.assertEqual(response.context['search_query'], 'python')
+
+class RecruiterJobListTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        user_recruiter = User.objects.create_user(username='recruiter1', password='testpassword')
+        cls.recruiter1 = RecruiterProfile.objects.create(user=user_recruiter, company_name='Recruiter 1 Corp')
+        user_applicant = User.objects.create_user(username='applicant1', password='testpassword')
+        other_user = User.objects.create_user(username='recruiter2', password='testpassword')
+        other_recruiter = RecruiterProfile.objects.create(user=other_user, company_name='Recruiter 2 Inc')
+        now = timezone.now()
+
+        Job.objects.create(recruiter=cls.recruiter1, title='Old Job', posted_date=now - timedelta(days=1))
+        time.sleep(0.01)
+
+        Job.objects.create(recruiter=cls.recruiter1, title='Recruiter 1 Job 1', posted_date=now - timedelta(seconds=3))
+        time.sleep(0.01)
+
+        Job.objects.create(recruiter=cls.recruiter1, title='Recruiter 1 Job 2', posted_date=now - timedelta(seconds=2))
+        time.sleep(0.01)
+
+        Job.objects.create(recruiter=other_recruiter, title='Recruiter 2 Job 1', posted_date=now - timedelta(seconds=1))
+        time.sleep(0.01)
+
+        Job.objects.create(recruiter=cls.recruiter1, title='New Job', posted_date=now)
+
+    def setUp(self):
+        self.client = Client()
+        self.recruiter_jobs_url = reverse('job:recruiter_job_list')
+        self.user_recruiter = User.objects.get(username='recruiter1')
+        self.user_applicant = User.objects.get(username='applicant1')
+
+    def test_recruiter_job_list_login_required(self):
+        response = self.client.get(self.recruiter_jobs_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(reverse('core:login'), response.url)
+
+    def test_recruiter_job_list_recruiter_required(self):
+        self.client.force_login(self.user_applicant)
+        response = self.client.get(self.recruiter_jobs_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('recruiter:recruiter_profile_create'))
+
+    def test_recruiter_job_list_displays_own_jobs(self):
+        self.client.force_login(self.user_recruiter)
+        response = self.client.get(self.recruiter_jobs_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'job/recruiter_job_list.html')
+        self.assertEqual(len(response.context['jobs']), 4)
+        self.assertContains(response, 'Recruiter 1 Job 1')
+        self.assertContains(response, 'Recruiter 1 Job 2')
+        self.assertContains(response, 'Old Job')
+        self.assertContains(response, 'New Job')
+        self.assertNotContains(response, 'Recruiter 2 Job 1')
+
+    def test_recruiter_job_list_is_ordered_by_posted_date_descending(self):
+        self.client.force_login(self.user_recruiter)
+        response = self.client.get(self.recruiter_jobs_url)
+        self.assertEqual(response.status_code, 200)
+        jobs = list(response.context['jobs'])
+        self.assertEqual(jobs[0].title, 'New Job')
+        self.assertEqual(jobs[1].title, 'Recruiter 1 Job 2')
+        self.assertEqual(jobs[2].title, 'Recruiter 1 Job 1')
+        self.assertEqual(jobs[3].title, 'Old Job')
