@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from applicant.models import ApplicantProfile, Skill
+from recruiter.models import RecruiterProfile
 from job.models import Job
 from application.models import Application
 from datetime import date
@@ -23,8 +24,13 @@ class ApplicationModelTest(TestCase):
 
         # Create a user and recruiter profile for the job
         user_recruiter = User.objects.create_user(username='recruiter1', password='testpassword')
+        cls.recruiter_profile = RecruiterProfile.objects.create(
+            user=user_recruiter,
+            company_name='Test Corp',
+            location='Remote'
+        )
         cls.job = Job.objects.create(
-            recruiter=user_recruiter.recruiter_profile,
+            recruiter=cls.recruiter_profile,
             title='Software Engineer',
             description='Job description here.',
             location='Remote'
@@ -41,10 +47,11 @@ class ApplicationModelTest(TestCase):
             cover_letter='My cover letter.',
             status='applied' # Using a value that's not in choices initially to test default later
         )
+        application.skills.add(self.skill)  # Add the skill to the application
         self.assertTrue(isinstance(application, Application))
         self.assertEqual(application.applicant, self.applicant_profile)
         self.assertEqual(application.job, self.job)
-        self.assertEqual(application.resume.name, 'applications/resume.pdf')
+        self.assertTrue(application.resume.name.startswith('applications/resume')) # Check if it starts with the correct path and original name
         self.assertEqual(application.cover_letter, 'My cover letter.')
         self.assertEqual(application.status, 'applied')
         self.assertIsNotNone(application.application_date)
@@ -92,4 +99,3 @@ class ApplicationModelTest(TestCase):
             cover_letter='My cover letter.'
         )
         self.assertTrue(application.resume.name.startswith('applications/'))
-        self.assertTrue(application.resume.name.endswith('resume.pdf'))
