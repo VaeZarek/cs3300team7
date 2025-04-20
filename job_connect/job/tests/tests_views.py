@@ -45,9 +45,6 @@ class JobListViewTest(TestCase):
     def test_job_list_is_ordered_by_posted_date_descending(self):
         response = self.client.get(self.list_url)
         jobs = list(response.context['jobs'])
-        print(f"\n--- Job Order ---")
-        for job in jobs:
-            print(f"{job.title}: {job.posted_date}")
         self.assertEqual(jobs[0].title, 'Job 3')
         self.assertEqual(jobs[1].title, 'Job 2')
         self.assertEqual(jobs[2].title, 'Job 1')
@@ -95,6 +92,8 @@ class JobCreateViewTest(TestCase):
         self.recruiter = RecruiterProfile.objects.create(user=self.user, company_name='Test Corp')
 
         self.non_recruiter = User.objects.create_user(username='testapplicant', password='testpassword')
+        if not hasattr(self, 'python_skill'):
+            self.python_skill = Skill.objects.create(name='Python')
 
         self.valid_form_data = {
             'title': 'New Job Title',
@@ -105,8 +104,7 @@ class JobCreateViewTest(TestCase):
             'employment_type': 'Full-time',
             'application_deadline': date(2025, 6, 30),
             'is_active': True,
-            'skills_required': [self.python_skill.id] if hasattr(self, 'python_skill') else [],
-            # Include if you have skills set up
+            'skills_required': [self.python_skill.id],
         }
         self.invalid_form_data = {
             'title': '',  # Missing required field
@@ -167,7 +165,7 @@ class JobUpdateViewTest(TestCase):
             location='Original Location'
         )
         self.update_url = reverse('job:job_update', kwargs={'pk': self.job.pk})
-        self.list_url = reverse('recruiter:recruiter_job_list') # Assuming this is the correct name
+        self.list_url = reverse('job:recruiter_job_list')
 
         self.non_recruiter = User.objects.create_user(username='testapplicant', password='testpassword')
         self.other_recruiter = User.objects.create_user(username='otherrecruiter', password='testpassword')
@@ -179,6 +177,8 @@ class JobUpdateViewTest(TestCase):
             location='Other Location'
         )
         self.other_job_update_url = reverse('job:job_update', kwargs={'pk': self.other_job.pk})
+        if not hasattr(self, 'python_skill'):
+            self.python_skill = Skill.objects.create(name='Python')
 
         self.valid_form_data = {
             'title': 'Updated Job Title',
@@ -189,8 +189,7 @@ class JobUpdateViewTest(TestCase):
             'employment_type': 'Full-time',
             'application_deadline': date(2025, 6, 30),
             'is_active': True,
-            'skills_required': [self.python_skill.id] if hasattr(self, 'python_skill') else [],
-            # Include if you have skills set up
+            'skills_required': [self.python_skill.id],
         }
         self.invalid_form_data = {
             'title': '',  # Missing required field
@@ -264,7 +263,7 @@ class JobDeleteViewTest(TestCase):
             location='Location to Delete'
         )
         self.delete_url = reverse('job:job_delete', kwargs={'pk': self.job.pk})
-        self.list_url = reverse('recruiter:recruiter_job_list')
+        self.list_url = reverse('job:recruiter_job_list')
 
         self.non_recruiter = User.objects.create_user(username='testapplicant', password='testpassword')
         self.other_recruiter = User.objects.create_user(username='otherrecruiter', password='testpassword')
@@ -298,7 +297,7 @@ class JobDeleteViewTest(TestCase):
     def test_job_delete_view_get_logged_in_recruiter_other_job(self):
         self.client.force_login(self.user)
         response = self.client.get(self.other_job_delete_url)
-        self.assertEqual(response.status_code, 404) # Expecting Not Found as per your views
+        self.assertEqual(response.status_code, 404)  # Expecting Not Found as per your views
 
     def test_job_delete_view_post_logged_in_recruiter_own_job(self):
         self.client.force_login(self.user)
@@ -311,8 +310,8 @@ class JobDeleteViewTest(TestCase):
     def test_job_delete_view_post_logged_in_recruiter_other_job(self):
         self.client.force_login(self.user)
         response = self.client.post(self.other_job_delete_url, follow=True)
-        self.assertEqual(response.status_code, 404) # Expecting Not Found as per your views
-        self.assertEqual(Job.objects.count(), 2) # Ensure the other job wasn't deleted
+        self.assertEqual(response.status_code, 404)  # Expecting Not Found as per your views
+        self.assertEqual(Job.objects.count(), 2)  # Ensure the other job wasn't deleted
 
 class JobSearchViewTest(TestCase):
     @classmethod
@@ -419,13 +418,16 @@ class RecruiterJobListTest(TestCase):
         Job.objects.create(recruiter=cls.recruiter1, title='Old Job', posted_date=now - timedelta(days=1))
         time.sleep(0.01)
 
-        Job.objects.create(recruiter=cls.recruiter1, title='Recruiter 1 Job 1', posted_date=now - timedelta(seconds=3))
+        Job.objects.create(recruiter=cls.recruiter1, title='Recruiter 1 Job 1',
+                           posted_date=now - timedelta(seconds=3))
         time.sleep(0.01)
 
-        Job.objects.create(recruiter=cls.recruiter1, title='Recruiter 1 Job 2', posted_date=now - timedelta(seconds=2))
+        Job.objects.create(recruiter=cls.recruiter1, title='Recruiter 1 Job 2',
+                           posted_date=now - timedelta(seconds=2))
         time.sleep(0.01)
 
-        Job.objects.create(recruiter=other_recruiter, title='Recruiter 2 Job 1', posted_date=now - timedelta(seconds=1))
+        Job.objects.create(recruiter=other_recruiter, title='Recruiter 2 Job 1',
+                           posted_date=now - timedelta(seconds=1))
         time.sleep(0.01)
 
         Job.objects.create(recruiter=cls.recruiter1, title='New Job', posted_date=now)
