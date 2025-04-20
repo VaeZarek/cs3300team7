@@ -1,1 +1,3 @@
 Adding a dhaggitt branch to test out pull requests
+Added database branch to test pull requests
+Testing git from CLI
