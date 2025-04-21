@@ -96,5 +96,7 @@ class ApplyForJobViewTest(TestCase):
         resume_file = SimpleUploadedFile("resume.pdf", b"dummy content", content_type="application/pdf")
         post_data = {'resume': resume_file, 'cover_letter': 'My awesome cover letter.'}
         response = self.client.post(self.apply_url, post_data, follow=True)
-        self.assertEqual(response.status_code, 403) # Recruiters shouldn't be able to apply
-        self.assertFalse(Application.objects.filter(applicant=self.recruiter_profile, job=self.job).exists())
+        self.assertEqual(response.status_code, 403)
+        # Recruiters shouldn't be able to apply
+        self.assertFalse(Application.objects.filter(job=self.job).exists())
+        # Just check if any application exists for this job after the recruiter's attempt
