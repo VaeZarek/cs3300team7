@@ -76,12 +76,14 @@ class ApplyForJobViewTest(TestCase):
 
     def test_apply_for_job_authenticated_applicant_post_invalid(self):
         self.client.force_login(self.applicant_user)
-        post_data = {'cover_letter': 'My awesome cover letter.'} # Missing resume
-        response = self.client.post(self.apply_url, post_data)
+        post_data = {'cover_letter': 'My awesome cover letter.'} # Missing resume in POST
+        files_data = {'resume': None} # Simulate no file uploaded
+        response = self.client.post(self.apply_url, post_data, files=files_data)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'application/apply_form.html')
         self.assertIn('form', response.context)
         self.assertTrue(response.context['form'].errors)
+        self.assertIn('resume', response.context['form'].errors) # Ensure there's an error for the resume field
         self.assertFalse(Application.objects.filter(applicant=self.applicant_profile, job=self.job).exists())
 
     def test_apply_for_job_authenticated_recruiter_get_forbidden(self):
