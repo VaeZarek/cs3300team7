@@ -6,7 +6,7 @@ class RecruiterProfile(BaseModel):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='recruiter_profile')
     company_name = models.CharField(max_length=255)
     company_website = models.URLField(blank=True)
-    description = models.TextField(blank=True)
+    description = models.TextField(blank=True, max_length=500)  # Added max_length
     location = models.CharField(max_length=255, blank=True)  # Added location field
     # Add other relevant fields like company logo, industry, etc.
 

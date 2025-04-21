@@ -99,36 +99,25 @@ class LoginViewTest(TestCase):
         self.assertIsInstance(response.context['form'], AuthenticationForm)
 
     def test_login_post_valid_applicant(self):
-        # 1. Simulate a successful login attempt
         form_data = {'username': 'test_applicant', 'password': 'testpass'}
         response = self.client.post(self.login_url, form_data, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertRedirects(response, self.applicant_dashboard_url)
-
-        # 2. **Crucially, check for authentication using client.login()**
         logged_in = self.client.login(username='test_applicant', password='testpass')
-        self.assertTrue(logged_in)  # Assert that login was successful
+        self.assertTrue(logged_in)
         self.assertTrue(self.client.session['_auth_user_id'])
-        self.assertTrue(self.client.session['_auth_user_backend'])
-
-        # 3. **Verify user is authenticated in a subsequent request (most robust)**
         response = self.client.get(self.applicant_dashboard_url)
-        self.assertEqual(response.status_code, 200)  # Or whatever status code is appropriate for your dashboard
+        self.assertEqual(response.status_code, 200)
         self.assertTrue(response.wsgi_request.user.is_authenticated)
 
     def test_login_post_valid_recruiter(self):
-        # 1. Simulate a successful login attempt
         form_data = {'username': 'test_recruiter', 'password': 'testpass'}
         response = self.client.post(self.login_url, form_data, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertRedirects(response, self.recruiter_dashboard_url)
-
-        # 2. **Crucially, check for authentication using client.login()**
         logged_in = self.client.login(username='test_recruiter', password='testpass')
         self.assertTrue(logged_in)
         self.assertTrue(self.client.session['_auth_user_id'])
-
-        # 3. **Verify user is authenticated in a subsequent request (most robust)**
         response = self.client.get(self.recruiter_dashboard_url)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.wsgi_request.user.is_authenticated)
@@ -180,35 +169,11 @@ class ApplicantSignUpViewTest(TestCase):
             'password1': 'testpassword123',
             'password2': 'testpassword123'
         }
-        print(f"\n--- Running test_signup_post_valid for applicant ---")
-        print(f"Signup URL: {self.signup_url}")
-        print(f"Profile Create URL: {self.profile_create_url}")
-        print(f"Form Data: {form_data}")
-
-        form = ApplicantSignUpForm(form_data)
-        print(f"Is form valid before post? {form.is_valid()}")
-        if not form.is_valid():
-            print(f"Form errors: {form.errors}")
-
         response = self.client.post(self.signup_url, form_data, follow=True)
-
-        print(f"Response status code: {response.status_code}")
-        print(f"Response headers: {response.headers}")
-        print(
-            f"Response content (first 500 chars): {response.content[:500].decode('utf-8') if response.content else 'No content'}")
-        print(f"Final request PATH: {response.wsgi_request.path}")  # Correct way to get the final URL path
-
-        try:
-            created_user = User.objects.get(username='testapplicant')
-            print(f"User created successfully: {created_user}")
-        except User.DoesNotExist:
-            print("User NOT created!")
-
-        print(f"Is user authenticated after post? {response.wsgi_request.user.is_authenticated}")
-
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.wsgi_request.path, self.profile_create_url)  # Assert the final path
         self.assertTrue(User.objects.filter(username='testapplicant').exists())
+        created_user = User.objects.get(username='testapplicant')
         self.assertTrue(created_user.groups.filter(name='Applicant').exists())
 
 class RecruiterSignUpViewTest(TestCase):
@@ -235,3 +200,13 @@ class RecruiterSignUpViewTest(TestCase):
         self.assertTrue(User.objects.filter(username='testrecruiter').exists())
         created_user = User.objects.get(username='testrecruiter')
         self.assertTrue(created_user.groups.filter(name='Recruiter').exists())
+
+class CoreViewsTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_login_view_get(self):
+        response = self.client.get(reverse('core:login'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'core/login.html')
+        self.assertIsInstance(response.context['form'], AuthenticationForm)

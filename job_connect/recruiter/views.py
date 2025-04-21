@@ -112,14 +112,14 @@ def job_applications_list(request):
 @login_required
 def recruiter_profile_create(request):
     if hasattr(request.user, 'recruiter_profile'):
-        return redirect('recruiter_profile_update') # Profile already exists
+        return redirect('recruiter:recruiter_profile_update') # Profile already exists
     if request.method == 'POST':
         profile_form = RecruiterProfileForm(request.POST, request.FILES)
         if profile_form.is_valid():
             profile = profile_form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return redirect('recruiter_dashboard')
+            return redirect('recruiter:recruiter_dashboard')
     else:
         profile_form = RecruiterProfileForm()
     return render(request, 'recruiter/recruiter_profile_create.html', {'profile_form': profile_form})

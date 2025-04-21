@@ -57,6 +57,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'job_connect.urls'
 
+LOGIN_URL = 'core:login'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

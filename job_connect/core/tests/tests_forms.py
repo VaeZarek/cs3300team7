@@ -1,11 +1,8 @@
 from django.test import TestCase
-from core.models import User
+from django.contrib.auth import get_user_model
 from core.forms import ApplicantSignUpForm, RecruiterSignUpForm
-from applicant.forms import ApplicantProfileForm
-from recruiter.forms import RecruiterProfileForm
-from recruiter.models import RecruiterProfile
-from applicant.models import ApplicantProfile
 
+User = get_user_model()
 
 class CoreFormsTest(TestCase):
     def test_applicant_signup_form(self):
@@ -16,9 +13,6 @@ class CoreFormsTest(TestCase):
             'password1': 'securepassword123', # Use 'password1'
         }
         form = ApplicantSignUpForm(data=form_data)
-        print(f"\n--- test_applicant_signup_form (valid) ---")
-        print(f"Is form valid? {form.is_valid()}")
-        print(f"Form errors: {form.errors}")
         self.assertTrue(form.is_valid())
 
     def test_applicant_signup_form_invalid(self):
@@ -29,9 +23,7 @@ class CoreFormsTest(TestCase):
             'password1': 'short', # Use 'password1'
         }
         form = ApplicantSignUpForm(data=form_data)
-        print(f"\n--- test_applicant_signup_form_invalid ---")
-        print(f"Is form valid? {form.is_valid()}")
-        print(f"Form errors: {form.errors}")
+        self.assertFalse(form.is_valid())
         self.assertIn('password2', form.errors) # Keep assertion on password2
         self.assertIn('This password is too short', str(form.errors['password2']))
 
@@ -43,10 +35,4 @@ class CoreFormsTest(TestCase):
             'password1': 'strongpassword456', # Use 'password1'
         }
         form = RecruiterSignUpForm(data=form_data)
-        print(f"\n--- test_recruiter_signup_form (valid) ---")
-        print(f"Is form valid? {form.is_valid()}")
-        print(f"Form errors: {form.errors}")
         self.assertTrue(form.is_valid())
-
-
-
