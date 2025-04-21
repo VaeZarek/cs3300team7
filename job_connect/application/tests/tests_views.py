@@ -100,3 +100,44 @@ class ApplyForJobViewTest(TestCase):
         # Recruiters shouldn't be able to apply
         self.assertFalse(Application.objects.filter(job=self.job).exists())
         # Just check if any application exists for this job after the recruiter's attempt
+
+class ApplicationConfirmationViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        # Create a user and recruiter profile for the job
+        cls.recruiter_user = User.objects.create_user(username='recruiter1', password='testpassword')
+        cls.recruiter_profile = RecruiterProfile.objects.create(
+            user=cls.recruiter_user,
+            company_name='Test Corp',
+            location='Remote'
+        )
+        cls.job = Job.objects.create(
+            recruiter=cls.recruiter_profile,
+            title='Software Engineer',
+            description='Job description here.',
+            location='Remote'
+        )
+
+    def setUp(self):
+        self.client = Client()
+        self.confirmation_url = reverse('application:application_confirmation', kwargs={'job_id': self.job.id})
+
+    def test_application_confirmation_login_required(self):
+        response = self.client.get(self.confirmation_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(reverse('core:login'), response.url)
+
+    def test_application_confirmation_authenticated_user_get(self):
+        self.client.force_login(self.recruiter_user) # Any logged-in user should be able to see the confirmation
+        response = self.client.get(self.confirmation_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'application/application_confirmation.html')
+        self.assertEqual(response.context['job'], self.job)
+
+    def test_application_confirmation_authenticated_applicant_get(self):
+        applicant_user = User.objects.create_user(username='applicant1', password='testpassword')
+        self.client.force_login(applicant_user)
+        response = self.client.get(self.confirmation_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'application/application_confirmation.html')
+        self.assertEqual(response.context['job'], self.job)
