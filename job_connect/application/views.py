@@ -27,7 +27,7 @@ def apply_for_job(request, job_id):
             application.applicant = applicant_profile
             application.job = job
             application.save()
-            return redirect('application_confirmation', job_id=job.id)
+            return redirect('application:application_confirmation', job_id=job.id)
     else:
         form = ApplicationForm(initial={'applicant': applicant_profile.id, 'job': job.id})
     return render(request, 'application/apply_form.html', {'form': form, 'job': job})
