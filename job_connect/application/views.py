@@ -1,6 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from job.models import Job
+
 from applicant.models import ApplicantProfile
 from application.models import Application
 from application.forms import ApplicationForm
@@ -11,9 +9,13 @@ from django.views.generic import ListView, UpdateView
 from application.models import Application
 from application.forms import ApplicationStatusForm
 from job.models import Job
+from django.http import HttpResponseForbidden
 
 @login_required
 def apply_for_job(request, job_id):
+    if hasattr(request.user, 'recruiter_profile'):
+        return HttpResponseForbidden("Recruiters are not allowed to apply for jobs.")
+
     job = get_object_or_404(Job, pk=job_id)
     applicant_profile = get_object_or_404(ApplicantProfile, user=request.user)
 
@@ -31,7 +33,6 @@ def apply_for_job(request, job_id):
     else:
         form = ApplicationForm(initial={'applicant': applicant_profile.id, 'job': job.id})
     return render(request, 'application/apply_form.html', {'form': form, 'job': job})
-
 @login_required
 def application_confirmation(request, job_id):
     job = get_object_or_404(Job, pk=job_id)
