@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'job_connect.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'job_connect',
+        'USER': 'dhaggitt',
+        'PASSWORD': 'donnie5524',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
