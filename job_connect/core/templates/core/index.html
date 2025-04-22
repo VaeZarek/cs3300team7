@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Welcome | Job Connect{% endblock %}
+
+{% block content %}
+<div class="signup-container">
+    <h1>Welcome to Job Connect!</h1>
+    <p>Find your next opportunity or your next great hire.</p>
+    <a href="{% url 'core:applicant_signup' %}" class="button">Create an Applicant Account</a>
+    <br><br>
+    <a href="{% url 'core:recruiter_signup' %}" class="button">Create a Recruiter Account</a>
+    <p class="login-link">
+        Already have an account? <a href="{% url 'core:login' %}">Log in</a>
+    </p>
+</div>
+{% endblock %}
+
