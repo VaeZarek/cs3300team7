@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+app_name = 'recruiter'  # Add this line to define the app namespace
+
 urlpatterns = [
     path('profile/create/', views.recruiter_profile_create, name='recruiter_profile_create'),
     path('profile/update/', views.recruiter_profile_update, name='recruiter_profile_update'),

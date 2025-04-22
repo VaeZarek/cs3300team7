@@ -27,6 +27,6 @@
     {% if profile.resume %}
         <p><a href="{{ profile.resume.url }}" target="_blank">View Resume</a></p>
     {% endif %}
-    <p><a href="{% url 'applicant_profile_update' %}">Edit Profile</a> | <a href="{% url 'applicant_dashboard' %}">Back to Dashboard</a></p>
+    <p><a href="{% url 'applicant:applicant_profile_update' %}">Edit Profile</a> | <a href="{% url 'applicant_dashboard' %}">Back to Dashboard</a></p>
 </body>
 </html>

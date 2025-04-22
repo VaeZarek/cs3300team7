@@ -30,6 +30,6 @@
     {% if request.user.is_applicant %}
         <p><a href="{% url 'apply_for_job' job.id %}">Apply for this Job</a></p>
     {% endif %}
-    <p><a href="{% url 'job_list' %}">Back to Job Listings</a></p>
+    <p><a href="{% url 'job:job_list' %}">Back to Job Listings</a></p>
 </body>
 </html>

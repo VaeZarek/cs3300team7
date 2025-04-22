@@ -6,6 +6,6 @@
 <body>
     <h1>Already Applied</h1>
     <p>You have already applied for the job "{{ job.title }}".</p>
-    <p><a href="{% url 'job_detail' job.id %}">Back to Job Details</a></p>
+    <p><a href="{% url 'job:job_detail' job.id %}">Back to Job Details</a></p>
 </body>
 </html>
