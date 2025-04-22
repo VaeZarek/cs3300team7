@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import ApplicantProfile #, Experience, Education
+from .models import ApplicantProfile , Experience, Education
 from .forms import ApplicantProfileForm, ExperienceFormSet, EducationFormSet
 from application.models import Application
 # from django.urls import reverse
