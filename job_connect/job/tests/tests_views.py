@@ -12,30 +12,47 @@ import time
 User = get_user_model()
 
 class JobListViewTest(TestCase):
+    """
+    Tests for the JobListView.
+    """
+
     @classmethod
     def setUpTestData(cls):
+        """
+        Set up test data for JobListViewTest.
+        """
+        # :no-index: Create a recruiter profile and some jobs for testing
         user = User.objects.create_user(username='testuser', password='testpassword')
         recruiter = RecruiterProfile.objects.create(user=user, company_name='Test Corp')
         now = timezone.now()
 
         Job.objects.create(recruiter=recruiter, title='Job 1', posted_date=now - timedelta(seconds=2))
-        time.sleep(0.01)  # Small delay
+        time.sleep(0.01)  # :no-index: Small delay
 
         Job.objects.create(recruiter=recruiter, title='Job 2', posted_date=now - timedelta(seconds=1))
-        time.sleep(0.01)  # Small delay
+        time.sleep(0.01)  # :no-index: Small delay
 
         Job.objects.create(recruiter=recruiter, title='Job 3', posted_date=now)
 
     def setUp(self):
+        """
+        Set up the client and URLs for each test.
+        """
         self.client = Client()
         self.list_url = reverse('job:job_list')
 
     def test_job_list_view_exists(self):
+        """
+        Test that the job list view exists.
+        """
         response = self.client.get(self.list_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'job/job_list.html')
 
     def test_job_list_displays_all_jobs(self):
+        """
+        Test that the job list view displays all jobs.
+        """
         response = self.client.get(self.list_url)
         self.assertEqual(len(response.context['jobs']), 3)
         self.assertContains(response, 'Job 1')
@@ -43,6 +60,9 @@ class JobListViewTest(TestCase):
         self.assertContains(response, 'Job 3')
 
     def test_job_list_is_ordered_by_posted_date_descending(self):
+        """
+        Test that the job list is ordered by posted date descending.
+        """
         response = self.client.get(self.list_url)
         jobs = list(response.context['jobs'])
         self.assertEqual(jobs[0].title, 'Job 3')
@@ -50,8 +70,16 @@ class JobListViewTest(TestCase):
         self.assertEqual(jobs[2].title, 'Job 1')
 
 class JobDetailViewTest(TestCase):
+    """
+    Tests for the JobDetailView.
+    """
+
     @classmethod
     def setUpTestData(cls):
+        """
+        Set up test data for JobDetailViewTest.
+        """
+        # :no-index: Create a recruiter profile and a job for testing
         user = User.objects.create_user(username='testuser', password='testpassword')
         recruiter = RecruiterProfile.objects.create(user=user, company_name='Test Corp')
         cls.job = Job.objects.create(
@@ -62,16 +90,25 @@ class JobDetailViewTest(TestCase):
         )
 
     def setUp(self):
+        """
+        Set up the client and URLs for each test.
+        """
         self.client = Client()
         self.detail_url = reverse('job:job_detail', kwargs={'pk': self.job.pk})
-        self.invalid_detail_url = reverse('job:job_detail', kwargs={'pk': 999}) # An ID that likely doesn't exist
+        self.invalid_detail_url = reverse('job:job_detail', kwargs={'pk': 999}) # :no-index: An ID that likely doesn't exist
 
     def test_job_detail_view_exists(self):
+        """
+        Test that the job detail view exists.
+        """
         response = self.client.get(self.detail_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'job/job_detail.html')
 
     def test_job_detail_displays_correct_job(self):
+        """
+        Test that the job detail view displays the correct job.
+        """
         response = self.client.get(self.detail_url)
         self.assertEqual(response.context['job'], self.job)
         self.assertContains(response, 'Detailed Job')
@@ -79,11 +116,21 @@ class JobDetailViewTest(TestCase):
         self.assertContains(response, 'Anywhere')
 
     def test_job_detail_returns_404_for_nonexistent_job(self):
+        """
+        Test that the job detail view returns a 404 for a nonexistent job.
+        """
         response = self.client.get(self.invalid_detail_url)
         self.assertEqual(response.status_code, 404)
 
 class JobCreateViewTest(TestCase):
+    """
+    Tests for the JobCreateView.
+    """
+
     def setUp(self):
+        """
+        Set up the test environment for JobCreateViewTest.
+        """
         self.client = Client()
         self.create_url = reverse('job:job_create')
         self.list_url = '/jobs/recruiter/jobs/'
@@ -107,25 +154,34 @@ class JobCreateViewTest(TestCase):
             'skills_required': [self.python_skill.id],
         }
         self.invalid_form_data = {
-            'title': '',  # Missing required field
+            'title': '',  # :no-index: Missing required field
             'description': 'New Job Description',
             'location': 'New Location',
         }
 
     def test_job_create_view_login_required(self):
+        """
+        Test that the job create view requires login.
+        """
         response = self.client.get(self.create_url)
         self.assertEqual(response.status_code, 302)
         self.assertIn(reverse('core:login'), response.url)
 
     def test_job_create_view_recruiter_required(self):
+        """
+        Test that the job create view requires a recruiter profile.
+        """
         self.client.force_login(self.non_recruiter)
         response = self.client.get(self.create_url)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse(
             'recruiter:recruiter_profile_create'))
-        # Assuming this URL is in your recruiter app's urls
+
 
     def test_job_create_view_get_logged_in_recruiter(self):
+        """
+        Test that a logged-in recruiter can access the job create view.
+        """
         self.client.force_login(self.user)
         response = self.client.get(self.create_url)
         self.assertEqual(response.status_code, 200)
@@ -133,6 +189,9 @@ class JobCreateViewTest(TestCase):
         self.assertIn('form', response.context)
 
     def test_job_create_view_post_valid_logged_in_recruiter(self):
+        """
+        Test that a logged-in recruiter can successfully create a job.
+        """
         self.client.force_login(self.user)
         response = self.client.post(self.create_url, self.valid_form_data)
         self.assertEqual(response.status_code, 302)
@@ -145,6 +204,9 @@ class JobCreateViewTest(TestCase):
         self.assertEqual(new_job.recruiter, self.recruiter)
 
     def test_job_create_view_post_invalid_logged_in_recruiter(self):
+        """
+        Test that the job create view handles invalid form submissions.
+        """
         self.client.force_login(self.user)
         response = self.client.post(self.create_url, self.invalid_form_data)
         self.assertEqual(response.status_code, 200)
@@ -154,7 +216,14 @@ class JobCreateViewTest(TestCase):
         self.assertEqual(Job.objects.count(), 0)
 
 class JobUpdateViewTest(TestCase):
+    """
+    Tests for the JobUpdateView.
+    """
+
     def setUp(self):
+        """
+        Set up the test environment for JobUpdateViewTest.
+        """
         self.client = Client()
         self.user = User.objects.create_user(username='testrecruiter', password='testpassword')
         self.recruiter = RecruiterProfile.objects.create(user=self.user, company_name='Test Corp')
@@ -192,23 +261,32 @@ class JobUpdateViewTest(TestCase):
             'skills_required': [self.python_skill.id],
         }
         self.invalid_form_data = {
-            'title': '',  # Missing required field
+            'title': '',  # :no-index: Missing required field
             'description': 'Updated Job Description',
             'location': 'Updated Location'
         }
 
     def test_job_update_view_login_required(self):
+        """
+        Test that the job update view requires login.
+        """
         response = self.client.get(self.update_url)
         self.assertEqual(response.status_code, 302)
         self.assertIn(reverse('core:login'), response.url)
 
     def test_job_update_view_recruiter_required(self):
+        """
+        Test that the job update view requires a recruiter profile.
+        """
         self.client.force_login(self.non_recruiter)
         response = self.client.get(self.update_url)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('recruiter:recruiter_profile_create'))
 
     def test_job_update_view_get_logged_in_recruiter_own_job(self):
+        """
+        Test that a logged-in recruiter can access the job update view for their own job.
+        """
         self.client.force_login(self.user)
         response = self.client.get(self.update_url)
         self.assertEqual(response.status_code, 200)
@@ -218,11 +296,17 @@ class JobUpdateViewTest(TestCase):
         self.assertEqual(response.context['form'].initial['title'], 'Original Job Title')
 
     def test_job_update_view_get_logged_in_recruiter_other_job(self):
+        """
+        Test that a logged-in recruiter cannot access the job update view for another recruiter's job.
+        """
         self.client.force_login(self.user)
         response = self.client.get(self.other_job_update_url)
-        self.assertEqual(response.status_code, 403)  # Expecting Forbidden
+        self.assertEqual(response.status_code, 403)  # :no-index: Expecting Forbidden
 
     def test_job_update_view_post_valid_logged_in_recruiter_own_job(self):
+        """
+        Test that a logged-in recruiter can successfully update their own job.
+        """
         self.client.force_login(self.user)
         response = self.client.post(self.update_url, self.valid_form_data)
         self.assertEqual(response.status_code, 302)
@@ -235,6 +319,11 @@ class JobUpdateViewTest(TestCase):
         self.assertEqual(updated_job.location, 'Updated Location')
 
     def test_job_update_view_post_invalid_logged_in_recruiter_own_job(self):
+        """
+        Tests that the job update view handles invalid form submissions for a
+         logged-in recruiter's own job.
+        :return:
+        """
         self.client.force_login(self.user)
         response = self.client.post(self.update_url, self.invalid_form_data)
         self.assertEqual(response.status_code, 200)
@@ -242,17 +331,27 @@ class JobUpdateViewTest(TestCase):
         self.assertIn('form', response.context)
         self.assertTrue(response.context['form'].errors)
         original_job = Job.objects.get(pk=self.job.pk)
-        self.assertEqual(original_job.title, 'Original Job Title') # Ensure it wasn't updated
+        self.assertEqual(original_job.title, 'Original Job Title') # :no-index: Ensure it wasn't updated
 
     def test_job_update_view_post_logged_in_recruiter_other_job(self):
+        """
+        Test that a logged-in recruiter cannot update another recruiter's job.
+        """
         self.client.force_login(self.user)
         response = self.client.post(self.other_job_update_url, self.valid_form_data)
-        self.assertEqual(response.status_code, 403) # Expecting Forbidden
+        self.assertEqual(response.status_code, 403) # :no-index: Expecting Forbidden
         other_job = Job.objects.get(pk=self.other_job.pk)
-        self.assertEqual(other_job.title, 'Other Job') # Ensure it wasn't updated
+        self.assertEqual(other_job.title, 'Other Job') # :no-index: Ensure it wasn't updated
 
 class JobDeleteViewTest(TestCase):
+    """
+    Tests for the JobDeleteView.
+    """
+
     def setUp(self):
+        """
+        Set up the test environment for JobDeleteViewTest.
+        """
         self.client = Client()
         self.user = User.objects.create_user(username='testrecruiter', password='testpassword')
         self.recruiter = RecruiterProfile.objects.create(user=self.user, company_name='Test Corp')
@@ -277,17 +376,26 @@ class JobDeleteViewTest(TestCase):
         self.other_job_delete_url = reverse('job:job_delete', kwargs={'pk': self.other_job.pk})
 
     def test_job_delete_view_login_required(self):
+        """
+        Test that the job delete view requires login.
+        """
         response = self.client.get(self.delete_url)
         self.assertEqual(response.status_code, 302)
         self.assertIn(reverse('core:login'), response.url)
 
     def test_job_delete_view_recruiter_required(self):
+        """
+        Test that the job delete view requires a recruiter profile.
+        """
         self.client.force_login(self.non_recruiter)
         response = self.client.get(self.delete_url)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('recruiter:recruiter_profile_create'))
 
     def test_job_delete_view_get_logged_in_recruiter_own_job(self):
+        """
+        Test that a logged-in recruiter can access the job delete view for their own job.
+        """
         self.client.force_login(self.user)
         response = self.client.get(self.delete_url)
         self.assertEqual(response.status_code, 200)
@@ -295,11 +403,17 @@ class JobDeleteViewTest(TestCase):
         self.assertEqual(response.context['job'], self.job)
 
     def test_job_delete_view_get_logged_in_recruiter_other_job(self):
+        """
+        Test that a logged-in recruiter cannot access the job delete view for another recruiter's job.
+        """
         self.client.force_login(self.user)
         response = self.client.get(self.other_job_delete_url)
-        self.assertEqual(response.status_code, 404)  # Expecting Not Found as per your views
+        self.assertEqual(response.status_code, 404)  # :no-index: Expecting Not Found as per your views
 
     def test_job_delete_view_post_logged_in_recruiter_own_job(self):
+        """
+        Test that a logged-in recruiter can successfully delete their own job.
+        """
         self.client.force_login(self.user)
         response = self.client.post(self.delete_url, follow=True)
         self.assertEqual(response.status_code, 200)
@@ -308,14 +422,25 @@ class JobDeleteViewTest(TestCase):
             Job.objects.get(pk=self.job.pk)
 
     def test_job_delete_view_post_logged_in_recruiter_other_job(self):
+        """
+        Test that a logged-in recruiter cannot delete another recruiter's job.
+        """
         self.client.force_login(self.user)
         response = self.client.post(self.other_job_delete_url, follow=True)
-        self.assertEqual(response.status_code, 404)  # Expecting Not Found as per your views
-        self.assertEqual(Job.objects.count(), 2)  # Ensure the other job wasn't deleted
+        self.assertEqual(response.status_code, 404)  # :no-index: Expecting Not Found as per your views
+        self.assertEqual(Job.objects.count(), 2)  # :no-index: Ensure the other job wasn't deleted
 
 class JobSearchViewTest(TestCase):
+    """
+    Tests for the JobSearchView.
+    """
+
     @classmethod
     def setUpTestData(cls):
+        """
+        Set up test data for JobSearchViewTest.
+        """
+        # :no-index: Create a recruiter profile and some jobs for testing
         user = User.objects.create_user(username='testuser', password='testpassword')
         recruiter = RecruiterProfile.objects.create(user=user, company_name='Test Corp')
 
@@ -351,20 +476,33 @@ class JobSearchViewTest(TestCase):
         )
 
     def setUp(self):
+        """
+        Set up the test environment for JobSearchViewTest.
+        """
         self.client = Client()
         self.search_url = reverse('job:job_search')
 
     def test_job_search_view_exists(self):
+        """
+        Test that the job search view exists.
+        """
         response = self.client.get(self.search_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'job/job_list.html')
 
     def test_job_search_no_query(self):
+        """
+        Test that the job search view displays all jobs when no query is provided.
+        """
         response = self.client.get(self.search_url)
         self.assertEqual(len(response.context['jobs']), 4)
         self.assertEqual(response.context['search_query'], '')
 
     def test_job_search_by_title(self):
+        """
+        Test that the job search view displays jobs matching the query.
+        :return:
+        """
         response = self.client.get(self.search_url, {'q': 'Python'})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context['jobs']), 2)
@@ -375,6 +513,10 @@ class JobSearchViewTest(TestCase):
         self.assertEqual(response.context['search_query'], 'Python')
 
     def test_job_search_by_description(self):
+        """
+        Test that the job search view displays jobs matching the query.
+        :return:
+        """
         response = self.client.get(self.search_url, {'q': 'experienced Django'})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context['jobs']), 1)
@@ -383,6 +525,10 @@ class JobSearchViewTest(TestCase):
         self.assertEqual(response.context['search_query'], 'experienced Django')
 
     def test_job_search_by_location(self):
+        """
+        Test that the job search view displays jobs matching the query.
+        :return:
+        """
         response = self.client.get(self.search_url, {'q': 'Remote'})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context['jobs']), 2)
@@ -391,6 +537,9 @@ class JobSearchViewTest(TestCase):
         self.assertEqual(response.context['search_query'], 'Remote')
 
     def test_job_search_by_skill(self):
+        """
+        Test that the job search view displays jobs matching the query.
+        """
         response = self.client.get(self.search_url, {'q': 'Java'})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context['jobs']), 1)
@@ -398,6 +547,10 @@ class JobSearchViewTest(TestCase):
         self.assertEqual(response.context['search_query'], 'Java')
 
     def test_job_search_case_insensitive(self):
+        """
+        Test that the job search view displays jobs matching the query, regardless of case.
+        :return:
+        """
         response = self.client.get(self.search_url, {'q': 'python'})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context['jobs']), 2)
@@ -406,6 +559,10 @@ class JobSearchViewTest(TestCase):
         self.assertEqual(response.context['search_query'], 'python')
 
 class RecruiterJobListTest(TestCase):
+    """
+    Tests for the RecruiterJobList.
+    """
+
     @classmethod
     def setUpTestData(cls):
         user_recruiter = User.objects.create_user(username='recruiter1', password='testpassword')
@@ -433,23 +590,38 @@ class RecruiterJobListTest(TestCase):
         Job.objects.create(recruiter=cls.recruiter1, title='New Job', posted_date=now)
 
     def setUp(self):
+        """
+        Set up the test environment for RecruiterJobListTest.
+        """
         self.client = Client()
         self.recruiter_jobs_url = reverse('job:recruiter_job_list')
         self.user_recruiter = User.objects.get(username='recruiter1')
         self.user_applicant = User.objects.get(username='applicant1')
 
     def test_recruiter_job_list_login_required(self):
+        """
+        Tests that the recruiter job list view requires login.
+        :return:
+        """
         response = self.client.get(self.recruiter_jobs_url)
         self.assertEqual(response.status_code, 302)
         self.assertIn(reverse('core:login'), response.url)
 
     def test_recruiter_job_list_recruiter_required(self):
+        """
+        Tests that the recruiter job list view requires a recruiter profile.
+        :return:
+        """
         self.client.force_login(self.user_applicant)
         response = self.client.get(self.recruiter_jobs_url)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('recruiter:recruiter_profile_create'))
 
     def test_recruiter_job_list_displays_own_jobs(self):
+        """
+        Tests that the recruiter job list view displays jobs for the recruiter who is logged in.
+        :return:
+        """
         self.client.force_login(self.user_recruiter)
         response = self.client.get(self.recruiter_jobs_url)
         self.assertEqual(response.status_code, 200)
@@ -462,6 +634,10 @@ class RecruiterJobListTest(TestCase):
         self.assertNotContains(response, 'Recruiter 2 Job 1')
 
     def test_recruiter_job_list_is_ordered_by_posted_date_descending(self):
+        """
+        Tests that the recruiter job list view displays jobs in descending order of posted date.
+        :return:
+        """
         self.client.force_login(self.user_recruiter)
         response = self.client.get(self.recruiter_jobs_url)
         self.assertEqual(response.status_code, 200)

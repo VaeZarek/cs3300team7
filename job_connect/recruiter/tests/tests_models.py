@@ -5,8 +5,15 @@ from recruiter.models import RecruiterProfile
 User = get_user_model()
 
 class RecruiterProfileModelTest(TestCase):
+    """
+    Tests for the RecruiterProfile model.
+    """
+
     @classmethod
     def setUpTestData(cls):
+        """
+        Set up test data for RecruiterProfileModelTest.
+        """
         cls.user1 = User.objects.create_user(username='testrecruiter1', password='testpassword1')
         cls.user2 = User.objects.create_user(username='testrecruiter2', password='testpassword2')
         cls.recruiter1 = RecruiterProfile.objects.create(
@@ -23,6 +30,9 @@ class RecruiterProfileModelTest(TestCase):
         )
 
     def test_recruiter_profile_creation(self):
+        """
+        Test that a recruiter profile is created successfully.
+        """
         self.assertEqual(self.recruiter1.user.username, 'testrecruiter1')
         self.assertEqual(self.recruiter1.company_name, 'Tech Recruiters Inc.')
         self.assertEqual(self.recruiter1.company_website, 'https://techrecruiters.com')
@@ -36,10 +46,16 @@ class RecruiterProfileModelTest(TestCase):
         self.assertEqual(self.recruiter2.location, 'New York, NY')
 
     def test_recruiter_profile_str_representation(self):
+        """
+        Test the __str__ method of the RecruiterProfile model.
+        """
         self.assertEqual(str(self.recruiter1), 'Tech Recruiters Inc.')
         self.assertEqual(str(self.recruiter2), 'Global Talent Solutions')
 
     def test_recruiter_profile_user_relationship(self):
+        """
+        Test the relationship between the User and RecruiterProfile models.
+        """
         user1_profile = self.user1.recruiter_profile
         self.assertEqual(user1_profile, self.recruiter1)
         self.assertEqual(user1_profile.company_name, 'Tech Recruiters Inc.')

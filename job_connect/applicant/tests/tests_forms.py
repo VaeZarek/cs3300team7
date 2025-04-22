@@ -6,20 +6,32 @@ from datetime import date
 
 
 class ApplicantProfileFormsTest(TestCase):
+    """
+    Tests for the ApplicantProfileForm.
+    """
     @classmethod
     def setUpTestData(cls):
+        """
+        Set up test data for the class.  Creates a user and some skills.
+        """
         cls.user = User.objects.create_user(username='testapplicant', password='testpassword')
         cls.applicant_profile = ApplicantProfile.objects.create(user=cls.user)
         cls.python_skill = Skill.objects.create(name='Python')
         cls.django_skill = Skill.objects.create(name='Django')
 
     def test_applicant_profile_form_valid(self):
+        """
+        Test that the form is valid with valid data.
+        """
         form_data = {'headline': 'Test Headline', 'summary': 'Test Summary', 'skills': [self.python_skill.id, self.django_skill.id], 'resume': None}
         form = ApplicantProfileForm(data=form_data, instance=self.applicant_profile)
         self.assertTrue(form.is_valid())
         self.assertEqual(len(form.errors), 0)
 
     def test_applicant_profile_form_invalid_missing_headline(self):
+        """
+        Test that the form is invalid when the headline is missing.
+        """
         form_data = {'summary': 'Test Summary', 'skills': [self.python_skill.id, self.django_skill.id], 'resume': None}
         form = ApplicantProfileForm(data=form_data)
         self.assertFalse(form.is_valid())
@@ -27,6 +39,9 @@ class ApplicantProfileFormsTest(TestCase):
         self.assertEqual(len(form.errors), 1)
 
     def test_applicant_profile_form_invalid_missing_summary(self):
+        """
+        Test that the form is invalid when the summary is missing.
+        """
         form_data = {'headline': 'Test Headline', 'skills': [self.python_skill.id, self.django_skill.id], 'resume': None}
         form = ApplicantProfileForm(data=form_data)
         self.assertFalse(form.is_valid())
@@ -34,17 +49,28 @@ class ApplicantProfileFormsTest(TestCase):
         self.assertEqual(len(form.errors), 1)
 
     def test_applicant_profile_form_valid_empty_skills_resume(self):
+        """
+        Test that the form is valid even with empty skills and resume.
+        """
         form = ApplicantProfileForm(data={'headline': 'Test Headline', 'summary': 'Test Summary', 'skills': [], 'resume': ''}, instance=self.applicant_profile)
         self.assertTrue(form.is_valid())
         self.assertEqual(len(form.errors), 0)
 
     def test_applicant_profile_form_with_skills(self):
+        """
+        Test that the form saves skills correctly.
+
+        """
         form_data = {'headline': 'Test Headline', 'summary': 'Test Summary', 'skills': [self.python_skill.id, self.django_skill.id], 'resume': None}
         form = ApplicantProfileForm(data=form_data, instance=self.applicant_profile)
         self.assertTrue(form.is_valid())
         self.assertEqual(len(form.errors), 0)
 
     def test_applicant_profile_form_invalid_headline_too_long(self):
+        """
+        Test that the form is invalid when the headline is too long.
+
+        """
         form_data = {'headline': 'a' * 300, 'summary': 'Test Summary', 'skills': [], 'resume': None}
         form = ApplicantProfileForm(data=form_data)
         self.assertFalse(form.is_valid())

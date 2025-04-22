@@ -1,0 +1,784 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>core package &mdash; job_connect  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="core.tests package" href="core.tests.html" />
+    <link rel="prev" title="application.tests package" href="application.tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            job_connect
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">job_connect</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="applicant.html">applicant package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application.html">application package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">core package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html">core.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-core.admin">core.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-core.apps">core.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#core.apps.CoreConfig"><code class="docutils literal notranslate"><span class="pre">CoreConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-core.forms">core.forms module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#core.forms.ApplicantSignUpForm"><code class="docutils literal notranslate"><span class="pre">ApplicantSignUpForm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#core.forms.RecruiterSignUpForm"><code class="docutils literal notranslate"><span class="pre">RecruiterSignUpForm</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-core.models">core.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#core.models.BaseModel"><code class="docutils literal notranslate"><span class="pre">BaseModel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#core.models.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-core.urls">core.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-core.views">core.views module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#core.views.applicant_signup"><code class="docutils literal notranslate"><span class="pre">applicant_signup()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#core.views.home"><code class="docutils literal notranslate"><span class="pre">home()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#core.views.login_view"><code class="docutils literal notranslate"><span class="pre">login_view()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#core.views.logout_view"><code class="docutils literal notranslate"><span class="pre">logout_view()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#core.views.recruiter_signup"><code class="docutils literal notranslate"><span class="pre">recruiter_signup()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-core">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="job.html">job package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="job_connect.html">job_connect package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recruiter.html">recruiter package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">job_connect</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">job_connect</a></li>
+      <li class="breadcrumb-item active">core package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/core.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="core-package">
+<h1>core package<a class="headerlink" href="#core-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="core.tests.html">core.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.tests.html#module-core.tests.tests_forms">core.tests.tests_forms module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.tests.html#core.tests.tests_forms.ApplicantSignupFormTests"><code class="docutils literal notranslate"><span class="pre">ApplicantSignupFormTests</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_forms.ApplicantSignupFormTests.test_applicant_signup_form"><code class="docutils literal notranslate"><span class="pre">ApplicantSignupFormTests.test_applicant_signup_form()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_forms.ApplicantSignupFormTests.test_applicant_signup_form_invalid"><code class="docutils literal notranslate"><span class="pre">ApplicantSignupFormTests.test_applicant_signup_form_invalid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_forms.ApplicantSignupFormTests.test_recruiter_signup_form"><code class="docutils literal notranslate"><span class="pre">ApplicantSignupFormTests.test_recruiter_signup_form()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.tests.html#module-core.tests.tests_models">core.tests.tests_models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.tests.html#core.tests.tests_models.UserModelTest"><code class="docutils literal notranslate"><span class="pre">UserModelTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_models.UserModelTest.setUp"><code class="docutils literal notranslate"><span class="pre">UserModelTest.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_models.UserModelTest.test_create_superuser"><code class="docutils literal notranslate"><span class="pre">UserModelTest.test_create_superuser()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_models.UserModelTest.test_groups_and_permissions_fields"><code class="docutils literal notranslate"><span class="pre">UserModelTest.test_groups_and_permissions_fields()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_models.UserModelTest.test_is_applicant_method"><code class="docutils literal notranslate"><span class="pre">UserModelTest.test_is_applicant_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_models.UserModelTest.test_is_recruiter_method"><code class="docutils literal notranslate"><span class="pre">UserModelTest.test_is_recruiter_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_models.UserModelTest.test_user_creation"><code class="docutils literal notranslate"><span class="pre">UserModelTest.test_user_creation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_models.UserModelTest.test_user_type_choices"><code class="docutils literal notranslate"><span class="pre">UserModelTest.test_user_type_choices()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.tests.html#module-core.tests.tests_views">core.tests.tests_views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.tests.html#core.tests.tests_views.ApplicantSignUpViewTest"><code class="docutils literal notranslate"><span class="pre">ApplicantSignUpViewTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.ApplicantSignUpViewTest.setUp"><code class="docutils literal notranslate"><span class="pre">ApplicantSignUpViewTest.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.ApplicantSignUpViewTest.setUpTestData"><code class="docutils literal notranslate"><span class="pre">ApplicantSignUpViewTest.setUpTestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.ApplicantSignUpViewTest.test_signup_post_valid"><code class="docutils literal notranslate"><span class="pre">ApplicantSignUpViewTest.test_signup_post_valid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.tests.html#core.tests.tests_views.AuthenticationViewTest"><code class="docutils literal notranslate"><span class="pre">AuthenticationViewTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.AuthenticationViewTest.setUp"><code class="docutils literal notranslate"><span class="pre">AuthenticationViewTest.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.AuthenticationViewTest.test_invalid_password"><code class="docutils literal notranslate"><span class="pre">AuthenticationViewTest.test_invalid_password()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.AuthenticationViewTest.test_invalid_username"><code class="docutils literal notranslate"><span class="pre">AuthenticationViewTest.test_invalid_username()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.AuthenticationViewTest.test_valid_login"><code class="docutils literal notranslate"><span class="pre">AuthenticationViewTest.test_valid_login()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.tests.html#core.tests.tests_views.CoreViewsTest"><code class="docutils literal notranslate"><span class="pre">CoreViewsTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.CoreViewsTest.setUp"><code class="docutils literal notranslate"><span class="pre">CoreViewsTest.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.CoreViewsTest.test_login_view_get"><code class="docutils literal notranslate"><span class="pre">CoreViewsTest.test_login_view_get()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.tests.html#core.tests.tests_views.LoginViewTest"><code class="docutils literal notranslate"><span class="pre">LoginViewTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.LoginViewTest.setUp"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.LoginViewTest.test_login_get"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_login_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.LoginViewTest.test_login_post_invalid_credentials"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_login_post_invalid_credentials()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.LoginViewTest.test_login_post_valid_applicant"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_login_post_valid_applicant()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.LoginViewTest.test_login_post_valid_recruiter"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_login_post_valid_recruiter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.tests.html#core.tests.tests_views.LogoutViewTest"><code class="docutils literal notranslate"><span class="pre">LogoutViewTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.LogoutViewTest.setUp"><code class="docutils literal notranslate"><span class="pre">LogoutViewTest.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.LogoutViewTest.test_logout_get"><code class="docutils literal notranslate"><span class="pre">LogoutViewTest.test_logout_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.LogoutViewTest.test_logout_post"><code class="docutils literal notranslate"><span class="pre">LogoutViewTest.test_logout_post()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.tests.html#core.tests.tests_views.RecruiterSignUpViewTest"><code class="docutils literal notranslate"><span class="pre">RecruiterSignUpViewTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.RecruiterSignUpViewTest.setUp"><code class="docutils literal notranslate"><span class="pre">RecruiterSignUpViewTest.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.RecruiterSignUpViewTest.setUpTestData"><code class="docutils literal notranslate"><span class="pre">RecruiterSignUpViewTest.setUpTestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.RecruiterSignUpViewTest.test_signup_post_valid"><code class="docutils literal notranslate"><span class="pre">RecruiterSignUpViewTest.test_signup_post_valid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.tests.html#core.tests.tests_views.SignUpViewTest"><code class="docutils literal notranslate"><span class="pre">SignUpViewTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.SignUpViewTest.setUp"><code class="docutils literal notranslate"><span class="pre">SignUpViewTest.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.SignUpViewTest.test_signup_get"><code class="docutils literal notranslate"><span class="pre">SignUpViewTest.test_signup_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.SignUpViewTest.test_signup_post_invalid"><code class="docutils literal notranslate"><span class="pre">SignUpViewTest.test_signup_post_invalid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#core.tests.tests_views.SignUpViewTest.test_signup_post_valid"><code class="docutils literal notranslate"><span class="pre">SignUpViewTest.test_signup_post_valid()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.tests.html#module-core.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-core.admin">
+<span id="core-admin-module"></span><h2>core.admin module<a class="headerlink" href="#module-core.admin" title="Link to this heading"></a></h2>
+</section>
+<section id="module-core.apps">
+<span id="core-apps-module"></span><h2>core.apps module<a class="headerlink" href="#module-core.apps" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.apps.CoreConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.apps.</span></span><span class="sig-name descname"><span class="pre">CoreConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.apps.CoreConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/applications/#django.apps.AppConfig" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.apps.CoreConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#core.apps.CoreConfig.default_auto_field" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.apps.CoreConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'core'</span></em><a class="headerlink" href="#core.apps.CoreConfig.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.forms">
+<span id="core-forms-module"></span><h2>core.forms module<a class="headerlink" href="#module-core.forms" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.forms.ApplicantSignUpForm">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.forms.</span></span><span class="sig-name descname"><span class="pre">ApplicantSignUpForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.forms.ApplicantSignUpForm" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/auth/default/#django.contrib.auth.forms.UserCreationForm" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserCreationForm</span></code></a></p>
+<p>Form for applicant sign-up, extending Django’s UserCreationForm.</p>
+<p>It automatically sets the user_type to ‘applicant’ upon saving.</p>
+<p><strong>Form fields:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">username</span></code>: Username (<code class="xref py py-class docutils literal notranslate"><span class="pre">UsernameField</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">password1</span></code>: Password (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/forms/fields/#django.forms.CharField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CharField</span></code></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">password2</span></code>: Password confirmation (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/forms/fields/#django.forms.CharField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CharField</span></code></a>)</p></li>
+</ul>
+<dl class="py property">
+<dt class="sig sig-object py" id="core.forms.ApplicantSignUpForm.media">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#core.forms.ApplicantSignUpForm.media" title="Link to this definition"></a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.forms.ApplicantSignUpForm.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.forms.ApplicantSignUpForm.save" title="Link to this definition"></a></dt>
+<dd><p>Saves the form and sets the user_type to ‘applicant’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>commit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to immediately save the user to the database. Defaults to True.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The saved User object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#core.models.User" title="core.models.User">User</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="core.forms.RecruiterSignUpForm">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.forms.</span></span><span class="sig-name descname"><span class="pre">RecruiterSignUpForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.forms.RecruiterSignUpForm" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/auth/default/#django.contrib.auth.forms.UserCreationForm" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserCreationForm</span></code></a></p>
+<p>Form for recruiter sign-up, extending Django’s UserCreationForm.</p>
+<p>It automatically sets the user_type to ‘recruiter’ upon saving.</p>
+<p><strong>Form fields:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">username</span></code>: Username (<code class="xref py py-class docutils literal notranslate"><span class="pre">UsernameField</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">password1</span></code>: Password (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/forms/fields/#django.forms.CharField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CharField</span></code></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">password2</span></code>: Password confirmation (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/forms/fields/#django.forms.CharField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CharField</span></code></a>)</p></li>
+</ul>
+<dl class="py property">
+<dt class="sig sig-object py" id="core.forms.RecruiterSignUpForm.media">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#core.forms.RecruiterSignUpForm.media" title="Link to this definition"></a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.forms.RecruiterSignUpForm.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.forms.RecruiterSignUpForm.save" title="Link to this definition"></a></dt>
+<dd><p>Saves the form and sets the user_type to ‘recruiter’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>commit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to immediately save the user to the database. Defaults to True.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The saved User object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#core.models.User" title="core.models.User">User</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.models">
+<span id="core-models-module"></span><h2>core.models module<a class="headerlink" href="#module-core.models" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.models.BaseModel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.models.</span></span><span class="sig-name descname"><span class="pre">BaseModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.BaseModel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/instances/#django.db.models.Model" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a></p>
+<p>Abstract base model that provides timestamp fields (created_at, updated_at).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>created_at</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.DateTimeField" title="(in Django v5.2)"><em>DateTimeField</em></a>) – Created at</p></li>
+<li><p><strong>updated_at</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.DateTimeField" title="(in Django v5.2)"><em>DateTimeField</em></a>) – Updated at</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.BaseModel.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#core.models.BaseModel.created_at" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.DateTimeField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTimeField</span></code></a></p>
+<p>Created at</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.models.BaseModel.get_next_by_created_at">
+<span class="sig-name descname"><span class="pre">get_next_by_created_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.DateTimeField:</span> <span class="pre">created_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.BaseModel.get_next_by_created_at" title="Link to this definition"></a></dt>
+<dd><p>Finds next instance based on <a class="reference internal" href="#core.models.BaseModel.created_at" title="core.models.BaseModel.created_at"><code class="xref py py-attr docutils literal notranslate"><span class="pre">created_at</span></code></a>. See <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/instances/#django.db.models.Model.get_next_by_FOO" title="(in Django v5.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_next_by_FOO()</span></code></a> for more information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.models.BaseModel.get_next_by_updated_at">
+<span class="sig-name descname"><span class="pre">get_next_by_updated_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.DateTimeField:</span> <span class="pre">updated_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.BaseModel.get_next_by_updated_at" title="Link to this definition"></a></dt>
+<dd><p>Finds next instance based on <a class="reference internal" href="#core.models.BaseModel.updated_at" title="core.models.BaseModel.updated_at"><code class="xref py py-attr docutils literal notranslate"><span class="pre">updated_at</span></code></a>. See <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/instances/#django.db.models.Model.get_next_by_FOO" title="(in Django v5.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_next_by_FOO()</span></code></a> for more information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.models.BaseModel.get_previous_by_created_at">
+<span class="sig-name descname"><span class="pre">get_previous_by_created_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.DateTimeField:</span> <span class="pre">created_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.BaseModel.get_previous_by_created_at" title="Link to this definition"></a></dt>
+<dd><p>Finds previous instance based on <a class="reference internal" href="#core.models.BaseModel.created_at" title="core.models.BaseModel.created_at"><code class="xref py py-attr docutils literal notranslate"><span class="pre">created_at</span></code></a>. See <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/instances/#django.db.models.Model.get_previous_by_FOO" title="(in Django v5.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_previous_by_FOO()</span></code></a> for more information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.models.BaseModel.get_previous_by_updated_at">
+<span class="sig-name descname"><span class="pre">get_previous_by_updated_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.DateTimeField:</span> <span class="pre">updated_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.BaseModel.get_previous_by_updated_at" title="Link to this definition"></a></dt>
+<dd><p>Finds previous instance based on <a class="reference internal" href="#core.models.BaseModel.updated_at" title="core.models.BaseModel.updated_at"><code class="xref py py-attr docutils literal notranslate"><span class="pre">updated_at</span></code></a>. See <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/instances/#django.db.models.Model.get_previous_by_FOO" title="(in Django v5.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_previous_by_FOO()</span></code></a> for more information.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.BaseModel.updated_at">
+<span class="sig-name descname"><span class="pre">updated_at</span></span><a class="headerlink" href="#core.models.BaseModel.updated_at" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.DateTimeField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTimeField</span></code></a></p>
+<p>Updated at</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="core.models.User">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.models.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.User" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/auth/customizing/#django.contrib.auth.models.AbstractUser" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractUser</span></code></a></p>
+<p>Custom user model that extends Django’s AbstractUser.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.user_type">
+<span class="sig-name descname"><span class="pre">user_type</span></span><a class="headerlink" href="#core.models.User.user_type" title="Link to this definition"></a></dt>
+<dd><p>Field to differentiate between ‘applicant’ and ‘recruiter’ users.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.CharField" title="(in Django v5.2)">django.db.models.CharField</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.BigAutoField" title="(in Django v5.2)"><em>BigAutoField</em></a>) – Primary key: ID</p></li>
+<li><p><strong>password</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.CharField" title="(in Django v5.2)"><em>CharField</em></a>) – Password</p></li>
+<li><p><strong>last_login</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.DateTimeField" title="(in Django v5.2)"><em>DateTimeField</em></a>) – Last login</p></li>
+<li><p><strong>is_superuser</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.BooleanField" title="(in Django v5.2)"><em>BooleanField</em></a>) – Superuser status. Designates that this user has all permissions without explicitly assigning them.</p></li>
+<li><p><strong>username</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.CharField" title="(in Django v5.2)"><em>CharField</em></a>) – Username. Required. 150 characters or fewer. Letters, digits and &#64;/./+/-/_ only.</p></li>
+<li><p><strong>first_name</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.CharField" title="(in Django v5.2)"><em>CharField</em></a>) – First name</p></li>
+<li><p><strong>last_name</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.CharField" title="(in Django v5.2)"><em>CharField</em></a>) – Last name</p></li>
+<li><p><strong>email</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.EmailField" title="(in Django v5.2)"><em>EmailField</em></a>) – Email address</p></li>
+<li><p><strong>is_staff</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.BooleanField" title="(in Django v5.2)"><em>BooleanField</em></a>) – Staff status. Designates whether the user can log into this admin site.</p></li>
+<li><p><strong>is_active</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.BooleanField" title="(in Django v5.2)"><em>BooleanField</em></a>) – Active. Designates whether this user should be treated as active. Unselect this instead of deleting accounts.</p></li>
+<li><p><strong>date_joined</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.DateTimeField" title="(in Django v5.2)"><em>DateTimeField</em></a>) – Date joined</p></li>
+<li><p><strong>user_type</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.CharField" title="(in Django v5.2)"><em>CharField</em></a>) – User type</p></li>
+</ul>
+</dd>
+</dl>
+<p>Relationship fields:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>groups</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.ManyToManyField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ManyToManyField</span></code></a> to <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/contrib/auth/#django.contrib.auth.models.Group" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>) – Groups. The groups this user belongs to. A user will get all permissions granted to each of their groups. (related name: <code class="xref py py-attr docutils literal notranslate"><span class="pre">core_user_set</span></code>)</p></li>
+<li><p><strong>user_permissions</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.ManyToManyField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ManyToManyField</span></code></a> to <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/contrib/auth/#django.contrib.auth.models.Permission" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Permission</span></code></a>) – User permissions. Specific permissions for this user. (related name: <code class="xref py py-attr docutils literal notranslate"><span class="pre">core_user_permissions_set</span></code>)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Reverse relationships:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logentry</strong> (Reverse <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.ForeignKey" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForeignKey</span></code></a> from <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/contrib/admin/#django.contrib.admin.models.LogEntry" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogEntry</span></code></a>) – All log entries of this user (related name of <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/contrib/admin/#django.contrib.admin.models.LogEntry.user" title="(in Django v5.2)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user</span></code></a>)</p></li>
+<li><p><strong>applicant_profile</strong> (Reverse <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.OneToOneField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OneToOneField</span></code></a> from <a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile" title="applicant.models.ApplicantProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicantProfile</span></code></a>) – The applicant profile of this user (related name of <a class="reference internal" href="applicant.html#id6" title="applicant.models.ApplicantProfile.user"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user</span></code></a>)</p></li>
+<li><p><strong>recruiter_profile</strong> (Reverse <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.OneToOneField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OneToOneField</span></code></a> from <a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile" title="recruiter.models.RecruiterProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecruiterProfile</span></code></a>) – The recruiter profile of this user (related name of <a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.user" title="recruiter.models.RecruiterProfile.user"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user</span></code></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="core.models.User.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#core.models.User.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="core.models.User.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#core.models.User.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.USER_TYPE_CHOICES">
+<span class="sig-name descname"><span class="pre">USER_TYPE_CHOICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(('applicant',</span> <span class="pre">'Applicant'),</span> <span class="pre">('recruiter',</span> <span class="pre">'Recruiter'))</span></em><a class="headerlink" href="#core.models.User.USER_TYPE_CHOICES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.applicant_profile">
+<span class="sig-name descname"><span class="pre">applicant_profile</span></span><a class="headerlink" href="#core.models.User.applicant_profile" title="Link to this definition"></a></dt>
+<dd><p>Type: Reverse <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.OneToOneField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OneToOneField</span></code></a> from <a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile" title="applicant.models.ApplicantProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicantProfile</span></code></a></p>
+<p>The applicant profile of this user (related name of <a class="reference internal" href="applicant.html#id6" title="applicant.models.ApplicantProfile.user"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user</span></code></a>)</p>
+<p>Accessor to the related object on the reverse side of a one-to-one
+relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Restaurant</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="n">OneToOneField</span><span class="p">(</span><span class="n">Place</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;restaurant&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.date_joined">
+<span class="sig-name descname"><span class="pre">date_joined</span></span><a class="headerlink" href="#core.models.User.date_joined" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.DateTimeField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTimeField</span></code></a></p>
+<p>Date joined</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.email">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="headerlink" href="#core.models.User.email" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.EmailField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmailField</span></code></a></p>
+<p>Email address</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.first_name">
+<span class="sig-name descname"><span class="pre">first_name</span></span><a class="headerlink" href="#core.models.User.first_name" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.CharField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CharField</span></code></a></p>
+<p>First name</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.models.User.get_next_by_date_joined">
+<span class="sig-name descname"><span class="pre">get_next_by_date_joined</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.DateTimeField:</span> <span class="pre">date_joined&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.User.get_next_by_date_joined" title="Link to this definition"></a></dt>
+<dd><p>Finds next instance based on <a class="reference internal" href="#core.models.User.date_joined" title="core.models.User.date_joined"><code class="xref py py-attr docutils literal notranslate"><span class="pre">date_joined</span></code></a>. See <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/instances/#django.db.models.Model.get_next_by_FOO" title="(in Django v5.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_next_by_FOO()</span></code></a> for more information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.models.User.get_previous_by_date_joined">
+<span class="sig-name descname"><span class="pre">get_previous_by_date_joined</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.DateTimeField:</span> <span class="pre">date_joined&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.User.get_previous_by_date_joined" title="Link to this definition"></a></dt>
+<dd><p>Finds previous instance based on <a class="reference internal" href="#core.models.User.date_joined" title="core.models.User.date_joined"><code class="xref py py-attr docutils literal notranslate"><span class="pre">date_joined</span></code></a>. See <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/instances/#django.db.models.Model.get_previous_by_FOO" title="(in Django v5.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_previous_by_FOO()</span></code></a> for more information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.models.User.get_user_type_display">
+<span class="sig-name descname"><span class="pre">get_user_type_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.CharField:</span> <span class="pre">user_type&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.models.User.get_user_type_display" title="Link to this definition"></a></dt>
+<dd><p>Shows the label of the <a class="reference internal" href="#id0" title="core.models.User.user_type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user_type</span></code></a>. See <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/instances/#django.db.models.Model.get_FOO_display" title="(in Django v5.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_FOO_display()</span></code></a> for more information.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.groups">
+<span class="sig-name descname"><span class="pre">groups</span></span><a class="headerlink" href="#core.models.User.groups" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.ManyToManyField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ManyToManyField</span></code></a> to <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/contrib/auth/#django.contrib.auth.models.Group" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a></p>
+<p>Groups. The groups this user belongs to. A user will get all permissions granted to each of their groups. (related name: <code class="xref py py-attr docutils literal notranslate"><span class="pre">core_user_set</span></code>)</p>
+<p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#core.models.User.id" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.BigAutoField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">BigAutoField</span></code></a></p>
+<p>Primary key: ID</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.is_active">
+<span class="sig-name descname"><span class="pre">is_active</span></span><a class="headerlink" href="#core.models.User.is_active" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.BooleanField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanField</span></code></a></p>
+<p>Active. Designates whether this user should be treated as active. Unselect this instead of deleting accounts.</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.models.User.is_applicant">
+<span class="sig-name descname"><span class="pre">is_applicant</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.models.User.is_applicant" title="Link to this definition"></a></dt>
+<dd><p>Checks if the user is an applicant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the user is an applicant, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.models.User.is_recruiter">
+<span class="sig-name descname"><span class="pre">is_recruiter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.models.User.is_recruiter" title="Link to this definition"></a></dt>
+<dd><p>Checks if the user is a recruiter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the user is a recruiter, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.is_staff">
+<span class="sig-name descname"><span class="pre">is_staff</span></span><a class="headerlink" href="#core.models.User.is_staff" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.BooleanField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanField</span></code></a></p>
+<p>Staff status. Designates whether the user can log into this admin site.</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.is_superuser">
+<span class="sig-name descname"><span class="pre">is_superuser</span></span><a class="headerlink" href="#core.models.User.is_superuser" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.BooleanField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanField</span></code></a></p>
+<p>Superuser status. Designates that this user has all permissions without explicitly assigning them.</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.last_login">
+<span class="sig-name descname"><span class="pre">last_login</span></span><a class="headerlink" href="#core.models.User.last_login" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.DateTimeField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTimeField</span></code></a></p>
+<p>Last login</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.last_name">
+<span class="sig-name descname"><span class="pre">last_name</span></span><a class="headerlink" href="#core.models.User.last_name" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.CharField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CharField</span></code></a></p>
+<p>Last name</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.logentry_set">
+<span class="sig-name descname"><span class="pre">logentry_set</span></span><a class="headerlink" href="#core.models.User.logentry_set" title="Link to this definition"></a></dt>
+<dd><p>Type: Reverse <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.ForeignKey" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForeignKey</span></code></a> from <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/contrib/admin/#django.contrib.admin.models.LogEntry" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogEntry</span></code></a></p>
+<p>All log entries of this user (related name of <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/contrib/admin/#django.contrib.admin.models.LogEntry.user" title="(in Django v5.2)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user</span></code></a>)</p>
+<p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.password">
+<span class="sig-name descname"><span class="pre">password</span></span><a class="headerlink" href="#core.models.User.password" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.CharField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CharField</span></code></a></p>
+<p>Password</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.recruiter_profile">
+<span class="sig-name descname"><span class="pre">recruiter_profile</span></span><a class="headerlink" href="#core.models.User.recruiter_profile" title="Link to this definition"></a></dt>
+<dd><p>Type: Reverse <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.OneToOneField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OneToOneField</span></code></a> from <a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile" title="recruiter.models.RecruiterProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecruiterProfile</span></code></a></p>
+<p>The recruiter profile of this user (related name of <a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.user" title="recruiter.models.RecruiterProfile.user"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user</span></code></a>)</p>
+<p>Accessor to the related object on the reverse side of a one-to-one
+relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Restaurant</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="n">OneToOneField</span><span class="p">(</span><span class="n">Place</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;restaurant&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.user_permissions">
+<span class="sig-name descname"><span class="pre">user_permissions</span></span><a class="headerlink" href="#core.models.User.user_permissions" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.ManyToManyField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ManyToManyField</span></code></a> to <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/contrib/auth/#django.contrib.auth.models.Permission" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Permission</span></code></a></p>
+<p>User permissions. Specific permissions for this user. (related name: <code class="xref py py-attr docutils literal notranslate"><span class="pre">core_user_permissions_set</span></code>)</p>
+<p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">user_type</span></span><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.CharField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CharField</span></code></a></p>
+<p>User type</p>
+<p>Choices:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">applicant</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">recruiter</span></code></p></li>
+</ul>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.models.User.username">
+<span class="sig-name descname"><span class="pre">username</span></span><a class="headerlink" href="#core.models.User.username" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.CharField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CharField</span></code></a></p>
+<p>Username. Required. 150 characters or fewer. Letters, digits and &#64;/./+/-/_ only.</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.urls">
+<span id="core-urls-module"></span><h2>core.urls module<a class="headerlink" href="#module-core.urls" title="Link to this heading"></a></h2>
+</section>
+<section id="module-core.views">
+<span id="core-views-module"></span><h2>core.views module<a class="headerlink" href="#module-core.views" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="core.views.applicant_signup">
+<span class="sig-prename descclassname"><span class="pre">core.views.</span></span><span class="sig-name descname"><span class="pre">applicant_signup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.applicant_signup" title="Link to this definition"></a></dt>
+<dd><p>Handles the applicant signup process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpRequest" title="(in Django v5.2)"><em>django.http.HttpRequest</em></a>) – HttpRequest object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>HttpResponse object rendering the signup form or redirecting to the profile creation page.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpResponse" title="(in Django v5.2)">django.http.HttpResponse</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.views.home">
+<span class="sig-prename descclassname"><span class="pre">core.views.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.home" title="Link to this definition"></a></dt>
+<dd><p>Renders the home page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpRequest" title="(in Django v5.2)"><em>django.http.HttpRequest</em></a>) – HttpRequest object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>HttpResponse object rendering the home page.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpResponse" title="(in Django v5.2)">django.http.HttpResponse</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.views.login_view">
+<span class="sig-prename descclassname"><span class="pre">core.views.</span></span><span class="sig-name descname"><span class="pre">login_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.login_view" title="Link to this definition"></a></dt>
+<dd><p>Handles the login process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpRequest" title="(in Django v5.2)"><em>django.http.HttpRequest</em></a>) – HttpRequest object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>HttpResponse object rendering the login form or redirecting to the appropriate dashboard.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpResponse" title="(in Django v5.2)">django.http.HttpResponse</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.views.logout_view">
+<span class="sig-prename descclassname"><span class="pre">core.views.</span></span><span class="sig-name descname"><span class="pre">logout_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.logout_view" title="Link to this definition"></a></dt>
+<dd><p>Handles the logout process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpRequest" title="(in Django v5.2)"><em>django.http.HttpRequest</em></a>) – HttpRequest object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>HttpResponse object redirecting to the home page.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpResponse" title="(in Django v5.2)">django.http.HttpResponse</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.views.recruiter_signup">
+<span class="sig-prename descclassname"><span class="pre">core.views.</span></span><span class="sig-name descname"><span class="pre">recruiter_signup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.views.recruiter_signup" title="Link to this definition"></a></dt>
+<dd><p>Handles the recruiter signup process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpRequest" title="(in Django v5.2)"><em>django.http.HttpRequest</em></a>) – HttpRequest object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>HttpResponse object rendering the signup form or redirecting to the profile creation page.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpResponse" title="(in Django v5.2)">django.http.HttpResponse</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-core" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="application.tests.html" class="btn btn-neutral float-left" title="application.tests package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="core.tests.html" class="btn btn-neutral float-right" title="core.tests package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Team 7.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

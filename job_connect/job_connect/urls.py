@@ -3,7 +3,7 @@ from django.urls import path, include
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls), # Django Administration
+    path('admin/', admin.site.urls), # :no-index: Django Administration
     path('', include('core.urls', namespace='core')),
     path('applicant/', include('applicant.urls', namespace='applicant')),
     path('recruiter/', include('recruiter.urls', namespace='recruiter')),

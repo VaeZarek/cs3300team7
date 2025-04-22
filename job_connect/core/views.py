@@ -8,15 +8,24 @@ from core.forms import ApplicantSignUpForm, RecruiterSignUpForm
 from django.contrib.auth.decorators import login_required
 
 def applicant_signup(request):
+    """
+    Handles the applicant signup process.
+
+    Args:
+        request (django.http.HttpRequest): HttpRequest object.
+
+    Returns:
+        django.http.HttpResponse: HttpResponse object rendering the signup form or redirecting to the profile creation page.
+    """
     if request.method == 'POST':
         form = ApplicantSignUpForm(request.POST)
         if form.is_valid():
-            user = form.save()  # Create the user
+            user = form.save()  # :no-index: Create the user
 
-            # Get or create the 'Applicant' group
+            # :no-index: Get or create the 'Applicant' group
             applicant_group, created = Group.objects.get_or_create(name='Applicant')
 
-            # Add the new user to the 'Applicant' group
+            # :no-index: Add the new user to the 'Applicant' group
             user.groups.add(applicant_group)
 
             login(request, user)
@@ -26,15 +35,24 @@ def applicant_signup(request):
     return render(request, 'core/applicant_signup.html', {'form': form})
 
 def recruiter_signup(request):
+    """
+    Handles the recruiter signup process.
+
+    Args:
+        request (django.http.HttpRequest): HttpRequest object.
+
+    Returns:
+        django.http.HttpResponse: HttpResponse object rendering the signup form or redirecting to the profile creation page.
+    """
     if request.method == 'POST':
         form = RecruiterSignUpForm(request.POST)
         if form.is_valid():
-            user = form.save()  # Create the recruiter user
+            user = form.save()  # :no-index: Create the recruiter user
 
-            # Get or create the 'Recruiter' group
+            # :no-index: Get or create the 'Recruiter' group
             recruiter_group, created = Group.objects.get_or_create(name='Recruiter')
 
-            # Add the new user to the 'Recruiter' group
+            # :no-index: Add the new user to the 'Recruiter' group
             user.groups.add(recruiter_group)
 
             login(request, user)
@@ -44,25 +62,52 @@ def recruiter_signup(request):
     return render(request, 'core/recruiter_signup.html', {'form': form})
 
 def login_view(request):
+    """
+    Handles the login process.
+
+    Args:
+        request (django.http.HttpRequest): HttpRequest object.
+
+    Returns:
+        django.http.HttpResponse: HttpResponse object rendering the login form or redirecting to the appropriate dashboard.
+    """
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
             if user.is_applicant():
-                return redirect('applicant:applicant_dashboard') # Define applicant dashboard URL
+                return redirect('applicant:applicant_dashboard') # :no-index: Define applicant dashboard URL
             elif user.is_recruiter():
-                return redirect('recruiter:recruiter_dashboard') # Define recruiter dashboard URL
+                return redirect('recruiter:recruiter_dashboard') # :no-index: Define recruiter dashboard URL
             else:
-                return redirect('core:home') # Default redirect
+                return redirect('core:home') # :no-index: Default redirect
     else:
         form = AuthenticationForm()
     return render(request, 'core/login.html', {'form': form})
 
 def home(request):
+    """
+    Renders the home page.
+
+    Args:
+        request (django.http.HttpRequest): HttpRequest object.
+
+    Returns:
+        django.http.HttpResponse: HttpResponse object rendering the home page.
+    """
     return render(request, 'core/index.html')
 
 @login_required
 def logout_view(request):
+    """
+    Handles the logout process.
+
+    Args:
+        request (django.http.HttpRequest): HttpRequest object.
+
+    Returns:
+        django.http.HttpResponse: HttpResponse object redirecting to the home page.
+    """
     logout(request)
-    return redirect('core:home') # Redirect to homepage
+    return redirect('core:home') # :no-index: Redirect to homepage

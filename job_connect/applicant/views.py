@@ -8,13 +8,30 @@ from django.urls import reverse
 
 @login_required
 def applicant_dashboard(request):
-    """View for the applicant's main dashboard."""
+    """
+    Displays the applicant dashboard.
+
+    Args:
+        request (HttpRequest): HttpRequest object.
+
+    Returns:
+        HttpResponse: HttpResponse object rendering the applicant dashboard.
+    """
     return render(request, 'applicant/applicant_dashboard.html')
 
 @login_required
 def applicant_profile_create(request):
+    """
+    Creates a new applicant profile.
+
+    Args:
+        request (HttpRequest): HttpRequest object.
+
+    Returns:
+        HttpResponse: HttpResponse object rendering the profile creation form or redirecting to the profile view.
+    """
     if hasattr(request.user, 'applicant_profile'):
-        return redirect('applicant:applicant_profile_update') # Profile already exists
+        return redirect('applicant:applicant_profile_update') # :no-index: Profile already exists
     if request.method == 'POST':
         profile_form = ApplicantProfileForm(request.POST, request.FILES)
         if profile_form.is_valid():
@@ -28,6 +45,15 @@ def applicant_profile_create(request):
 
 @login_required
 def applicant_profile_update(request):
+    """
+    Updates an existing applicant profile.
+
+    Args:
+        request (HttpRequest): HttpRequest object.
+
+    Returns:
+        HttpResponse: HttpResponse object rendering the profile update form or redirecting to the profile view.
+    """
     profile = get_object_or_404(ApplicantProfile, user=request.user)
     if request.method == 'POST':
         profile_form = ApplicantProfileForm(request.POST, request.FILES, instance=profile)
@@ -69,6 +95,15 @@ def applicant_profile_update(request):
 
 @login_required
 def applicant_profile_view(request):
+    """
+    Displays an applicant profile.
+
+    Args:
+        request (HttpRequest): HttpRequest object.
+
+    Returns:
+        HttpResponse: HttpResponse object rendering the applicant profile.
+    """
     try:
         profile = request.user.applicant_profile
         return render(request, 'applicant/applicant_profile_view.html', {'profile': profile})
@@ -77,6 +112,16 @@ def applicant_profile_view(request):
 
 @login_required
 def applicant_applications(request):
+    """
+    Displays a list of applications submitted by the applicant.
+
+    Args:
+        request (HttpRequest): HttpRequest object.
+
+    Returns:
+        HttpResponse: HttpResponse object rendering the list of applications.
+    """
+
     try:
         applicant_profile = request.user.applicant_profile
         applications = Application.objects.filter(applicant=applicant_profile).order_by('-application_date')

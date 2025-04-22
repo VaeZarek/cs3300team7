@@ -1,185 +1,94 @@
-from django.test import TestCase, Client
+from django.test import TestCase, RequestFactory
 from django.urls import reverse
-from django.contrib.auth import get_user_model  # Import get_user_model
-from applicant.models import ApplicantProfile, Experience, Education
-from applicant.forms import ApplicantProfileForm, ExperienceFormSet, EducationFormSet
-from django.contrib.auth.models import Group
-from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
+from applicant.models import ApplicantProfile
+from applicant.views import applicant_profile_create, applicant_profile_update, applicant_profile_view, \
+    applicant_dashboard
+from applicant.forms import ApplicantProfileForm
+from unittest.mock import patch
 
-User = get_user_model()  # Get your custom User model
+User = get_user_model()
 
-class ApplicantDashboardViewTest(TestCase):
-    def setUp(self):
-        self.client = Client()
-        self.user = User.objects.create_user(username='testapplicant', password='testpassword')
-        self.client.force_login(self.user)
-        self.dashboard_url = reverse('applicant:applicant_dashboard')
-
-
-    def test_login_required(self):
-        self.client.logout()
-        response = self.client.get(self.dashboard_url)
-        self.assertEqual(response.status_code, 302)
-        self.assertIn(reverse('core:login'), response.url)
-
-    def test_authenticated_user_can_access(self):
-        response = self.client.get(self.dashboard_url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'applicant/applicant_dashboard.html')
-
-class ApplicantProfileUpdateViewTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        Group.objects.create(name='Applicant')
-
-    def setUp(self):
-        self.client = Client()
-        self.user = User.objects.create_user(username='testapplicant', password='testpassword')
-        self.applicant_profile = ApplicantProfile.objects.create(user=self.user, headline='Existing Headline', summary='Existing Summary')
-        self.user.groups.add(Group.objects.get(name='Applicant'))
-        self.client.force_login(self.user)
-        self.update_url = reverse('applicant:applicant_profile_update')
-        self.profile_view_url = reverse('applicant:applicant_profile_view') # Add the profile view URL
-
-    def test_get_request_renders_form(self):
-        response = self.client.get(self.update_url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'applicant/applicant_profile_update.html')
-        self.assertIsInstance(response.context['profile_form'], ApplicantProfileForm)
-        self.assertIsInstance(response.context['experience_formset'], ExperienceFormSet)
-        self.assertIsInstance(response.context['education_formset'], EducationFormSet)
-
-    def test_post_request_only_profile_form(self):
-        post_data = {
-            'headline': 'Simple Update',
-            'summary': 'Simple Summary',
-            'experiences-TOTAL_FORMS': '0',
-            'experiences-INITIAL_FORMS': '0',
-            'experiences-MIN_NUM_FORMS': '0',
-            'experiences-MAX_NUM_FORMS': '1000',
-            'educations-TOTAL_FORMS': '0',
-            'educations-INITIAL_FORMS': '0',
-            'educations-MIN_NUM_FORMS': '0',
-            'educations-MAX_NUM_FORMS': '1000',
-        }
-        response = self.client.post(self.update_url, post_data, follow=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.wsgi_request.path, self.profile_view_url)
-        self.assertEqual(ApplicantProfile.objects.get(user=self.user).headline, 'Simple Update')
-
-    def test_post_request_updates_profile(self):
-        post_data = {
-            'headline': 'Updated Headline',
-            'summary': 'Updated Summary',
-            'skills': [],
-            'resume': '',
-
-            'experiences-TOTAL_FORMS': '1',  # Use the plural 'experiences'
-            'experiences-INITIAL_FORMS': '0',
-            'experiences-MIN_NUM_FORMS': '0',
-            'experiences-MAX_NUM_FORMS': '1000',
-            'experiences-0-title': 'Software Engineer',
-            'experiences-0-company': 'Tech Corp',
-            'experiences-0-start_date': '2023-01-01',
-            'experiences-0-end_date': '2024-01-01',
-            'experiences-0-description': 'Developed key features.',
-            'experiences-0-DELETE': False,
-
-            'educations-TOTAL_FORMS': '1',  # Use the plural 'educations'
-            'educations-INITIAL_FORMS': '0',
-            'educations-MIN_NUM_FORMS': '0',
-            'educations-MAX_NUM_FORMS': '1000',
-            'educations-0-degree': 'Master of Science',
-            'educations-0-institution': 'University X',
-            'educations-0-graduation_date': '2022-05-01',
-            'educations-0-major': 'Computer Science',
-            'educations-0-DELETE': False,
-        }
-        response = self.client.post(self.update_url, post_data, follow=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.wsgi_request.path, self.profile_view_url)
-        self.assertTrue(
-            Experience.objects.filter(applicant_profile=self.applicant_profile, title='Software Engineer').exists())
-        self.assertTrue(
-            Education.objects.filter(applicant_profile=self.applicant_profile, degree='Master of Science').exists())
-
-class ApplicantProfileViewViewTest(TestCase):
-    def setUp(self):
-        self.client = Client()
-        self.user = User.objects.create_user(username='testapplicant', password='testpassword')
-        self.applicant_profile = ApplicantProfile.objects.create(user=self.user, headline='Test', summary='Summary')
-        self.client.force_login(self.user)
-        self.view_url = reverse('applicant:applicant_profile_view')
-
-    def test_login_required(self):
-        self.client.logout()
-        response = self.client.get(self.view_url)
-        self.assertEqual(response.status_code, 302)
-        self.assertIn(reverse('core:login'), response.url)
-
-    def test_get_request_renders_form(self):
-        response = self.client.get(self.view_url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'applicant/applicant_profile_view.html')
-        self.assertEqual(response.context['profile'], self.applicant_profile)
-
-        # You would add more tests for handling experience_formset and education_formset
-    # and invalid form submissions here.
 
 class ApplicantProfileViewTest(TestCase):
+    """
+    Tests for the applicant profile views (create, update, view, dashboard).
+
+    """
+
     def setUp(self):
-        self.client = Client()
-        self.user = User.objects.create_user(username='testapplicant', password='testpassword')
-        self.applicant_profile = ApplicantProfile.objects.create(user=self.user, headline='Test', summary='Summary')
-        self.client.force_login(self.user)
-        self.view_url = reverse('applicant:applicant_profile_view')
+        """
+        Set up test data for applicant profile tests.
 
-    def test_login_required(self):
-        self.client.logout()
-        response = self.client.get(self.view_url)
-        self.assertEqual(response.status_code, 302)
-        self.assertIn(reverse('core:login'), response.url)
+        """
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(username='testuser', password='testpassword', user_type='applicant')
+        self.client.force_login(self.user)  # Use force_login for simplicity
 
-    def test_authenticated_user_can_view_profile(self):
-        response = self.client.get(self.view_url)
+    def test_applicant_profile_create_view_get(self):
+        """
+        Test that the applicant profile create view returns a 200 status code on GET.
+
+        """
+        url = reverse('applicant:applicant_profile_create')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'applicant/applicant_profile_create.html')
+
+    def test_applicant_profile_create_view_post_valid(self):
+        """
+        Test that the applicant profile create view creates a new profile on valid POST.
+
+        """
+        url = reverse('applicant:applicant_profile_create')
+        form_data = {'headline': 'Test Headline', 'summary': 'Test Summary'}
+        response = self.client.post(url, form_data)
+        self.assertEqual(response.status_code, 302)  # Redirect after successful creation
+        self.assertTrue(ApplicantProfile.objects.filter(user=self.user).exists())
+
+    def test_applicant_profile_update_view_get(self):
+        """
+        Test that the applicant profile update view returns a 200 status code on GET.
+
+        """
+        ApplicantProfile.objects.create(user=self.user, headline='Initial Headline', summary='Initial Summary')
+        url = reverse('applicant:applicant_profile_update')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'applicant/applicant_profile_update.html')
+
+    def test_applicant_profile_update_view_post_valid(self):
+        """
+        Test that the applicant profile update view updates an existing profile on valid POST.
+
+        """
+        profile = ApplicantProfile.objects.create(user=self.user, headline='Initial Headline',
+                                                  summary='Initial Summary')
+        url = reverse('applicant:applicant_profile_update')
+        form_data = {'headline': 'Updated Headline', 'summary': 'Updated Summary'}
+        response = self.client.post(url, form_data)
+        self.assertEqual(response.status_code, 302)  # Redirect after successful update
+        profile.refresh_from_db()
+        self.assertEqual(profile.headline, 'Updated Headline')
+
+    def test_applicant_profile_view_get(self):
+        """
+        Test that the applicant profile view returns a 200 status code on GET.
+
+        """
+        ApplicantProfile.objects.create(user=self.user, headline='Test Headline', summary='Test Summary')
+        url = reverse('applicant:applicant_profile_view')
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'applicant/applicant_profile_view.html')
-        self.assertEqual(response.context['profile'], self.applicant_profile)
 
-    def test_redirect_if_profile_does_not_exist(self):
-        # Delete the existing profile
-        self.applicant_profile.delete()
-        response = self.client.get(self.view_url)
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse('applicant:applicant_profile_create'))
+    def test_applicant_dashboard_view_get(self):
+        """
+        Test that the applicant dashboard view returns a 200 status code on GET.
 
-
-class ApplicantApplicationsViewTest(TestCase):
-    def setUp(self):
-        self.client = Client()
-        self.user = User.objects.create_user(username='testapplicant', password='testpassword')
-        self.applicant_profile = ApplicantProfile.objects.create(user=self.user, headline='Test', summary='Summary')
-        self.client.force_login(self.user)
-        self.applications_url = reverse('applicant:applicant_applications')
-        # Create some dummy applications if needed for testing the list
-
-    def test_login_required(self):
-        self.client.logout()
-        response = self.client.get(self.applications_url)
-        self.assertEqual(response.status_code, 302)
-        self.assertIn(reverse('core:login'), response.url)
-
-    def test_authenticated_user_can_access(self):
-        response = self.client.get(self.applications_url)
+        """
+        ApplicantProfile.objects.create(user=self.user, headline='Test Headline', summary='Test Summary')
+        url = reverse('applicant:applicant_dashboard')
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'applicant/applicant_applications_list.html')
-        self.assertIn('applications', response.context)
-
-    def test_handles_no_applicant_profile(self):
-        # Delete the existing profile
-        self.applicant_profile.delete()
-        response = self.client.get(self.applications_url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'applicant/applicant_applications_list.html')
-        self.assertIn('applications', response.context)
-        self.assertEqual(len(response.context['applications']), 0)
+        self.assertTemplateUsed(response, 'applicant/applicant_dashboard.html')

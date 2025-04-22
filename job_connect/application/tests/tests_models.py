@@ -10,9 +10,17 @@ from django.core.files.base import ContentFile
 User = get_user_model()
 
 class ApplicationModelTest(TestCase):
+    """
+    Tests for the Application model.
+    """
+
     @classmethod
     def setUpTestData(cls):
-        # Create a user for the applicant profile
+        """
+        Set up test data for the Application model tests.
+        """
+        # Create a user, applicant profile, recruiter profile, skill, and job for testing
+
         user_applicant = User.objects.create_user(username='applicant1', password='testpassword')
         cls.applicant_profile = ApplicantProfile.objects.create(
             user=user_applicant,
@@ -40,6 +48,9 @@ class ApplicationModelTest(TestCase):
         cls.resume_file = ContentFile(b"This is a dummy resume content.", name='resume.pdf')
 
     def test_application_creation(self):
+        """
+        Test that an Application can be created successfully.
+        """
         application = Application.objects.create(
             applicant=self.applicant_profile,
             job=self.job,
@@ -58,6 +69,9 @@ class ApplicationModelTest(TestCase):
         self.assertIn(self.skill, application.skills.all())
 
     def test_application_default_status(self):
+        """
+        Test that the default status of an Application is 'pending'.
+        """
         application = Application.objects.create(
             applicant=self.applicant_profile,
             job=self.job,
@@ -67,6 +81,9 @@ class ApplicationModelTest(TestCase):
         self.assertEqual(application.status, 'pending')
 
     def test_application_unique_together(self):
+        """
+        Test the unique_together constraint on the Application model.
+        """
         Application.objects.create(
             applicant=self.applicant_profile,
             job=self.job,
@@ -82,6 +99,9 @@ class ApplicationModelTest(TestCase):
             )
 
     def test_application_str_method(self):
+        """
+        Test the __str__ method of the Application model.
+        """
         application = Application.objects.create(
             applicant=self.applicant_profile,
             job=self.job,
@@ -92,6 +112,9 @@ class ApplicationModelTest(TestCase):
         self.assertEqual(str(application), expected_str)
 
     def test_application_resume_upload_path(self):
+        """
+        Test the resume upload path of the Application model.
+        """
         application = Application.objects.create(
             applicant=self.applicant_profile,
             job=self.job,

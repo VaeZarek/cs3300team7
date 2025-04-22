@@ -6,10 +6,22 @@ from django.utils import timezone
 User = get_user_model()
 
 class ApplicantProfileModelTest(TestCase):
+    """
+    Tests for the ApplicantProfile model.
+
+    """
     def setUp(self):
+        """
+        Set up test data for the ApplicantProfile model tests.
+
+        """
         self.user = User.objects.create_user(username='testapplicant')
 
     def test_applicant_profile_creation(self):
+        """
+        Test that an ApplicantProfile can be created successfully.
+
+        """
         profile = ApplicantProfile.objects.create(
             user=self.user,
             headline='Experienced Software Engineer',
@@ -27,6 +39,10 @@ class ApplicantProfileModelTest(TestCase):
         self.assertFalse(profile.resume)  # Check if the FieldFile evaluates to False
 
     def test_applicant_profile_skills_relationship(self):
+        """
+        Test the relationship between ApplicantProfile and Skill models.
+
+        """
         profile1 = ApplicantProfile.objects.create(user=self.user, headline='Test 1', summary='Summary 1')
         profile2 = ApplicantProfile.objects.create(user=User.objects.create_user(username='testapplicant2'),
                                                    headline='Test 2', summary='Summary 2')
@@ -51,6 +67,9 @@ class ApplicantProfileModelTest(TestCase):
         self.assertEqual(django_skill.applicants.count(), 1)  # Corrected: Using the correct related_name
 
     def test_applicant_profile_resume_upload(self):
+        """
+        Test the resume upload functionality for ApplicantProfile.
+        """
         profile = ApplicantProfile.objects.create(user=self.user, headline='Test', summary='Summary')
         # For testing FileField, you'd typically use SimpleUploadedFile
         from django.core.files.uploadedfile import SimpleUploadedFile
@@ -62,13 +81,25 @@ class ApplicantProfileModelTest(TestCase):
         # You might want to further test the file content if needed
 
 class ExperienceModelTest(TestCase):
+    """
+    Tests for the Experience model.
+
+    """
     def setUp(self):
+        """
+        Set up test data for the Experience model tests.
+
+        """
         self.user = User.objects.create_user(username='testapplicant')
         self.applicant_profile = ApplicantProfile.objects.create(user=self.user, headline='Test', summary='Summary')
         self.start_date = timezone.now().date()
         self.end_date = timezone.now().date() + timezone.timedelta(days=365)
 
     def test_experience_creation(self):
+        """
+        Test that an Experience can be created successfully.
+
+        """
         experience = Experience.objects.create(
             applicant_profile=self.applicant_profile,
             title='Software Engineer',
@@ -88,6 +119,10 @@ class ExperienceModelTest(TestCase):
         self.assertEqual(str(experience), 'Software Engineer at Tech Corp')
 
     def test_experience_without_end_date(self):
+        """
+        Test that an Experience can be created without an end date.
+
+        """
         experience = Experience.objects.create(
             applicant_profile=self.applicant_profile,
             title='Current Role',
@@ -98,19 +133,32 @@ class ExperienceModelTest(TestCase):
         self.assertEqual(experience.end_date, None)
 
 class EducationModelTest(TestCase):
+    """
+    Tests for the Education model.
+
+    """
+
     def setUp(self):
+        """
+        Set up test data for the Education model tests.
+
+        """
         self.user = User.objects.create_user(username='testapplicant')
         self.applicant_profile = ApplicantProfile.objects.create(user=self.user, headline='Test', summary='Summary')
         self.graduation_date = timezone.now().date()
 
     def test_education_creation(self):
+        """
+        Test that an Education can be created successfully.
+
+        """
         education = Education.objects.create(
             applicant_profile=self.applicant_profile,
             degree='Master of Science',
             institution='University X',
             graduation_date=self.graduation_date,
             major='Computer Science',
-        )
+        ) # :no-index:
         self.assertEqual(education.applicant_profile, self.applicant_profile)
         self.assertEqual(education.degree, 'Master of Science')
         self.assertEqual(education.institution, 'University X')
@@ -121,10 +169,14 @@ class EducationModelTest(TestCase):
         self.assertEqual(str(education), 'Master of Science from University X')
 
     def test_education_without_graduation_date_and_major(self):
+        """
+        Test that an Education can be created without a graduation date and major.
+
+        """
         education = Education.objects.create(
             applicant_profile=self.applicant_profile,
             degree='Bachelor of Arts',
             institution='College Y',
-        )
+        )# :no-index:
         self.assertEqual(education.graduation_date, None)
         self.assertEqual(education.major, '')

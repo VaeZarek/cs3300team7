@@ -3,16 +3,23 @@ from django.test import TestCase
 from job.forms import JobForm
 from applicant.models import Skill
 from recruiter.models import RecruiterProfile
-from django.contrib.auth import get_user_model  # Import get_user_model
+from django.contrib.auth import get_user_model  # :no-index: Import get_user_model
 from datetime import date
 from job.models import Job
 
-User = get_user_model()  # Assign the custom user model to User
+User = get_user_model()  # :no-index: Assign the custom user model to User
 
 class JobFormTest(TestCase):
+    """
+    Tests for the JobForm.
+    """
 
     @classmethod
     def setUpTestData(cls):
+        """
+        Set up test data for the JobFormTest.
+        """
+        # :no-index: Create a recruiter profile and some skills for testing
         user = User.objects.create_user(username='test_recruiter', password='test_password')
         cls.recruiter_profile = RecruiterProfile.objects.create(user=user, company_name='Test Corp')
         Skill.objects.create(name='Python')
@@ -21,6 +28,10 @@ class JobFormTest(TestCase):
         cls.django_skill = Skill.objects.get(name='Django')
 
     def test_valid_job_form(self):
+        """
+        Test that a valid JobForm is valid.
+        """
+        # :no-index: Prepare valid form data
         form_data = {
             'title': 'Software Engineer',
             'description': 'Write code and stuff.',
@@ -38,7 +49,7 @@ class JobFormTest(TestCase):
         job.recruiter = self.recruiter_profile
         job.save()
         form.save_m2m()
-        # Retrieve the job from the database to ensure M2M is saved
+        # :no-index: Retrieve the job from the database to ensure M2M is saved
         retrieved_job = Job.objects.get(pk=job.pk)
         self.assertEqual(retrieved_job.title, 'Software Engineer')
         self.assertEqual(retrieved_job.description, 'Write code and stuff.')
@@ -51,6 +62,10 @@ class JobFormTest(TestCase):
         self.assertEqual(list(retrieved_job.skills_required.all()), [self.python_skill, self.django_skill])
 
     def test_invalid_job_form_missing_required_fields(self):
+        """
+        Test that a JobForm is invalid when missing required fields.
+        """
+        # :no-index: Prepare form data with missing required fields
         required_fields = ['title', 'description', 'location']
         for field in required_fields:
             form_data = {
@@ -72,12 +87,16 @@ class JobFormTest(TestCase):
             self.assertEqual(form.errors[field][0], 'This field is required.')
 
     def test_valid_job_form_optional_fields_missing(self):
+        """
+        Test that a JobForm is valid when optional fields are missing.
+        """
+        # :no-index: Prepare valid form data with optional fields missing
         form_data = {
             'title': 'Software Engineer',
             'description': 'Write code and stuff.',
             'location': 'Tech Hub',
-            'is_active': True,  # Explicitly set is_active to True
-            # 'requirements', 'salary_range', 'employment_type', 'application_deadline', 'skills_required' are missing
+            'is_active': True,  # :no-index: Explicitly set is_active to True
+            # :no-index: 'requirements', 'salary_range', 'employment_type', 'application_deadline', 'skills_required' are missing
         }
         form = JobForm(data=form_data)
         self.assertTrue(form.is_valid())
@@ -95,6 +114,10 @@ class JobFormTest(TestCase):
         self.assertEqual(list(job.skills_required.all()), [])
 
     def test_job_form_invalid_application_deadline_type(self):
+        """
+        Test that a JobForm is invalid when the application deadline is of an invalid type.
+        """
+        # :no-index: Prepare form data with an invalid application deadline type
         form_data = {
             'title': 'Software Engineer',
             'description': 'Write code and stuff.',
@@ -113,6 +136,9 @@ class JobFormTest(TestCase):
         self.assertIn('Enter a valid date.', form.errors['application_deadline'][0])
 
     def test_job_form_empty_skills_required(self):
+        """
+        Test that a JobForm is valid when no skills are required.
+        """
         form_data = {
             'title': 'Software Engineer',
             'description': 'Write code and stuff.',
