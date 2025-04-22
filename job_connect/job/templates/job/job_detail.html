@@ -1,35 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ job.title }}</title>
-</head>
-<body>
+{% extends 'core/base.html' %}
+
+{% block title %}{{ job.title }} | Job Connect{% endblock %}
+
+{% block content %}
+<div class="signup-container">
     <h1>{{ job.title }}</h1>
-    <p><strong>Company:</strong> {{ job.recruiter.company_name }}</p>
     <p><strong>Location:</strong> {{ job.location }}</p>
-    <p><strong>Posted Date:</strong> {{ job.posted_date }}</p>
-    {% if job.application_deadline %}
-        <p><strong>Application Deadline:</strong> {{ job.application_deadline }}</p>
+    <p><strong>Posted on:</strong> {{ job.posted_date|date:"M d, Y" }}</p>
+    <p><strong>Description:</strong><br>{{ job.description|linebreaks }}</p>
+
+    {% if user.is_authenticated and user.is_applicant %}
+        <a href="{% url 'application:apply_for_job' job.id %}" class="button">Apply for this job</a>
     {% endif %}
-    <p><strong>Employment Type:</strong> {{ job.employment_type|default:"N/A" }}</p>
-    <p><strong>Salary Range:</strong> {{ job.salary_range|default:"N/A" }}</p>
-    <h2>Description</h2>
-    <p>{{ job.description|linebreaksbr }}</p>
-    {% if job.requirements %}
-        <h2>Requirements</h2>
-        <p>{{ job.requirements|linebreaksbr }}</p>
+
+    {% if request.user.is_recruiter %}
+        <p>
+            <a href="{% url 'job:job_update' job.id %}">Edit</a> |
+            <a href="{% url 'job:job_delete' job.id %}">Delete</a>
+        </p>
     {% endif %}
-    {% if job.skills_required.all %}
-        <h2>Skills Required</h2>
-        <ul>
-            {% for skill in job.skills_required.all %}
-                <li>{{ skill }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    {% if request.user.is_applicant %}
-        <p><a href="{% url 'apply_for_job' job.id %}">Apply for this Job</a></p>
-    {% endif %}
-    <p><a href="{% url 'job:job_list' %}">Back to Job Listings</a></p>
-</body>
-</html>
+</div>
+{% endblock %}
+

@@ -1,28 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Applications for {{ job.title }}</title>
-</head>
-<body>
-    <h1>Applications for "{{ job.title }}"</h1>
-    <ul>
-        {% for application in applications %}
-            <li>
-                <strong>Applicant:</strong> {{ application.applicant.user.username }}
-                <p><strong>Applied on:</strong> {{ application.application_date }}</p>
-                <p><strong>Status:</strong> {{ application.get_status_display }}</p>
-                {% if application.resume %}
-                    <p><a href="{{ application.resume.url }}" target="_blank">View Resume</a></p>
-                {% endif %}
-                {% if application.cover_letter %}
-                    <p><strong>Cover Letter:</strong><br>{{ application.cover_letter|linebreaksbr|truncatewords:50 }} <a href="#">Read More</a></p>
-                {% endif %}
-                <a href="{% url 'application:application_update_status' application.id %}">Update Status</a>
-            </li>
-        {% empty %}
-            <li>No applications received yet.</li>
-        {% endfor %}
-    </ul>
-    <p><a href="{% url 'recruiter:recruiter_job_list' %}">Back to My Job Listings</a></p>
-</body>
-</html>
+{% extends 'core/base.html' %}
+
+{% block title %}Applications for {{ job.title }} | Job Connect{% endblock %}
+
+{% block content %}
+    <div class="signup-container">
+        <h1>Applications for "{{ job.title }}"</h1>
+        <ul>
+            {% for application in applications %}
+                <li>
+                    <strong>Applicant:</strong> {{ application.applicant.user.username }}<br>
+                    <strong>Applied on:</strong> {{ application.application_date }}<br>
+                    <strong>Status:</strong> {{ application.get_status_display }}<br>
+
+                    {% if application.resume %}
+                        <a href="{{ application.resume.url }}" target="_blank">View Resume</a><br>
+                    {% endif %}
+
+                    {% if application.cover_letter %}
+                        <p><strong>Cover Letter:</strong><br>
+                        {{ application.cover_letter|linebreaksbr|truncatewords:50 }} <a href="#">Read More</a></p>
+                    {% endif %}
+
+                    <a href="{% url 'application:application_update_status' application.id %}">Update Status</a>
+                </li>
+            {% empty %}
+                <li>No applications received yet.</li>
+            {% endfor %}
+        </ul>
+
+        <p><a href="{% url 'recruiter:recruiter_job_list' %}">Back to My Job Listings</a></p>
+    </div>
+{% endblock %}
+

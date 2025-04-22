@@ -1,23 +1,33 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Job Listings</title>
-</head>
-<body>
+{% extends 'core/base.html' %}
+
+{% block title %}Job Listings | Job Connect{% endblock %}
+
+{% block content %}
+<div class="signup-container">
     <h1>Job Listings</h1>
+
     <form method="get" action="{% url 'job:job_search' %}">
         <input type="text" name="q" placeholder="Search jobs...">
         <button type="submit">Search</button>
     </form>
+
     <ul>
         {% for job in jobs %}
-            <li><a href="{% url 'job:job_detail' job.id %}">{{ job.title }}</a> - {{ job.location }} (Posted: {{ job.posted_date }})</li>
+            <li>
+                <a href="{% url 'job:job_detail' job.id %}">{{ job.title }}</a> - {{ job.location }} 
+                (Posted: {{ job.posted_date|date:"M d, Y" }})
+            </li>
         {% empty %}
             <li>No jobs available.</li>
         {% endfor %}
     </ul>
+
     {% if request.user.is_recruiter %}
-        <p><a href="{% url 'job:job_create' %}">Post a New Job</a> | <a href="{% url 'recruiter_dashboard' %}">Recruiter Dashboard</a></p>
+        <p>
+            <a href="{% url 'job:job_create' %}">Post a New Job</a> |
+            <a href="{% url 'recruiter_dashboard' %}">Recruiter Dashboard</a>
+        </p>
     {% endif %}
-</body>
-</html>
+</div>
+{% endblock %}
+

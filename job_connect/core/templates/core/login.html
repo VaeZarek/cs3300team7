@@ -1,15 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
+{% extends 'core/base.html' %}
+
+{% block title %}Login | Job Connect{% endblock %}
+
+{% block content %}
+<div class="signup-container">
     <h1>Login</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Log In</button>
     </form>
-    <p>Don't have an account? <a href="{% url 'core:applicant_signup' %}">Sign up as an applicant</a> or <a href="{% url 'core:recruiter_signup' %}">sign up as a recruiter</a>.</p>
-</body>
-</html>
+    <p class="login-link">
+        Don’t have an account? <a href="{% url 'core:applicant_signup' %}">Sign up</a>
+    </p>
+</div>
+{% endblock %}
+

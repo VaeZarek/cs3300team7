@@ -65,10 +65,13 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'core/login.html', {'form': form})
 
-def home(request):
+def index(request):
     return render(request, 'core/index.html')
 
 @login_required
 def logout_view(request):
     logout(request)
     return redirect('core:home') # Redirect to homepage
+
+def home(request):
+    return render(request, 'core/index.html')

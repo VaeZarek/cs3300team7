@@ -135,3 +135,15 @@ don't explicitly define a primary key in your Django models, Django will
 automatically create a 64-bit auto-incrementing integer field for you, 
 providing a larger range of values for your database records. 
 """
+
+import os
+
+STATIC_URL = 'static/'
+
+# Added this to find static files during development
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'core/static'),
+]
+
+LOGIN_URL = '/login/'
+

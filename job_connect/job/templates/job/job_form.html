@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{% if form.instance.pk %}Edit Job{% else %}Post a New Job{% endif %}</title>
-</head>
-<body>
-    <h1>{% if form.instance.pk %}Edit Job{% else %}Post a New Job{% endif %}</h1>
+{% extends 'core/base.html' %}
+
+{% block title %}Post or Edit a Job | Job Connect{% endblock %}
+
+{% block content %}
+<div class="signup-container">
+    <h1>{{ form.instance.pk|yesno:"Edit Job,Post a Job" }}</h1>
+
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Save Job</button>
+        <button type="submit">Save</button>
     </form>
-    <p><a href="{% url 'recruiter:recruiter_job_list' %}">Back to My Job Listings</a></p>
-</body>
-</html>
+</div>
+{% endblock %}
+

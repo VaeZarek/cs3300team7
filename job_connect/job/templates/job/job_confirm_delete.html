@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Confirm Delete Job</title>
-</head>
-<body>
-    <h1>Confirm Delete Job</h1>
-    <p>Are you sure you want to delete the job "{{ job.title }}"?</p>
+{% extends 'core/base.html' %}
+
+{% block title %}Delete Job | Job Connect{% endblock %}
+
+{% block content %}
+<div class="signup-container">
+    <h1>Delete Job: "{{ job.title }}"</h1>
+    <p>Are you sure you want to delete this job?</p>
+
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Yes, Delete</button>
-        <a href="{% url 'recruiter:recruiter_job_list' %}">No, Go Back</a>
+        <button type="submit">Yes, delete</button>
+        <a href="{% url 'job:job_detail' job.id %}">Cancel</a>
     </form>
-</body>
-</html>
+</div>
+{% endblock %}
+
