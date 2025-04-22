@@ -1,0 +1,740 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>job_connect &mdash; job_connect  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="applicant package" href="applicant.html" />
+    <link rel="prev" title="job_connect documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            job_connect
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">job_connect</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="applicant.html">applicant package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application.html">application package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">core package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="job.html">job package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="job_connect.html">job_connect package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recruiter.html">recruiter package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">job_connect</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">job_connect</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="job-connect">
+<h1>job_connect<a class="headerlink" href="#job-connect" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="applicant.html">applicant package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="applicant.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applicant.tests.html">applicant.tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="applicant.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.tests.html#module-applicant.tests.tests_forms">applicant.tests.tests_forms module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.tests.html#module-applicant.tests.tests_models">applicant.tests.tests_models module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.tests.html#module-applicant.tests.tests_views">applicant.tests.tests_views module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.tests.html#module-applicant.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="applicant.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applicant.html#module-applicant.admin">applicant.admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applicant.html#module-applicant.apps">applicant.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applicant.html#applicant.apps.ApplicantConfig"><code class="docutils literal notranslate"><span class="pre">ApplicantConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.apps.ApplicantConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">ApplicantConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.apps.ApplicantConfig.name"><code class="docutils literal notranslate"><span class="pre">ApplicantConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="applicant.html#module-applicant.forms">applicant.forms module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applicant.html#applicant.forms.ApplicantProfileForm"><code class="docutils literal notranslate"><span class="pre">ApplicantProfileForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ApplicantProfileForm.headline"><code class="docutils literal notranslate"><span class="pre">ApplicantProfileForm.headline</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ApplicantProfileForm.summary"><code class="docutils literal notranslate"><span class="pre">ApplicantProfileForm.summary</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ApplicantProfileForm.skills"><code class="docutils literal notranslate"><span class="pre">ApplicantProfileForm.skills</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ApplicantProfileForm.resume"><code class="docutils literal notranslate"><span class="pre">ApplicantProfileForm.resume</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ApplicantProfileForm.media"><code class="docutils literal notranslate"><span class="pre">ApplicantProfileForm.media</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="applicant.html#applicant.forms.EducationFormSet"><code class="docutils literal notranslate"><span class="pre">EducationFormSet</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.EducationFormSet.absolute_max"><code class="docutils literal notranslate"><span class="pre">EducationFormSet.absolute_max</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.EducationFormSet.can_delete"><code class="docutils literal notranslate"><span class="pre">EducationFormSet.can_delete</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.EducationFormSet.can_delete_extra"><code class="docutils literal notranslate"><span class="pre">EducationFormSet.can_delete_extra</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.EducationFormSet.can_order"><code class="docutils literal notranslate"><span class="pre">EducationFormSet.can_order</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.EducationFormSet.edit_only"><code class="docutils literal notranslate"><span class="pre">EducationFormSet.edit_only</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.EducationFormSet.extra"><code class="docutils literal notranslate"><span class="pre">EducationFormSet.extra</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.EducationFormSet.fk"><code class="docutils literal notranslate"><span class="pre">EducationFormSet.fk</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.EducationFormSet.form"><code class="docutils literal notranslate"><span class="pre">EducationFormSet.form</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.EducationFormSet.max_num"><code class="docutils literal notranslate"><span class="pre">EducationFormSet.max_num</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.EducationFormSet.min_num"><code class="docutils literal notranslate"><span class="pre">EducationFormSet.min_num</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.EducationFormSet.model"><code class="docutils literal notranslate"><span class="pre">EducationFormSet.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.EducationFormSet.renderer"><code class="docutils literal notranslate"><span class="pre">EducationFormSet.renderer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.EducationFormSet.validate_max"><code class="docutils literal notranslate"><span class="pre">EducationFormSet.validate_max</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.EducationFormSet.validate_min"><code class="docutils literal notranslate"><span class="pre">EducationFormSet.validate_min</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="applicant.html#applicant.forms.ExperienceFormSet"><code class="docutils literal notranslate"><span class="pre">ExperienceFormSet</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ExperienceFormSet.absolute_max"><code class="docutils literal notranslate"><span class="pre">ExperienceFormSet.absolute_max</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ExperienceFormSet.can_delete"><code class="docutils literal notranslate"><span class="pre">ExperienceFormSet.can_delete</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ExperienceFormSet.can_delete_extra"><code class="docutils literal notranslate"><span class="pre">ExperienceFormSet.can_delete_extra</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ExperienceFormSet.can_order"><code class="docutils literal notranslate"><span class="pre">ExperienceFormSet.can_order</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ExperienceFormSet.edit_only"><code class="docutils literal notranslate"><span class="pre">ExperienceFormSet.edit_only</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ExperienceFormSet.extra"><code class="docutils literal notranslate"><span class="pre">ExperienceFormSet.extra</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ExperienceFormSet.fk"><code class="docutils literal notranslate"><span class="pre">ExperienceFormSet.fk</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ExperienceFormSet.form"><code class="docutils literal notranslate"><span class="pre">ExperienceFormSet.form</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ExperienceFormSet.max_num"><code class="docutils literal notranslate"><span class="pre">ExperienceFormSet.max_num</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ExperienceFormSet.min_num"><code class="docutils literal notranslate"><span class="pre">ExperienceFormSet.min_num</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ExperienceFormSet.model"><code class="docutils literal notranslate"><span class="pre">ExperienceFormSet.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ExperienceFormSet.renderer"><code class="docutils literal notranslate"><span class="pre">ExperienceFormSet.renderer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ExperienceFormSet.validate_max"><code class="docutils literal notranslate"><span class="pre">ExperienceFormSet.validate_max</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.forms.ExperienceFormSet.validate_min"><code class="docutils literal notranslate"><span class="pre">ExperienceFormSet.validate_min</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="applicant.html#module-applicant.models">applicant.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.user"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.headline"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.headline</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.summary"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.summary</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.skills"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.skills</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.experience"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.experience</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.education"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.education</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.resume"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.resume</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.applications"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.applications</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.created_at"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id0"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.education</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.educations"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.educations</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id1"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.experience</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.experiences"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.experiences</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id2"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.headline</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.id"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.objects"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id3"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.resume</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id4"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.skills</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id5"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.summary</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.updated_at"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.updated_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id6"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.user_id"><code class="docutils literal notranslate"><span class="pre">ApplicantProfile.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="applicant.html#applicant.models.Education"><code class="docutils literal notranslate"><span class="pre">Education</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.applicant_profile"><code class="docutils literal notranslate"><span class="pre">Education.applicant_profile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.degree"><code class="docutils literal notranslate"><span class="pre">Education.degree</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.institution"><code class="docutils literal notranslate"><span class="pre">Education.institution</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.graduation_date"><code class="docutils literal notranslate"><span class="pre">Education.graduation_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.major"><code class="docutils literal notranslate"><span class="pre">Education.major</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Education.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Education.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id7"><code class="docutils literal notranslate"><span class="pre">Education.applicant_profile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.applicant_profile_id"><code class="docutils literal notranslate"><span class="pre">Education.applicant_profile_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.applicantprofile_set"><code class="docutils literal notranslate"><span class="pre">Education.applicantprofile_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.created_at"><code class="docutils literal notranslate"><span class="pre">Education.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id8"><code class="docutils literal notranslate"><span class="pre">Education.degree</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">Education.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Education.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">Education.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Education.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id9"><code class="docutils literal notranslate"><span class="pre">Education.graduation_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.id"><code class="docutils literal notranslate"><span class="pre">Education.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id10"><code class="docutils literal notranslate"><span class="pre">Education.institution</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id11"><code class="docutils literal notranslate"><span class="pre">Education.major</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.objects"><code class="docutils literal notranslate"><span class="pre">Education.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Education.updated_at"><code class="docutils literal notranslate"><span class="pre">Education.updated_at</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="applicant.html#applicant.models.Experience"><code class="docutils literal notranslate"><span class="pre">Experience</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.applicant_profile"><code class="docutils literal notranslate"><span class="pre">Experience.applicant_profile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.title"><code class="docutils literal notranslate"><span class="pre">Experience.title</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.company"><code class="docutils literal notranslate"><span class="pre">Experience.company</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.start_date"><code class="docutils literal notranslate"><span class="pre">Experience.start_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.end_date"><code class="docutils literal notranslate"><span class="pre">Experience.end_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.description"><code class="docutils literal notranslate"><span class="pre">Experience.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Experience.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Experience.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id12"><code class="docutils literal notranslate"><span class="pre">Experience.applicant_profile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.applicant_profile_id"><code class="docutils literal notranslate"><span class="pre">Experience.applicant_profile_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.applicantprofile_set"><code class="docutils literal notranslate"><span class="pre">Experience.applicantprofile_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id13"><code class="docutils literal notranslate"><span class="pre">Experience.company</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.created_at"><code class="docutils literal notranslate"><span class="pre">Experience.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id14"><code class="docutils literal notranslate"><span class="pre">Experience.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id15"><code class="docutils literal notranslate"><span class="pre">Experience.end_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">Experience.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.get_next_by_start_date"><code class="docutils literal notranslate"><span class="pre">Experience.get_next_by_start_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Experience.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">Experience.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.get_previous_by_start_date"><code class="docutils literal notranslate"><span class="pre">Experience.get_previous_by_start_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Experience.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.id"><code class="docutils literal notranslate"><span class="pre">Experience.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.objects"><code class="docutils literal notranslate"><span class="pre">Experience.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id16"><code class="docutils literal notranslate"><span class="pre">Experience.start_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id17"><code class="docutils literal notranslate"><span class="pre">Experience.title</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Experience.updated_at"><code class="docutils literal notranslate"><span class="pre">Experience.updated_at</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="applicant.html#applicant.models.Skill"><code class="docutils literal notranslate"><span class="pre">Skill</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Skill.name"><code class="docutils literal notranslate"><span class="pre">Skill.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Skill.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Skill.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Skill.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Skill.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Skill.applicants"><code class="docutils literal notranslate"><span class="pre">Skill.applicants</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Skill.created_at"><code class="docutils literal notranslate"><span class="pre">Skill.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Skill.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">Skill.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Skill.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Skill.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Skill.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">Skill.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Skill.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Skill.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Skill.id"><code class="docutils literal notranslate"><span class="pre">Skill.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Skill.job_postings"><code class="docutils literal notranslate"><span class="pre">Skill.job_postings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#id18"><code class="docutils literal notranslate"><span class="pre">Skill.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Skill.objects"><code class="docutils literal notranslate"><span class="pre">Skill.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Skill.required_in_jobs"><code class="docutils literal notranslate"><span class="pre">Skill.required_in_jobs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="applicant.html#applicant.models.Skill.updated_at"><code class="docutils literal notranslate"><span class="pre">Skill.updated_at</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="applicant.html#module-applicant.urls">applicant.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applicant.html#module-applicant.views">applicant.views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applicant.html#applicant.views.applicant_applications"><code class="docutils literal notranslate"><span class="pre">applicant_applications()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicant.html#applicant.views.applicant_dashboard"><code class="docutils literal notranslate"><span class="pre">applicant_dashboard()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicant.html#applicant.views.applicant_profile_create"><code class="docutils literal notranslate"><span class="pre">applicant_profile_create()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicant.html#applicant.views.applicant_profile_update"><code class="docutils literal notranslate"><span class="pre">applicant_profile_update()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicant.html#applicant.views.applicant_profile_view"><code class="docutils literal notranslate"><span class="pre">applicant_profile_view()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="applicant.html#module-applicant">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="application.html">application package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="application.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="application.tests.html">application.tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#module-application.tests.tests_forms">application.tests.tests_forms module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#module-application.tests.tests_models">application.tests.tests_models module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#module-application.tests.tests_views">application.tests.tests_views module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#module-application.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="application.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application.html#module-application.admin">application.admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application.html#module-application.apps">application.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="application.html#application.apps.ApplicationConfig"><code class="docutils literal notranslate"><span class="pre">ApplicationConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.apps.ApplicationConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">ApplicationConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.apps.ApplicationConfig.name"><code class="docutils literal notranslate"><span class="pre">ApplicationConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="application.html#module-application.forms">application.forms module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="application.html#application.forms.ApplicationForm"><code class="docutils literal notranslate"><span class="pre">ApplicationForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.forms.ApplicationForm.media"><code class="docutils literal notranslate"><span class="pre">ApplicationForm.media</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="application.html#application.forms.ApplicationStatusForm"><code class="docutils literal notranslate"><span class="pre">ApplicationStatusForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.forms.ApplicationStatusForm.media"><code class="docutils literal notranslate"><span class="pre">ApplicationStatusForm.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="application.html#module-application.models">application.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="application.html#application.models.Application"><code class="docutils literal notranslate"><span class="pre">Application</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Application.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Application.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.applicant"><code class="docutils literal notranslate"><span class="pre">Application.applicant</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.applicant_id"><code class="docutils literal notranslate"><span class="pre">Application.applicant_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.application_date"><code class="docutils literal notranslate"><span class="pre">Application.application_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.cover_letter"><code class="docutils literal notranslate"><span class="pre">Application.cover_letter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.created_at"><code class="docutils literal notranslate"><span class="pre">Application.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.get_next_by_application_date"><code class="docutils literal notranslate"><span class="pre">Application.get_next_by_application_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">Application.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Application.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.get_previous_by_application_date"><code class="docutils literal notranslate"><span class="pre">Application.get_previous_by_application_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">Application.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Application.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.get_status_display"><code class="docutils literal notranslate"><span class="pre">Application.get_status_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.id"><code class="docutils literal notranslate"><span class="pre">Application.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.job"><code class="docutils literal notranslate"><span class="pre">Application.job</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.job_id"><code class="docutils literal notranslate"><span class="pre">Application.job_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.objects"><code class="docutils literal notranslate"><span class="pre">Application.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.resume"><code class="docutils literal notranslate"><span class="pre">Application.resume</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.skills"><code class="docutils literal notranslate"><span class="pre">Application.skills</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.status"><code class="docutils literal notranslate"><span class="pre">Application.status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.models.Application.updated_at"><code class="docutils literal notranslate"><span class="pre">Application.updated_at</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="application.html#module-application.urls">application.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application.html#module-application.views">application.views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="application.html#application.views.ApplicationUpdateStatusView"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.views.ApplicationUpdateStatusView.context_object_name"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.views.ApplicationUpdateStatusView.form_class"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView.form_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.views.ApplicationUpdateStatusView.get_queryset"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView.get_queryset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.views.ApplicationUpdateStatusView.get_success_url"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView.get_success_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.views.ApplicationUpdateStatusView.model"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.views.ApplicationUpdateStatusView.success_url"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView.success_url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.views.ApplicationUpdateStatusView.template_name"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="application.html#application.views.RecruiterRequiredMixin"><code class="docutils literal notranslate"><span class="pre">RecruiterRequiredMixin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="application.html#application.views.RecruiterRequiredMixin.test_func"><code class="docutils literal notranslate"><span class="pre">RecruiterRequiredMixin.test_func()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="application.html#application.views.application_confirmation"><code class="docutils literal notranslate"><span class="pre">application_confirmation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="application.html#application.views.apply_for_job"><code class="docutils literal notranslate"><span class="pre">apply_for_job()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="application.html#application.views.job_applications_list"><code class="docutils literal notranslate"><span class="pre">job_applications_list()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="application.html#module-application">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">core package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.tests.html">core.tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#module-core.tests.tests_forms">core.tests.tests_forms module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#module-core.tests.tests_models">core.tests.tests_models module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#module-core.tests.tests_views">core.tests.tests_views module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.tests.html#module-core.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.admin">core.admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.apps">core.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.apps.CoreConfig"><code class="docutils literal notranslate"><span class="pre">CoreConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.apps.CoreConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">CoreConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.apps.CoreConfig.name"><code class="docutils literal notranslate"><span class="pre">CoreConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.forms">core.forms module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.forms.ApplicantSignUpForm"><code class="docutils literal notranslate"><span class="pre">ApplicantSignUpForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.forms.ApplicantSignUpForm.media"><code class="docutils literal notranslate"><span class="pre">ApplicantSignUpForm.media</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.forms.ApplicantSignUpForm.save"><code class="docutils literal notranslate"><span class="pre">ApplicantSignUpForm.save()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.forms.RecruiterSignUpForm"><code class="docutils literal notranslate"><span class="pre">RecruiterSignUpForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.forms.RecruiterSignUpForm.media"><code class="docutils literal notranslate"><span class="pre">RecruiterSignUpForm.media</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.forms.RecruiterSignUpForm.save"><code class="docutils literal notranslate"><span class="pre">RecruiterSignUpForm.save()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.models">core.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.models.BaseModel"><code class="docutils literal notranslate"><span class="pre">BaseModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.BaseModel.created_at"><code class="docutils literal notranslate"><span class="pre">BaseModel.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.BaseModel.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">BaseModel.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.BaseModel.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">BaseModel.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.BaseModel.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">BaseModel.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.BaseModel.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">BaseModel.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.BaseModel.updated_at"><code class="docutils literal notranslate"><span class="pre">BaseModel.updated_at</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.models.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.user_type"><code class="docutils literal notranslate"><span class="pre">User.user_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">User.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">User.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.USER_TYPE_CHOICES"><code class="docutils literal notranslate"><span class="pre">User.USER_TYPE_CHOICES</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.applicant_profile"><code class="docutils literal notranslate"><span class="pre">User.applicant_profile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.date_joined"><code class="docutils literal notranslate"><span class="pre">User.date_joined</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.email"><code class="docutils literal notranslate"><span class="pre">User.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.first_name"><code class="docutils literal notranslate"><span class="pre">User.first_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.get_next_by_date_joined"><code class="docutils literal notranslate"><span class="pre">User.get_next_by_date_joined()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.get_previous_by_date_joined"><code class="docutils literal notranslate"><span class="pre">User.get_previous_by_date_joined()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.get_user_type_display"><code class="docutils literal notranslate"><span class="pre">User.get_user_type_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.groups"><code class="docutils literal notranslate"><span class="pre">User.groups</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.id"><code class="docutils literal notranslate"><span class="pre">User.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.is_active"><code class="docutils literal notranslate"><span class="pre">User.is_active</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.is_applicant"><code class="docutils literal notranslate"><span class="pre">User.is_applicant()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.is_recruiter"><code class="docutils literal notranslate"><span class="pre">User.is_recruiter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.is_staff"><code class="docutils literal notranslate"><span class="pre">User.is_staff</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.is_superuser"><code class="docutils literal notranslate"><span class="pre">User.is_superuser</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.last_login"><code class="docutils literal notranslate"><span class="pre">User.last_login</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.last_name"><code class="docutils literal notranslate"><span class="pre">User.last_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.logentry_set"><code class="docutils literal notranslate"><span class="pre">User.logentry_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.password"><code class="docutils literal notranslate"><span class="pre">User.password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.recruiter_profile"><code class="docutils literal notranslate"><span class="pre">User.recruiter_profile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.user_permissions"><code class="docutils literal notranslate"><span class="pre">User.user_permissions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#id0"><code class="docutils literal notranslate"><span class="pre">User.user_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.username"><code class="docutils literal notranslate"><span class="pre">User.username</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.urls">core.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.views">core.views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.views.applicant_signup"><code class="docutils literal notranslate"><span class="pre">applicant_signup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.views.home"><code class="docutils literal notranslate"><span class="pre">home()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.views.login_view"><code class="docutils literal notranslate"><span class="pre">login_view()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.views.logout_view"><code class="docutils literal notranslate"><span class="pre">logout_view()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.views.recruiter_signup"><code class="docutils literal notranslate"><span class="pre">recruiter_signup()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="job.html">job package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="job.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="job.tests.html">job.tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="job.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.tests.html#module-job.tests.tests_forms">job.tests.tests_forms module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.tests.html#module-job.tests.tests_models">job.tests.tests_models module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.tests.html#module-job.tests.tests_views">job.tests.tests_views module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.tests.html#module-job.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="job.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="job.html#module-job.admin">job.admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="job.html#module-job.apps">job.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="job.html#job.apps.JobConfig"><code class="docutils literal notranslate"><span class="pre">JobConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.apps.JobConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">JobConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.apps.JobConfig.name"><code class="docutils literal notranslate"><span class="pre">JobConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="job.html#module-job.forms">job.forms module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="job.html#job.forms.JobForm"><code class="docutils literal notranslate"><span class="pre">JobForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.forms.JobForm.media"><code class="docutils literal notranslate"><span class="pre">JobForm.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="job.html#module-job.models">job.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="job.html#job.models.Job"><code class="docutils literal notranslate"><span class="pre">Job</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Job.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Job.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.application_deadline"><code class="docutils literal notranslate"><span class="pre">Job.application_deadline</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.applications"><code class="docutils literal notranslate"><span class="pre">Job.applications</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.created_at"><code class="docutils literal notranslate"><span class="pre">Job.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.description"><code class="docutils literal notranslate"><span class="pre">Job.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.employment_type"><code class="docutils literal notranslate"><span class="pre">Job.employment_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">Job.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.get_next_by_posted_date"><code class="docutils literal notranslate"><span class="pre">Job.get_next_by_posted_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Job.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">Job.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.get_previous_by_posted_date"><code class="docutils literal notranslate"><span class="pre">Job.get_previous_by_posted_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Job.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.id"><code class="docutils literal notranslate"><span class="pre">Job.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.is_active"><code class="docutils literal notranslate"><span class="pre">Job.is_active</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.location"><code class="docutils literal notranslate"><span class="pre">Job.location</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.objects"><code class="docutils literal notranslate"><span class="pre">Job.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.posted_date"><code class="docutils literal notranslate"><span class="pre">Job.posted_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.recruiter"><code class="docutils literal notranslate"><span class="pre">Job.recruiter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.recruiter_id"><code class="docutils literal notranslate"><span class="pre">Job.recruiter_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.requirements"><code class="docutils literal notranslate"><span class="pre">Job.requirements</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.salary_range"><code class="docutils literal notranslate"><span class="pre">Job.salary_range</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.skills_required"><code class="docutils literal notranslate"><span class="pre">Job.skills_required</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.title"><code class="docutils literal notranslate"><span class="pre">Job.title</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.models.Job.updated_at"><code class="docutils literal notranslate"><span class="pre">Job.updated_at</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="job.html#module-job.urls">job.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="job.html#module-job.views">job.views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="job.html#job.views.JobCreateView"><code class="docutils literal notranslate"><span class="pre">JobCreateView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobCreateView.form_class"><code class="docutils literal notranslate"><span class="pre">JobCreateView.form_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobCreateView.form_valid"><code class="docutils literal notranslate"><span class="pre">JobCreateView.form_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobCreateView.model"><code class="docutils literal notranslate"><span class="pre">JobCreateView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobCreateView.success_url"><code class="docutils literal notranslate"><span class="pre">JobCreateView.success_url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobCreateView.template_name"><code class="docutils literal notranslate"><span class="pre">JobCreateView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="job.html#job.views.JobDeleteView"><code class="docutils literal notranslate"><span class="pre">JobDeleteView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobDeleteView.context_object_name"><code class="docutils literal notranslate"><span class="pre">JobDeleteView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobDeleteView.dispatch"><code class="docutils literal notranslate"><span class="pre">JobDeleteView.dispatch()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobDeleteView.handle_no_permission"><code class="docutils literal notranslate"><span class="pre">JobDeleteView.handle_no_permission()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobDeleteView.model"><code class="docutils literal notranslate"><span class="pre">JobDeleteView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobDeleteView.success_url"><code class="docutils literal notranslate"><span class="pre">JobDeleteView.success_url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobDeleteView.template_name"><code class="docutils literal notranslate"><span class="pre">JobDeleteView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="job.html#job.views.JobDetailView"><code class="docutils literal notranslate"><span class="pre">JobDetailView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobDetailView.context_object_name"><code class="docutils literal notranslate"><span class="pre">JobDetailView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobDetailView.model"><code class="docutils literal notranslate"><span class="pre">JobDetailView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobDetailView.template_name"><code class="docutils literal notranslate"><span class="pre">JobDetailView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="job.html#job.views.JobListView"><code class="docutils literal notranslate"><span class="pre">JobListView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobListView.context_object_name"><code class="docutils literal notranslate"><span class="pre">JobListView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobListView.model"><code class="docutils literal notranslate"><span class="pre">JobListView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobListView.ordering"><code class="docutils literal notranslate"><span class="pre">JobListView.ordering</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobListView.template_name"><code class="docutils literal notranslate"><span class="pre">JobListView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="job.html#job.views.JobSearchView"><code class="docutils literal notranslate"><span class="pre">JobSearchView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobSearchView.context_object_name"><code class="docutils literal notranslate"><span class="pre">JobSearchView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobSearchView.get_context_data"><code class="docutils literal notranslate"><span class="pre">JobSearchView.get_context_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobSearchView.get_queryset"><code class="docutils literal notranslate"><span class="pre">JobSearchView.get_queryset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobSearchView.model"><code class="docutils literal notranslate"><span class="pre">JobSearchView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobSearchView.template_name"><code class="docutils literal notranslate"><span class="pre">JobSearchView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="job.html#job.views.JobUpdateView"><code class="docutils literal notranslate"><span class="pre">JobUpdateView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobUpdateView.context_object_name"><code class="docutils literal notranslate"><span class="pre">JobUpdateView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobUpdateView.dispatch"><code class="docutils literal notranslate"><span class="pre">JobUpdateView.dispatch()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobUpdateView.form_class"><code class="docutils literal notranslate"><span class="pre">JobUpdateView.form_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobUpdateView.form_valid"><code class="docutils literal notranslate"><span class="pre">JobUpdateView.form_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobUpdateView.handle_no_permission"><code class="docutils literal notranslate"><span class="pre">JobUpdateView.handle_no_permission()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobUpdateView.model"><code class="docutils literal notranslate"><span class="pre">JobUpdateView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobUpdateView.success_url"><code class="docutils literal notranslate"><span class="pre">JobUpdateView.success_url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.JobUpdateView.template_name"><code class="docutils literal notranslate"><span class="pre">JobUpdateView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="job.html#job.views.RecruiterJobList"><code class="docutils literal notranslate"><span class="pre">RecruiterJobList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.RecruiterJobList.context_object_name"><code class="docutils literal notranslate"><span class="pre">RecruiterJobList.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.RecruiterJobList.get_queryset"><code class="docutils literal notranslate"><span class="pre">RecruiterJobList.get_queryset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.RecruiterJobList.model"><code class="docutils literal notranslate"><span class="pre">RecruiterJobList.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.RecruiterJobList.ordering"><code class="docutils literal notranslate"><span class="pre">RecruiterJobList.ordering</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.RecruiterJobList.template_name"><code class="docutils literal notranslate"><span class="pre">RecruiterJobList.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="job.html#job.views.RecruiterRequiredMixin"><code class="docutils literal notranslate"><span class="pre">RecruiterRequiredMixin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.RecruiterRequiredMixin.handle_no_permission"><code class="docutils literal notranslate"><span class="pre">RecruiterRequiredMixin.handle_no_permission()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="job.html#job.views.RecruiterRequiredMixin.test_func"><code class="docutils literal notranslate"><span class="pre">RecruiterRequiredMixin.test_func()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="job.html#module-job">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="job_connect.html">job_connect package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="job_connect.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="job_connect.html#module-job_connect.asgi">job_connect.asgi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="job_connect.html#module-job_connect.settings">job_connect.settings module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="job_connect.html#job_connect.settings.DEFAULT_AUTO_FIELD"><code class="docutils literal notranslate"><span class="pre">DEFAULT_AUTO_FIELD</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="job_connect.html#module-job_connect.urls">job_connect.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="job_connect.html#module-job_connect.wsgi">job_connect.wsgi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="job_connect.html#module-job_connect">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manage.html">manage module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manage.html#manage.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recruiter.html">recruiter package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recruiter.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.tests.html">recruiter.tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.tests.html#module-recruiter.tests.tests_forms">recruiter.tests.tests_forms module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.tests.html#module-recruiter.tests.tests_models">recruiter.tests.tests_models module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.tests.html#module-recruiter.tests.tests_views">recruiter.tests.tests_views module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.tests.html#module-recruiter.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="recruiter.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recruiter.html#module-recruiter.admin">recruiter.admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recruiter.html#module-recruiter.apps">recruiter.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.html#recruiter.apps.RecruiterConfig"><code class="docutils literal notranslate"><span class="pre">RecruiterConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.apps.RecruiterConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">RecruiterConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.apps.RecruiterConfig.name"><code class="docutils literal notranslate"><span class="pre">RecruiterConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="recruiter.html#module-recruiter.forms">recruiter.forms module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.html#recruiter.forms.RecruiterProfileForm"><code class="docutils literal notranslate"><span class="pre">RecruiterProfileForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.forms.RecruiterProfileForm.company_name"><code class="docutils literal notranslate"><span class="pre">RecruiterProfileForm.company_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.forms.RecruiterProfileForm.company_website"><code class="docutils literal notranslate"><span class="pre">RecruiterProfileForm.company_website</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.forms.RecruiterProfileForm.description"><code class="docutils literal notranslate"><span class="pre">RecruiterProfileForm.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.forms.RecruiterProfileForm.location"><code class="docutils literal notranslate"><span class="pre">RecruiterProfileForm.location</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.forms.RecruiterProfileForm.media"><code class="docutils literal notranslate"><span class="pre">RecruiterProfileForm.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="recruiter.html#module-recruiter.models">recruiter.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.company_name"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.company_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.company_website"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.company_website</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.created_at"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.description"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.id"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.jobs"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.jobs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.location"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.location</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.objects"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.updated_at"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.updated_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.user"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.models.RecruiterProfile.user_id"><code class="docutils literal notranslate"><span class="pre">RecruiterProfile.user_id</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="recruiter.html#module-recruiter.urls">recruiter.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recruiter.html#module-recruiter.views">recruiter.views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.html#recruiter.views.ApplicationUpdateStatusView"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.ApplicationUpdateStatusView.context_object_name"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.ApplicationUpdateStatusView.form_class"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView.form_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.ApplicationUpdateStatusView.form_valid"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView.form_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.ApplicationUpdateStatusView.get_context_data"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView.get_context_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.ApplicationUpdateStatusView.get_object"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView.get_object()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.ApplicationUpdateStatusView.get_success_url"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView.get_success_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.ApplicationUpdateStatusView.template_name"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.html#recruiter.views.JobCreateView"><code class="docutils literal notranslate"><span class="pre">JobCreateView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobCreateView.form_class"><code class="docutils literal notranslate"><span class="pre">JobCreateView.form_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobCreateView.form_valid"><code class="docutils literal notranslate"><span class="pre">JobCreateView.form_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobCreateView.model"><code class="docutils literal notranslate"><span class="pre">JobCreateView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobCreateView.success_url"><code class="docutils literal notranslate"><span class="pre">JobCreateView.success_url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobCreateView.template_name"><code class="docutils literal notranslate"><span class="pre">JobCreateView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.html#recruiter.views.JobDeleteView"><code class="docutils literal notranslate"><span class="pre">JobDeleteView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobDeleteView.context_object_name"><code class="docutils literal notranslate"><span class="pre">JobDeleteView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobDeleteView.get_queryset"><code class="docutils literal notranslate"><span class="pre">JobDeleteView.get_queryset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobDeleteView.model"><code class="docutils literal notranslate"><span class="pre">JobDeleteView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobDeleteView.success_url"><code class="docutils literal notranslate"><span class="pre">JobDeleteView.success_url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobDeleteView.template_name"><code class="docutils literal notranslate"><span class="pre">JobDeleteView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.html#recruiter.views.JobDetailView"><code class="docutils literal notranslate"><span class="pre">JobDetailView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobDetailView.context_object_name"><code class="docutils literal notranslate"><span class="pre">JobDetailView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobDetailView.get_queryset"><code class="docutils literal notranslate"><span class="pre">JobDetailView.get_queryset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobDetailView.model"><code class="docutils literal notranslate"><span class="pre">JobDetailView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobDetailView.template_name"><code class="docutils literal notranslate"><span class="pre">JobDetailView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.html#recruiter.views.JobUpdateView"><code class="docutils literal notranslate"><span class="pre">JobUpdateView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobUpdateView.context_object_name"><code class="docutils literal notranslate"><span class="pre">JobUpdateView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobUpdateView.form_class"><code class="docutils literal notranslate"><span class="pre">JobUpdateView.form_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobUpdateView.get_queryset"><code class="docutils literal notranslate"><span class="pre">JobUpdateView.get_queryset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobUpdateView.get_success_url"><code class="docutils literal notranslate"><span class="pre">JobUpdateView.get_success_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobUpdateView.model"><code class="docutils literal notranslate"><span class="pre">JobUpdateView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.JobUpdateView.template_name"><code class="docutils literal notranslate"><span class="pre">JobUpdateView.template_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.html#recruiter.views.RecruiterRequiredMixin"><code class="docutils literal notranslate"><span class="pre">RecruiterRequiredMixin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="recruiter.html#recruiter.views.RecruiterRequiredMixin.test_func"><code class="docutils literal notranslate"><span class="pre">RecruiterRequiredMixin.test_func()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.html#recruiter.views.job_applications_list"><code class="docutils literal notranslate"><span class="pre">job_applications_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.html#recruiter.views.recruiter_dashboard"><code class="docutils literal notranslate"><span class="pre">recruiter_dashboard()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.html#recruiter.views.recruiter_job_list"><code class="docutils literal notranslate"><span class="pre">recruiter_job_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.html#recruiter.views.recruiter_profile_create"><code class="docutils literal notranslate"><span class="pre">recruiter_profile_create()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.html#recruiter.views.recruiter_profile_update"><code class="docutils literal notranslate"><span class="pre">recruiter_profile_update()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="recruiter.html#recruiter.views.recruiter_profile_view"><code class="docutils literal notranslate"><span class="pre">recruiter_profile_view()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="recruiter.html#module-recruiter">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="job_connect documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="applicant.html" class="btn btn-neutral float-right" title="applicant package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Team 7.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
