@@ -1,0 +1,660 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>application package &mdash; job_connect  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="application.tests package" href="application.tests.html" />
+    <link rel="prev" title="applicant.tests package" href="applicant.tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            job_connect
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">job_connect</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="applicant.html">applicant package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">application package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html">application.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-application.admin">application.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-application.apps">application.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#application.apps.ApplicationConfig"><code class="docutils literal notranslate"><span class="pre">ApplicationConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-application.forms">application.forms module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#application.forms.ApplicationForm"><code class="docutils literal notranslate"><span class="pre">ApplicationForm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application.forms.ApplicationStatusForm"><code class="docutils literal notranslate"><span class="pre">ApplicationStatusForm</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-application.models">application.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#application.models.Application"><code class="docutils literal notranslate"><span class="pre">Application</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-application.urls">application.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-application.views">application.views module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#application.views.ApplicationUpdateStatusView"><code class="docutils literal notranslate"><span class="pre">ApplicationUpdateStatusView</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application.views.RecruiterRequiredMixin"><code class="docutils literal notranslate"><span class="pre">RecruiterRequiredMixin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application.views.application_confirmation"><code class="docutils literal notranslate"><span class="pre">application_confirmation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application.views.apply_for_job"><code class="docutils literal notranslate"><span class="pre">apply_for_job()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application.views.job_applications_list"><code class="docutils literal notranslate"><span class="pre">job_applications_list()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-application">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">core package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="job.html">job package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="job_connect.html">job_connect package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recruiter.html">recruiter package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">job_connect</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">job_connect</a></li>
+      <li class="breadcrumb-item active">application package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/application.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="application-package">
+<h1>application package<a class="headerlink" href="#application-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="application.tests.html">application.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="application.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application.tests.html#module-application.tests.tests_forms">application.tests.tests_forms module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="application.tests.html#application.tests.tests_forms.ApplicationFormTest"><code class="docutils literal notranslate"><span class="pre">ApplicationFormTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_forms.ApplicationFormTest.test_application_form_file_handling"><code class="docutils literal notranslate"><span class="pre">ApplicationFormTest.test_application_form_file_handling()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_forms.ApplicationFormTest.test_application_form_missing_cover_letter"><code class="docutils literal notranslate"><span class="pre">ApplicationFormTest.test_application_form_missing_cover_letter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_forms.ApplicationFormTest.test_application_form_missing_resume"><code class="docutils literal notranslate"><span class="pre">ApplicationFormTest.test_application_form_missing_resume()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_forms.ApplicationFormTest.test_valid_application_form"><code class="docutils literal notranslate"><span class="pre">ApplicationFormTest.test_valid_application_form()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="application.tests.html#application.tests.tests_forms.ApplicationStatusFormTest"><code class="docutils literal notranslate"><span class="pre">ApplicationStatusFormTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_forms.ApplicationStatusFormTest.test_invalid_application_status_form"><code class="docutils literal notranslate"><span class="pre">ApplicationStatusFormTest.test_invalid_application_status_form()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_forms.ApplicationStatusFormTest.test_valid_application_status_form"><code class="docutils literal notranslate"><span class="pre">ApplicationStatusFormTest.test_valid_application_status_form()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="application.tests.html#module-application.tests.tests_models">application.tests.tests_models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="application.tests.html#application.tests.tests_models.ApplicationModelTest"><code class="docutils literal notranslate"><span class="pre">ApplicationModelTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_models.ApplicationModelTest.setUpTestData"><code class="docutils literal notranslate"><span class="pre">ApplicationModelTest.setUpTestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_models.ApplicationModelTest.test_application_creation"><code class="docutils literal notranslate"><span class="pre">ApplicationModelTest.test_application_creation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_models.ApplicationModelTest.test_application_default_status"><code class="docutils literal notranslate"><span class="pre">ApplicationModelTest.test_application_default_status()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_models.ApplicationModelTest.test_application_resume_upload_path"><code class="docutils literal notranslate"><span class="pre">ApplicationModelTest.test_application_resume_upload_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_models.ApplicationModelTest.test_application_str_method"><code class="docutils literal notranslate"><span class="pre">ApplicationModelTest.test_application_str_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_models.ApplicationModelTest.test_application_unique_together"><code class="docutils literal notranslate"><span class="pre">ApplicationModelTest.test_application_unique_together()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="application.tests.html#module-application.tests.tests_views">application.tests.tests_views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplicationConfirmationViewTest"><code class="docutils literal notranslate"><span class="pre">ApplicationConfirmationViewTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplicationConfirmationViewTest.setUp"><code class="docutils literal notranslate"><span class="pre">ApplicationConfirmationViewTest.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplicationConfirmationViewTest.setUpTestData"><code class="docutils literal notranslate"><span class="pre">ApplicationConfirmationViewTest.setUpTestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplicationConfirmationViewTest.test_application_confirmation_authenticated_applicant_get"><code class="docutils literal notranslate"><span class="pre">ApplicationConfirmationViewTest.test_application_confirmation_authenticated_applicant_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplicationConfirmationViewTest.test_application_confirmation_authenticated_user_get"><code class="docutils literal notranslate"><span class="pre">ApplicationConfirmationViewTest.test_application_confirmation_authenticated_user_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplicationConfirmationViewTest.test_application_confirmation_login_required"><code class="docutils literal notranslate"><span class="pre">ApplicationConfirmationViewTest.test_application_confirmation_login_required()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplyForJobViewTest"><code class="docutils literal notranslate"><span class="pre">ApplyForJobViewTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplyForJobViewTest.setUp"><code class="docutils literal notranslate"><span class="pre">ApplyForJobViewTest.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplyForJobViewTest.setUpTestData"><code class="docutils literal notranslate"><span class="pre">ApplyForJobViewTest.setUpTestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplyForJobViewTest.test_apply_for_job_authenticated_applicant_already_applied"><code class="docutils literal notranslate"><span class="pre">ApplyForJobViewTest.test_apply_for_job_authenticated_applicant_already_applied()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplyForJobViewTest.test_apply_for_job_authenticated_applicant_get"><code class="docutils literal notranslate"><span class="pre">ApplyForJobViewTest.test_apply_for_job_authenticated_applicant_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplyForJobViewTest.test_apply_for_job_authenticated_applicant_post_invalid"><code class="docutils literal notranslate"><span class="pre">ApplyForJobViewTest.test_apply_for_job_authenticated_applicant_post_invalid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplyForJobViewTest.test_apply_for_job_authenticated_applicant_post_valid"><code class="docutils literal notranslate"><span class="pre">ApplyForJobViewTest.test_apply_for_job_authenticated_applicant_post_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplyForJobViewTest.test_apply_for_job_authenticated_recruiter_get_forbidden"><code class="docutils literal notranslate"><span class="pre">ApplyForJobViewTest.test_apply_for_job_authenticated_recruiter_get_forbidden()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplyForJobViewTest.test_apply_for_job_authenticated_recruiter_post_forbidden"><code class="docutils literal notranslate"><span class="pre">ApplyForJobViewTest.test_apply_for_job_authenticated_recruiter_post_forbidden()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.tests.html#application.tests.tests_views.ApplyForJobViewTest.test_apply_for_job_login_required"><code class="docutils literal notranslate"><span class="pre">ApplyForJobViewTest.test_apply_for_job_login_required()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="application.tests.html#module-application.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-application.admin">
+<span id="application-admin-module"></span><h2>application.admin module<a class="headerlink" href="#module-application.admin" title="Link to this heading"></a></h2>
+</section>
+<section id="module-application.apps">
+<span id="application-apps-module"></span><h2>application.apps module<a class="headerlink" href="#module-application.apps" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="application.apps.ApplicationConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">application.apps.</span></span><span class="sig-name descname"><span class="pre">ApplicationConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.apps.ApplicationConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/applications/#django.apps.AppConfig" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.apps.ApplicationConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#application.apps.ApplicationConfig.default_auto_field" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.apps.ApplicationConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'application'</span></em><a class="headerlink" href="#application.apps.ApplicationConfig.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-application.forms">
+<span id="application-forms-module"></span><h2>application.forms module<a class="headerlink" href="#module-application.forms" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="application.forms.ApplicationForm">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">application.forms.</span></span><span class="sig-name descname"><span class="pre">ApplicationForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.forms.ApplicationForm" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/forms/modelforms/#django.forms.ModelForm" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></a></p>
+<p>Form for submitting an application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resume</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/forms/fields/#django.forms.FileField" title="(in Django v5.2)"><em>django.forms.FileField</em></a>) – The resume file to be uploaded. Required.</p></li>
+<li><p><strong>cover_letter</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/forms/fields/#django.forms.CharField" title="(in Django v5.2)"><em>django.forms.CharField</em></a>) – The cover letter for the application.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Form fields:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">resume</span></code>: Resume (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/forms/fields/#django.forms.FileField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileField</span></code></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cover_letter</span></code>: Cover letter (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/forms/fields/#django.forms.CharField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CharField</span></code></a>)</p></li>
+</ul>
+<dl class="py property">
+<dt class="sig sig-object py" id="application.forms.ApplicationForm.media">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#application.forms.ApplicationForm.media" title="Link to this definition"></a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="application.forms.ApplicationStatusForm">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">application.forms.</span></span><span class="sig-name descname"><span class="pre">ApplicationStatusForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.forms.ApplicationStatusForm" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/forms/modelforms/#django.forms.ModelForm" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></a></p>
+<p>Form for updating the status of an application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>status</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/forms/fields/#django.forms.CharField" title="(in Django v5.2)"><em>django.forms.CharField</em></a>) – The new status of the application.</p>
+</dd>
+</dl>
+<p><strong>Form fields:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code>: Status (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/forms/fields/#django.forms.TypedChoiceField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypedChoiceField</span></code></a>)</p></li>
+</ul>
+<dl class="py property">
+<dt class="sig sig-object py" id="application.forms.ApplicationStatusForm.media">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#application.forms.ApplicationStatusForm.media" title="Link to this definition"></a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-application.models">
+<span id="application-models-module"></span><h2>application.models module<a class="headerlink" href="#module-application.models" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="application.models.Application">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">application.models.</span></span><span class="sig-name descname"><span class="pre">Application</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.models.Application" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="core.html#core.models.BaseModel" title="core.models.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></a></p>
+<p>Represents an application submitted by an applicant for a job.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>applicant</strong> (<a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile" title="applicant.models.ApplicantProfile"><em>applicant.models.ApplicantProfile</em></a>) – The applicant who submitted the application.</p></li>
+<li><p><strong>job</strong> (<a class="reference internal" href="job.html#job.models.Job" title="job.models.Job"><em>job.models.Job</em></a>) – The job being applied for.</p></li>
+<li><p><strong>application_date</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.DateTimeField" title="(in Django v5.2)"><em>django.db.models.DateTimeField</em></a>) – The date and time when the application was submitted.</p></li>
+<li><p><strong>skills</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.ManyToManyField" title="(in Django v5.2)"><em>django.db.models.ManyToManyField</em></a>) – The skills associated with the application.</p></li>
+<li><p><strong>resume</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.FileField" title="(in Django v5.2)"><em>django.db.models.FileField</em></a>) – The resume uploaded by the applicant.</p></li>
+<li><p><strong>cover_letter</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.TextField" title="(in Django v5.2)"><em>django.db.models.TextField</em></a>) – The cover letter submitted by the applicant.</p></li>
+<li><p><strong>status</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.CharField" title="(in Django v5.2)"><em>django.db.models.CharField</em></a>) – The current status of the application (e.g., pending, reviewed, etc.).</p></li>
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.BigAutoField" title="(in Django v5.2)"><em>BigAutoField</em></a>) – Primary key: ID</p></li>
+<li><p><strong>created_at</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.DateTimeField" title="(in Django v5.2)"><em>DateTimeField</em></a>) – Created at</p></li>
+<li><p><strong>updated_at</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.DateTimeField" title="(in Django v5.2)"><em>DateTimeField</em></a>) – Updated at</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="application.models.Application.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#application.models.Application.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="application.models.Application.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#application.models.Application.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.models.Application.applicant">
+<span class="sig-name descname"><span class="pre">applicant</span></span><a class="headerlink" href="#application.models.Application.applicant" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.ForeignKey" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForeignKey</span></code></a> to <a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile" title="applicant.models.ApplicantProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicantProfile</span></code></a></p>
+<p>Applicant (related name: <a class="reference internal" href="applicant.html#applicant.models.ApplicantProfile.applications" title="applicant.models.ApplicantProfile.applications"><code class="xref py py-attr docutils literal notranslate"><span class="pre">applications</span></code></a>)</p>
+<p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.models.Application.applicant_id">
+<span class="sig-name descname"><span class="pre">applicant_id</span></span><a class="headerlink" href="#application.models.Application.applicant_id" title="Link to this definition"></a></dt>
+<dd><p>Internal field, use <a class="reference internal" href="#application.models.Application.applicant" title="application.models.Application.applicant"><code class="xref py py-class docutils literal notranslate"><span class="pre">applicant</span></code></a> instead.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.models.Application.application_date">
+<span class="sig-name descname"><span class="pre">application_date</span></span><a class="headerlink" href="#application.models.Application.application_date" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.DateTimeField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTimeField</span></code></a></p>
+<p>Application date</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.models.Application.cover_letter">
+<span class="sig-name descname"><span class="pre">cover_letter</span></span><a class="headerlink" href="#application.models.Application.cover_letter" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.TextField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextField</span></code></a></p>
+<p>Cover letter</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.models.Application.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#application.models.Application.created_at" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.DateTimeField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTimeField</span></code></a></p>
+<p>Created at</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.models.Application.get_next_by_application_date">
+<span class="sig-name descname"><span class="pre">get_next_by_application_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.DateTimeField:</span> <span class="pre">application_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.models.Application.get_next_by_application_date" title="Link to this definition"></a></dt>
+<dd><p>Finds next instance based on <a class="reference internal" href="#application.models.Application.application_date" title="application.models.Application.application_date"><code class="xref py py-attr docutils literal notranslate"><span class="pre">application_date</span></code></a>. See <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/instances/#django.db.models.Model.get_next_by_FOO" title="(in Django v5.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_next_by_FOO()</span></code></a> for more information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.models.Application.get_next_by_created_at">
+<span class="sig-name descname"><span class="pre">get_next_by_created_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.DateTimeField:</span> <span class="pre">created_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.models.Application.get_next_by_created_at" title="Link to this definition"></a></dt>
+<dd><p>Finds next instance based on <a class="reference internal" href="#application.models.Application.created_at" title="application.models.Application.created_at"><code class="xref py py-attr docutils literal notranslate"><span class="pre">created_at</span></code></a>. See <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/instances/#django.db.models.Model.get_next_by_FOO" title="(in Django v5.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_next_by_FOO()</span></code></a> for more information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.models.Application.get_next_by_updated_at">
+<span class="sig-name descname"><span class="pre">get_next_by_updated_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.DateTimeField:</span> <span class="pre">updated_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.models.Application.get_next_by_updated_at" title="Link to this definition"></a></dt>
+<dd><p>Finds next instance based on <a class="reference internal" href="#application.models.Application.updated_at" title="application.models.Application.updated_at"><code class="xref py py-attr docutils literal notranslate"><span class="pre">updated_at</span></code></a>. See <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/instances/#django.db.models.Model.get_next_by_FOO" title="(in Django v5.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_next_by_FOO()</span></code></a> for more information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.models.Application.get_previous_by_application_date">
+<span class="sig-name descname"><span class="pre">get_previous_by_application_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.DateTimeField:</span> <span class="pre">application_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.models.Application.get_previous_by_application_date" title="Link to this definition"></a></dt>
+<dd><p>Finds previous instance based on <a class="reference internal" href="#application.models.Application.application_date" title="application.models.Application.application_date"><code class="xref py py-attr docutils literal notranslate"><span class="pre">application_date</span></code></a>. See <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/instances/#django.db.models.Model.get_previous_by_FOO" title="(in Django v5.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_previous_by_FOO()</span></code></a> for more information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.models.Application.get_previous_by_created_at">
+<span class="sig-name descname"><span class="pre">get_previous_by_created_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.DateTimeField:</span> <span class="pre">created_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.models.Application.get_previous_by_created_at" title="Link to this definition"></a></dt>
+<dd><p>Finds previous instance based on <a class="reference internal" href="#application.models.Application.created_at" title="application.models.Application.created_at"><code class="xref py py-attr docutils literal notranslate"><span class="pre">created_at</span></code></a>. See <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/instances/#django.db.models.Model.get_previous_by_FOO" title="(in Django v5.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_previous_by_FOO()</span></code></a> for more information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.models.Application.get_previous_by_updated_at">
+<span class="sig-name descname"><span class="pre">get_previous_by_updated_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.DateTimeField:</span> <span class="pre">updated_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.models.Application.get_previous_by_updated_at" title="Link to this definition"></a></dt>
+<dd><p>Finds previous instance based on <a class="reference internal" href="#application.models.Application.updated_at" title="application.models.Application.updated_at"><code class="xref py py-attr docutils literal notranslate"><span class="pre">updated_at</span></code></a>. See <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/instances/#django.db.models.Model.get_previous_by_FOO" title="(in Django v5.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_previous_by_FOO()</span></code></a> for more information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.models.Application.get_status_display">
+<span class="sig-name descname"><span class="pre">get_status_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.CharField:</span> <span class="pre">status&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.models.Application.get_status_display" title="Link to this definition"></a></dt>
+<dd><p>Shows the label of the <a class="reference internal" href="#application.models.Application.status" title="application.models.Application.status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">status</span></code></a>. See <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/instances/#django.db.models.Model.get_FOO_display" title="(in Django v5.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_FOO_display()</span></code></a> for more information.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.models.Application.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#application.models.Application.id" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.BigAutoField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">BigAutoField</span></code></a></p>
+<p>Primary key: ID</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.models.Application.job">
+<span class="sig-name descname"><span class="pre">job</span></span><a class="headerlink" href="#application.models.Application.job" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.ForeignKey" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForeignKey</span></code></a> to <a class="reference internal" href="job.html#job.models.Job" title="job.models.Job"><code class="xref py py-class docutils literal notranslate"><span class="pre">Job</span></code></a></p>
+<p>Job (related name: <a class="reference internal" href="job.html#job.models.Job.applications" title="job.models.Job.applications"><code class="xref py py-attr docutils literal notranslate"><span class="pre">applications</span></code></a>)</p>
+<p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.models.Application.job_id">
+<span class="sig-name descname"><span class="pre">job_id</span></span><a class="headerlink" href="#application.models.Application.job_id" title="Link to this definition"></a></dt>
+<dd><p>Internal field, use <a class="reference internal" href="#application.models.Application.job" title="application.models.Application.job"><code class="xref py py-class docutils literal notranslate"><span class="pre">job</span></code></a> instead.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.models.Application.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#application.models.Application.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.models.Application.resume">
+<span class="sig-name descname"><span class="pre">resume</span></span><a class="headerlink" href="#application.models.Application.resume" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.FileField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileField</span></code></a></p>
+<p>Resume</p>
+<p>The descriptor for the file attribute on the model instance. Return a
+FieldFile when accessed so you can write code like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">myapp.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyModel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">instance</span> <span class="o">=</span> <span class="n">MyModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">instance</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">size</span>
+</pre></div>
+</div>
+<p>Assign a file object on assignment so you can do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/path/to/hello.world&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.models.Application.skills">
+<span class="sig-name descname"><span class="pre">skills</span></span><a class="headerlink" href="#application.models.Application.skills" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.ManyToManyField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ManyToManyField</span></code></a> to <a class="reference internal" href="applicant.html#applicant.models.Skill" title="applicant.models.Skill"><code class="xref py py-class docutils literal notranslate"><span class="pre">Skill</span></code></a></p>
+<p>Skills (related name: <a class="reference internal" href="applicant.html#applicant.models.Skill.job_postings" title="applicant.models.Skill.job_postings"><code class="xref py py-attr docutils literal notranslate"><span class="pre">job_postings</span></code></a>)</p>
+<p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.models.Application.status">
+<span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#application.models.Application.status" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.CharField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CharField</span></code></a></p>
+<p>Status</p>
+<p>Choices:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pending</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reviewed</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shortlisted</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">interviewing</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">offered</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rejected</span></code></p></li>
+</ul>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.models.Application.updated_at">
+<span class="sig-name descname"><span class="pre">updated_at</span></span><a class="headerlink" href="#application.models.Application.updated_at" title="Link to this definition"></a></dt>
+<dd><p>Type: <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.DateTimeField" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTimeField</span></code></a></p>
+<p>Updated at</p>
+<p>A wrapper for a deferred-loading field. When the value is read from this</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-application.urls">
+<span id="application-urls-module"></span><h2>application.urls module<a class="headerlink" href="#module-application.urls" title="Link to this heading"></a></h2>
+</section>
+<section id="module-application.views">
+<span id="application-views-module"></span><h2>application.views module<a class="headerlink" href="#module-application.views" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="application.views.ApplicationUpdateStatusView">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">application.views.</span></span><span class="sig-name descname"><span class="pre">ApplicationUpdateStatusView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.views.ApplicationUpdateStatusView" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#application.views.RecruiterRequiredMixin" title="application.views.RecruiterRequiredMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecruiterRequiredMixin</span></code></a>, <a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/class-based-views/generic-editing/#django.views.generic.edit.UpdateView" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateView</span></code></a></p>
+<p>Allows a recruiter to update the status of an application.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.views.ApplicationUpdateStatusView.context_object_name">
+<span class="sig-name descname"><span class="pre">context_object_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'application'</span></em><a class="headerlink" href="#application.views.ApplicationUpdateStatusView.context_object_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.views.ApplicationUpdateStatusView.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#application.views.ApplicationUpdateStatusView.form_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#application.forms.ApplicationStatusForm" title="application.forms.ApplicationStatusForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationStatusForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.views.ApplicationUpdateStatusView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#application.views.ApplicationUpdateStatusView.get_queryset" title="Link to this definition"></a></dt>
+<dd><p>Returns the queryset of applications that the current recruiter has access to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The queryset of applications.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/models/querysets/#django.db.models.query.QuerySet" title="(in Django v5.2)">django.db.models.query.QuerySet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.views.ApplicationUpdateStatusView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#application.views.ApplicationUpdateStatusView.get_success_url" title="Link to this definition"></a></dt>
+<dd><p>Returns the URL to redirect to after successfully updating the application status.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The success URL.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.views.ApplicationUpdateStatusView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#application.views.ApplicationUpdateStatusView.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#application.models.Application" title="application.models.Application"><code class="xref py py-class docutils literal notranslate"><span class="pre">Application</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.views.ApplicationUpdateStatusView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/recruiter/jobs/{job_id}/applications/'</span></em><a class="headerlink" href="#application.views.ApplicationUpdateStatusView.success_url" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="application.views.ApplicationUpdateStatusView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'application/application_update_status.html'</span></em><a class="headerlink" href="#application.views.ApplicationUpdateStatusView.template_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="application.views.RecruiterRequiredMixin">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">application.views.</span></span><span class="sig-name descname"><span class="pre">RecruiterRequiredMixin</span></span><a class="headerlink" href="#application.views.RecruiterRequiredMixin" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/auth/default/#django.contrib.auth.mixins.LoginRequiredMixin" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoginRequiredMixin</span></code></a>, <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/auth/default/#django.contrib.auth.mixins.UserPassesTestMixin" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserPassesTestMixin</span></code></a></p>
+<p>Mixin to restrict access to views only to recruiters.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="application.views.RecruiterRequiredMixin.test_func">
+<span class="sig-name descname"><span class="pre">test_func</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#application.views.RecruiterRequiredMixin.test_func" title="Link to this definition"></a></dt>
+<dd><p>Checks if the current user is a recruiter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the user is a recruiter, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="application.views.application_confirmation">
+<span class="sig-prename descclassname"><span class="pre">application.views.</span></span><span class="sig-name descname"><span class="pre">application_confirmation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">job_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.views.application_confirmation" title="Link to this definition"></a></dt>
+<dd><p>Renders the application confirmation page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpRequest" title="(in Django v5.2)"><em>django.http.HttpRequest</em></a>) – HttpRequest object.</p></li>
+<li><p><strong>job_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The ID of the job for which the application was submitted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Renders the application confirmation page.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>django.shortcuts.render</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="application.views.apply_for_job">
+<span class="sig-prename descclassname"><span class="pre">application.views.</span></span><span class="sig-name descname"><span class="pre">apply_for_job</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">job_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.views.apply_for_job" title="Link to this definition"></a></dt>
+<dd><p>Allows an applicant to apply for a specific job.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpRequest" title="(in Django v5.2)"><em>django.http.HttpRequest</em></a>) – HttpRequest object.</p></li>
+<li><p><strong>job_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The ID of the job being applied for.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Renders the application form or redirects to the confirmation page upon successful application.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>django.shortcuts.render or django.shortcuts.redirect</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>HttpResponseForbidden</strong> – If a recruiter attempts to apply for a job.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="application.views.job_applications_list">
+<span class="sig-prename descclassname"><span class="pre">application.views.</span></span><span class="sig-name descname"><span class="pre">job_applications_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">job_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.views.job_applications_list" title="Link to this definition"></a></dt>
+<dd><p>Lists all applications for a specific job. Accessible only to recruiters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<a class="reference external" href="https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpRequest" title="(in Django v5.2)"><em>django.http.HttpRequest</em></a>) – HttpRequest object.</p></li>
+<li><p><strong>job_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The ID of the job for which applications are listed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Renders the list of applications for the job.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>django.shortcuts.render</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-application">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-application" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="applicant.tests.html" class="btn btn-neutral float-left" title="applicant.tests package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="application.tests.html" class="btn btn-neutral float-right" title="application.tests package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Team 7.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

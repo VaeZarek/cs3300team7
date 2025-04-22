@@ -8,6 +8,7 @@
 import os
 import sys
 import django
+
 sys.path.insert(0, os.path.abspath('..')) # Adjust '..' if your docs directory isn't at the project root
 os.environ['DJANGO_SETTINGS_MODULE'] = 'job_connect.settings'  # Replace 'your_project_name'
 django.setup()
@@ -23,12 +24,23 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx_rtd_theme',
+    'sphinxcontrib_django',
     'django',
     'myst_parser',
 ]
 
 templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = [
+    '_build',
+    'Thumbs.db',
+    '.DS_Store',
+    'venv',
+    '.venv',
+    '**/migrations'
+    '/messaging',
+    '**/__pycache__',
+    '.idea'
+]
 
 
 

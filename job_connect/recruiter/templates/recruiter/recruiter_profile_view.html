@@ -10,6 +10,9 @@
         <p><strong>Website:</strong> <a href="{{ profile.company_website }}" target="_blank">{{ profile.company_website }}</a></p>
     {% endif %}
     <p><strong>Description:</strong> {{ profile.description|linebreaksbr }}</p>
-    <p><a href="{% url 'recruiter:recruiter_profile_update' %}">Edit Profile</a> | <a href="{% url 'recruiter_dashboard' %}">Back to Dashboard</a></p>
+    {% if profile.location %}
+        <p><strong>Location:</strong> {{ profile.location }}</p>
+    {% endif %}
+    <p><a href="{% url 'recruiter:recruiter_profile_update' %}">Edit Profile</a> | <a href="{% url 'recruiter:recruiter_dashboard' %}">Back to Dashboard</a></p>
 </body>
 </html>

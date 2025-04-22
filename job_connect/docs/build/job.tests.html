@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>job.tests package &mdash; job_connect  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="job_connect package" href="job_connect.html" />
+    <link rel="prev" title="job package" href="job.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            job_connect
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">job_connect</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="applicant.html">applicant package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application.html">application package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">core package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="job.html">job package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="job.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">job.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="job.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="job.html#module-job.admin">job.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="job.html#module-job.apps">job.apps module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="job.html#module-job.forms">job.forms module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="job.html#module-job.models">job.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="job.html#module-job.urls">job.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="job.html#module-job.views">job.views module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="job.html#module-job">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="job_connect.html">job_connect package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recruiter.html">recruiter package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">job_connect</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">job_connect</a></li>
+          <li class="breadcrumb-item"><a href="job.html">job package</a></li>
+      <li class="breadcrumb-item active">job.tests package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/job.tests.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="job-tests-package">
+<h1>job.tests package<a class="headerlink" href="#job-tests-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-job.tests.tests_forms">
+<span id="job-tests-tests-forms-module"></span><h2>job.tests.tests_forms module<a class="headerlink" href="#module-job.tests.tests_forms" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="job.tests.tests_forms.JobFormTest">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">job.tests.tests_forms.</span></span><span class="sig-name descname"><span class="pre">JobFormTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_forms.JobFormTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.TestCase" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></a></p>
+<p>Tests for the JobForm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_forms.JobFormTest.setUpTestData">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpTestData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_forms.JobFormTest.setUpTestData" title="Link to this definition"></a></dt>
+<dd><p>Set up test data for the JobFormTest.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_forms.JobFormTest.test_invalid_job_form_missing_required_fields">
+<span class="sig-name descname"><span class="pre">test_invalid_job_form_missing_required_fields</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_forms.JobFormTest.test_invalid_job_form_missing_required_fields" title="Link to this definition"></a></dt>
+<dd><p>Test that a JobForm is invalid when missing required fields.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_forms.JobFormTest.test_job_form_empty_skills_required">
+<span class="sig-name descname"><span class="pre">test_job_form_empty_skills_required</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_forms.JobFormTest.test_job_form_empty_skills_required" title="Link to this definition"></a></dt>
+<dd><p>Test that a JobForm is valid when no skills are required.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_forms.JobFormTest.test_job_form_invalid_application_deadline_type">
+<span class="sig-name descname"><span class="pre">test_job_form_invalid_application_deadline_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_forms.JobFormTest.test_job_form_invalid_application_deadline_type" title="Link to this definition"></a></dt>
+<dd><p>Test that a JobForm is invalid when the application deadline is of an invalid type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_forms.JobFormTest.test_valid_job_form">
+<span class="sig-name descname"><span class="pre">test_valid_job_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_forms.JobFormTest.test_valid_job_form" title="Link to this definition"></a></dt>
+<dd><p>Test that a valid JobForm is valid.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_forms.JobFormTest.test_valid_job_form_optional_fields_missing">
+<span class="sig-name descname"><span class="pre">test_valid_job_form_optional_fields_missing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_forms.JobFormTest.test_valid_job_form_optional_fields_missing" title="Link to this definition"></a></dt>
+<dd><p>Test that a JobForm is valid when optional fields are missing.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-job.tests.tests_models">
+<span id="job-tests-tests-models-module"></span><h2>job.tests.tests_models module<a class="headerlink" href="#module-job.tests.tests_models" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="job.tests.tests_models.JobModelTest">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">job.tests.tests_models.</span></span><span class="sig-name descname"><span class="pre">JobModelTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_models.JobModelTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.TestCase" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></a></p>
+<p>Tests for the Job model.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_models.JobModelTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_models.JobModelTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up the test environment for JobModelTest.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_models.JobModelTest.test_create_job">
+<span class="sig-name descname"><span class="pre">test_create_job</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_models.JobModelTest.test_create_job" title="Link to this definition"></a></dt>
+<dd><p>Test that a Job can be created successfully.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_models.JobModelTest.test_job_fields">
+<span class="sig-name descname"><span class="pre">test_job_fields</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_models.JobModelTest.test_job_fields" title="Link to this definition"></a></dt>
+<dd><p>Test that all fields of a Job are saved correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_models.JobModelTest.test_job_recruiter_relationship">
+<span class="sig-name descname"><span class="pre">test_job_recruiter_relationship</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_models.JobModelTest.test_job_recruiter_relationship" title="Link to this definition"></a></dt>
+<dd><p>Test the relationship between Job and RecruiterProfile.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_models.JobModelTest.test_job_str_method">
+<span class="sig-name descname"><span class="pre">test_job_str_method</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_models.JobModelTest.test_job_str_method" title="Link to this definition"></a></dt>
+<dd><p>Test the __str__ method of the Job model.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-job.tests.tests_views">
+<span id="job-tests-tests-views-module"></span><h2>job.tests.tests_views module<a class="headerlink" href="#module-job.tests.tests_views" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobCreateViewTest">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">job.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">JobCreateViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobCreateViewTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.TestCase" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></a></p>
+<p>Tests for the JobCreateView.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobCreateViewTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobCreateViewTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up the test environment for JobCreateViewTest.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobCreateViewTest.test_job_create_view_get_logged_in_recruiter">
+<span class="sig-name descname"><span class="pre">test_job_create_view_get_logged_in_recruiter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobCreateViewTest.test_job_create_view_get_logged_in_recruiter" title="Link to this definition"></a></dt>
+<dd><p>Test that a logged-in recruiter can access the job create view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobCreateViewTest.test_job_create_view_login_required">
+<span class="sig-name descname"><span class="pre">test_job_create_view_login_required</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobCreateViewTest.test_job_create_view_login_required" title="Link to this definition"></a></dt>
+<dd><p>Test that the job create view requires login.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobCreateViewTest.test_job_create_view_post_invalid_logged_in_recruiter">
+<span class="sig-name descname"><span class="pre">test_job_create_view_post_invalid_logged_in_recruiter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobCreateViewTest.test_job_create_view_post_invalid_logged_in_recruiter" title="Link to this definition"></a></dt>
+<dd><p>Test that the job create view handles invalid form submissions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobCreateViewTest.test_job_create_view_post_valid_logged_in_recruiter">
+<span class="sig-name descname"><span class="pre">test_job_create_view_post_valid_logged_in_recruiter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobCreateViewTest.test_job_create_view_post_valid_logged_in_recruiter" title="Link to this definition"></a></dt>
+<dd><p>Test that a logged-in recruiter can successfully create a job.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobCreateViewTest.test_job_create_view_recruiter_required">
+<span class="sig-name descname"><span class="pre">test_job_create_view_recruiter_required</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobCreateViewTest.test_job_create_view_recruiter_required" title="Link to this definition"></a></dt>
+<dd><p>Test that the job create view requires a recruiter profile.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobDeleteViewTest">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">job.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">JobDeleteViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobDeleteViewTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.TestCase" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></a></p>
+<p>Tests for the JobDeleteView.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobDeleteViewTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobDeleteViewTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up the test environment for JobDeleteViewTest.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobDeleteViewTest.test_job_delete_view_get_logged_in_recruiter_other_job">
+<span class="sig-name descname"><span class="pre">test_job_delete_view_get_logged_in_recruiter_other_job</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobDeleteViewTest.test_job_delete_view_get_logged_in_recruiter_other_job" title="Link to this definition"></a></dt>
+<dd><p>Test that a logged-in recruiter cannot access the job delete view for another recruiter’s job.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobDeleteViewTest.test_job_delete_view_get_logged_in_recruiter_own_job">
+<span class="sig-name descname"><span class="pre">test_job_delete_view_get_logged_in_recruiter_own_job</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobDeleteViewTest.test_job_delete_view_get_logged_in_recruiter_own_job" title="Link to this definition"></a></dt>
+<dd><p>Test that a logged-in recruiter can access the job delete view for their own job.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobDeleteViewTest.test_job_delete_view_login_required">
+<span class="sig-name descname"><span class="pre">test_job_delete_view_login_required</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobDeleteViewTest.test_job_delete_view_login_required" title="Link to this definition"></a></dt>
+<dd><p>Test that the job delete view requires login.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobDeleteViewTest.test_job_delete_view_post_logged_in_recruiter_other_job">
+<span class="sig-name descname"><span class="pre">test_job_delete_view_post_logged_in_recruiter_other_job</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobDeleteViewTest.test_job_delete_view_post_logged_in_recruiter_other_job" title="Link to this definition"></a></dt>
+<dd><p>Test that a logged-in recruiter cannot delete another recruiter’s job.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobDeleteViewTest.test_job_delete_view_post_logged_in_recruiter_own_job">
+<span class="sig-name descname"><span class="pre">test_job_delete_view_post_logged_in_recruiter_own_job</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobDeleteViewTest.test_job_delete_view_post_logged_in_recruiter_own_job" title="Link to this definition"></a></dt>
+<dd><p>Test that a logged-in recruiter can successfully delete their own job.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobDeleteViewTest.test_job_delete_view_recruiter_required">
+<span class="sig-name descname"><span class="pre">test_job_delete_view_recruiter_required</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobDeleteViewTest.test_job_delete_view_recruiter_required" title="Link to this definition"></a></dt>
+<dd><p>Test that the job delete view requires a recruiter profile.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobDetailViewTest">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">job.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">JobDetailViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobDetailViewTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.TestCase" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></a></p>
+<p>Tests for the JobDetailView.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobDetailViewTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobDetailViewTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up the client and URLs for each test.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobDetailViewTest.setUpTestData">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpTestData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobDetailViewTest.setUpTestData" title="Link to this definition"></a></dt>
+<dd><p>Set up test data for JobDetailViewTest.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobDetailViewTest.test_job_detail_displays_correct_job">
+<span class="sig-name descname"><span class="pre">test_job_detail_displays_correct_job</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobDetailViewTest.test_job_detail_displays_correct_job" title="Link to this definition"></a></dt>
+<dd><p>Test that the job detail view displays the correct job.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobDetailViewTest.test_job_detail_returns_404_for_nonexistent_job">
+<span class="sig-name descname"><span class="pre">test_job_detail_returns_404_for_nonexistent_job</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobDetailViewTest.test_job_detail_returns_404_for_nonexistent_job" title="Link to this definition"></a></dt>
+<dd><p>Test that the job detail view returns a 404 for a nonexistent job.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobDetailViewTest.test_job_detail_view_exists">
+<span class="sig-name descname"><span class="pre">test_job_detail_view_exists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobDetailViewTest.test_job_detail_view_exists" title="Link to this definition"></a></dt>
+<dd><p>Test that the job detail view exists.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobListViewTest">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">job.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">JobListViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobListViewTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.TestCase" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></a></p>
+<p>Tests for the JobListView.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobListViewTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobListViewTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up the client and URLs for each test.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobListViewTest.setUpTestData">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpTestData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobListViewTest.setUpTestData" title="Link to this definition"></a></dt>
+<dd><p>Set up test data for JobListViewTest.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobListViewTest.test_job_list_displays_all_jobs">
+<span class="sig-name descname"><span class="pre">test_job_list_displays_all_jobs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobListViewTest.test_job_list_displays_all_jobs" title="Link to this definition"></a></dt>
+<dd><p>Test that the job list view displays all jobs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobListViewTest.test_job_list_is_ordered_by_posted_date_descending">
+<span class="sig-name descname"><span class="pre">test_job_list_is_ordered_by_posted_date_descending</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobListViewTest.test_job_list_is_ordered_by_posted_date_descending" title="Link to this definition"></a></dt>
+<dd><p>Test that the job list is ordered by posted date descending.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobListViewTest.test_job_list_view_exists">
+<span class="sig-name descname"><span class="pre">test_job_list_view_exists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobListViewTest.test_job_list_view_exists" title="Link to this definition"></a></dt>
+<dd><p>Test that the job list view exists.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobSearchViewTest">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">job.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">JobSearchViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobSearchViewTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.TestCase" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></a></p>
+<p>Tests for the JobSearchView.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobSearchViewTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobSearchViewTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up the test environment for JobSearchViewTest.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobSearchViewTest.setUpTestData">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpTestData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobSearchViewTest.setUpTestData" title="Link to this definition"></a></dt>
+<dd><p>Set up test data for JobSearchViewTest.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobSearchViewTest.test_job_search_by_description">
+<span class="sig-name descname"><span class="pre">test_job_search_by_description</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobSearchViewTest.test_job_search_by_description" title="Link to this definition"></a></dt>
+<dd><p>Test that the job search view displays jobs matching the query.
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobSearchViewTest.test_job_search_by_location">
+<span class="sig-name descname"><span class="pre">test_job_search_by_location</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobSearchViewTest.test_job_search_by_location" title="Link to this definition"></a></dt>
+<dd><p>Test that the job search view displays jobs matching the query.
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobSearchViewTest.test_job_search_by_skill">
+<span class="sig-name descname"><span class="pre">test_job_search_by_skill</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobSearchViewTest.test_job_search_by_skill" title="Link to this definition"></a></dt>
+<dd><p>Test that the job search view displays jobs matching the query.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobSearchViewTest.test_job_search_by_title">
+<span class="sig-name descname"><span class="pre">test_job_search_by_title</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobSearchViewTest.test_job_search_by_title" title="Link to this definition"></a></dt>
+<dd><p>Test that the job search view displays jobs matching the query.
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobSearchViewTest.test_job_search_case_insensitive">
+<span class="sig-name descname"><span class="pre">test_job_search_case_insensitive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobSearchViewTest.test_job_search_case_insensitive" title="Link to this definition"></a></dt>
+<dd><p>Test that the job search view displays jobs matching the query, regardless of case.
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobSearchViewTest.test_job_search_no_query">
+<span class="sig-name descname"><span class="pre">test_job_search_no_query</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobSearchViewTest.test_job_search_no_query" title="Link to this definition"></a></dt>
+<dd><p>Test that the job search view displays all jobs when no query is provided.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobSearchViewTest.test_job_search_view_exists">
+<span class="sig-name descname"><span class="pre">test_job_search_view_exists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobSearchViewTest.test_job_search_view_exists" title="Link to this definition"></a></dt>
+<dd><p>Test that the job search view exists.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobUpdateViewTest">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">job.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">JobUpdateViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobUpdateViewTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.TestCase" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></a></p>
+<p>Tests for the JobUpdateView.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobUpdateViewTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobUpdateViewTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up the test environment for JobUpdateViewTest.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobUpdateViewTest.test_job_update_view_get_logged_in_recruiter_other_job">
+<span class="sig-name descname"><span class="pre">test_job_update_view_get_logged_in_recruiter_other_job</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobUpdateViewTest.test_job_update_view_get_logged_in_recruiter_other_job" title="Link to this definition"></a></dt>
+<dd><p>Test that a logged-in recruiter cannot access the job update view for another recruiter’s job.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobUpdateViewTest.test_job_update_view_get_logged_in_recruiter_own_job">
+<span class="sig-name descname"><span class="pre">test_job_update_view_get_logged_in_recruiter_own_job</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobUpdateViewTest.test_job_update_view_get_logged_in_recruiter_own_job" title="Link to this definition"></a></dt>
+<dd><p>Test that a logged-in recruiter can access the job update view for their own job.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobUpdateViewTest.test_job_update_view_login_required">
+<span class="sig-name descname"><span class="pre">test_job_update_view_login_required</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobUpdateViewTest.test_job_update_view_login_required" title="Link to this definition"></a></dt>
+<dd><p>Test that the job update view requires login.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobUpdateViewTest.test_job_update_view_post_invalid_logged_in_recruiter_own_job">
+<span class="sig-name descname"><span class="pre">test_job_update_view_post_invalid_logged_in_recruiter_own_job</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobUpdateViewTest.test_job_update_view_post_invalid_logged_in_recruiter_own_job" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Tests that the job update view handles invalid form submissions for a</dt><dd><p>logged-in recruiter’s own job.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobUpdateViewTest.test_job_update_view_post_logged_in_recruiter_other_job">
+<span class="sig-name descname"><span class="pre">test_job_update_view_post_logged_in_recruiter_other_job</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobUpdateViewTest.test_job_update_view_post_logged_in_recruiter_other_job" title="Link to this definition"></a></dt>
+<dd><p>Test that a logged-in recruiter cannot update another recruiter’s job.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobUpdateViewTest.test_job_update_view_post_valid_logged_in_recruiter_own_job">
+<span class="sig-name descname"><span class="pre">test_job_update_view_post_valid_logged_in_recruiter_own_job</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobUpdateViewTest.test_job_update_view_post_valid_logged_in_recruiter_own_job" title="Link to this definition"></a></dt>
+<dd><p>Test that a logged-in recruiter can successfully update their own job.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.JobUpdateViewTest.test_job_update_view_recruiter_required">
+<span class="sig-name descname"><span class="pre">test_job_update_view_recruiter_required</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.JobUpdateViewTest.test_job_update_view_recruiter_required" title="Link to this definition"></a></dt>
+<dd><p>Test that the job update view requires a recruiter profile.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="job.tests.tests_views.RecruiterJobListTest">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">job.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">RecruiterJobListTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.RecruiterJobListTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.TestCase" title="(in Django v5.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></a></p>
+<p>Tests for the RecruiterJobList.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.RecruiterJobListTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.RecruiterJobListTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up the test environment for RecruiterJobListTest.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.RecruiterJobListTest.setUpTestData">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpTestData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.RecruiterJobListTest.setUpTestData" title="Link to this definition"></a></dt>
+<dd><p>Load initial data for the TestCase.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.RecruiterJobListTest.test_recruiter_job_list_displays_own_jobs">
+<span class="sig-name descname"><span class="pre">test_recruiter_job_list_displays_own_jobs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.RecruiterJobListTest.test_recruiter_job_list_displays_own_jobs" title="Link to this definition"></a></dt>
+<dd><p>Tests that the recruiter job list view displays jobs for the recruiter who is logged in.
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.RecruiterJobListTest.test_recruiter_job_list_is_ordered_by_posted_date_descending">
+<span class="sig-name descname"><span class="pre">test_recruiter_job_list_is_ordered_by_posted_date_descending</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.RecruiterJobListTest.test_recruiter_job_list_is_ordered_by_posted_date_descending" title="Link to this definition"></a></dt>
+<dd><p>Tests that the recruiter job list view displays jobs in descending order of posted date.
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.RecruiterJobListTest.test_recruiter_job_list_login_required">
+<span class="sig-name descname"><span class="pre">test_recruiter_job_list_login_required</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.RecruiterJobListTest.test_recruiter_job_list_login_required" title="Link to this definition"></a></dt>
+<dd><p>Tests that the recruiter job list view requires login.
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="job.tests.tests_views.RecruiterJobListTest.test_recruiter_job_list_recruiter_required">
+<span class="sig-name descname"><span class="pre">test_recruiter_job_list_recruiter_required</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job.tests.tests_views.RecruiterJobListTest.test_recruiter_job_list_recruiter_required" title="Link to this definition"></a></dt>
+<dd><p>Tests that the recruiter job list view requires a recruiter profile.
+:return:</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-job.tests">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-job.tests" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="job.html" class="btn btn-neutral float-left" title="job package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="job_connect.html" class="btn btn-neutral float-right" title="job_connect package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Team 7.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

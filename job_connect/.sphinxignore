@@ -1,0 +1,4 @@
+messaging/
+migrations/
+__pycache__/
+.idea/
