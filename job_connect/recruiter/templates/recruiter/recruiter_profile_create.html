@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Create/Update Recruiter Profile</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block title %}Create/Update Recruiter Profile{% endblock title %}
+
+{% block content %}
     <h1>Create/Update Recruiter Profile</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -14,5 +13,4 @@
         <button type="submit">Save Profile</button>
     </form>
     <p><a href="{% url 'recruiter:recruiter_dashboard' %}">Back to Dashboard</a></p>
-</body>
-</html>
+{% endblock content %}

@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Applications for {{ job.title }}</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block title %}Applications for {{ job.title }}{% endblock title %}
+
+{% block content %}
     <h1>Applications for "{{ job.title }}"</h1>
     <ul>
         {% for application in applications %}
@@ -19,10 +18,9 @@
                 {% endif %}
                 <a href="{% url 'application:application_update_status' application.id %}">Update Status</a>
             </li>
-        {% empty %}
+            {% empty %}
             <li>No applications received yet.</li>
         {% endfor %}
     </ul>
     <p><a href="{% url 'recruiter:recruiter_job_list' %}">Back to My Job Listings</a></p>
-</body>
-</html>
+{% endblock content %}

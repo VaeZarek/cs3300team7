@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Recruiter Profile</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block title %}Recruiter Profile{% endblock title %}
+
+{% block content %}
     <h1>{{ profile.user.username }}'s Company Profile</h1>
     <p><strong>Company Name:</strong> {{ profile.company_name }}</p>
     {% if profile.company_website %}
@@ -14,5 +13,4 @@
         <p><strong>Location:</strong> {{ profile.location }}</p>
     {% endif %}
     <p><a href="{% url 'recruiter:recruiter_profile_update' %}">Edit Profile</a> | <a href="{% url 'recruiter:recruiter_dashboard' %}">Back to Dashboard</a></p>
-</body>
-</html>
+{% endblock content %}

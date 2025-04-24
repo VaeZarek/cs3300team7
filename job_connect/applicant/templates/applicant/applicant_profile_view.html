@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Applicant Profile</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block title %}{{ profile.user.username }}'s Profile - Job Connect{% endblock title %}
+
+{% block content %}
     <h1>{{ profile.user.username }}'s Profile</h1>
     <p><strong>Headline:</strong> {{ profile.headline }}</p>
     <p><strong>Summary:</strong> {{ profile.summary|linebreaksbr }}</p>
@@ -28,5 +27,4 @@
         <p><a href="{{ profile.resume.url }}" target="_blank">View Resume</a></p>
     {% endif %}
     <p><a href="{% url 'applicant:applicant_profile_update' %}">Edit Profile</a> | <a href="{% url 'applicant:applicant_dashboard' %}">Back to Dashboard</a></p>
-</body>
-</html>
+{% endblock content %}

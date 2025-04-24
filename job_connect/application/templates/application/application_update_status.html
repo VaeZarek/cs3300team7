@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Update Application Status</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block title %}Update Application Status{% endblock title %}
+
+{% block content %}
     <h1>Update Application Status for {{ application.applicant.user.username }}</h1>
     <form method="post">
         {% csrf_token %}
@@ -11,5 +10,4 @@
         <button type="submit">Update Status</button>
     </form>
     <p><a href="{% url 'job:job_applications_list' application.job.id %}">Back to Applications for {{ application.job.title }}</a></p>
-</body>
-</html>
+{% endblock content %}

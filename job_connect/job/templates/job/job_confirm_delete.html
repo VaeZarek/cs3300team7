@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Confirm Delete Job</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block title %}Confirm Delete Job{% endblock title %}
+
+{% block content %}
     <h1>Confirm Delete Job</h1>
     <p>Are you sure you want to delete the job "{{ job.title }}"?</p>
     <form method="post">
@@ -11,5 +10,4 @@
         <button type="submit">Yes, Delete</button>
         <a href="{% url 'recruiter:recruiter_job_list' %}">No, Go Back</a>
     </form>
-</body>
-</html>
+{% endblock content %}
