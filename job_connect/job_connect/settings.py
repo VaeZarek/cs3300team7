@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-d06&)o()vh@b34iktg^0jig&3=s71e)4vb0&m%d0rt&@!&duj&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['[2601:281:da00:f8e0:71a8:b7da:347c:2842]']
 
 
 # Application definition
@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'job_connect',
         'USER': 'dhaggitt',
         'PASSWORD': 'donnie5524',
-        'HOST': 'localhost',
+        'HOST': 'database',
         'PORT': '5432',
     }
 }
