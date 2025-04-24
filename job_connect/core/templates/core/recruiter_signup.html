@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+{% extends 'core/base.html' %}
+
 <head>
     <title>Recruiter Sign Up</title>
 </head>
@@ -12,4 +12,5 @@
     </form>
     <p>Already have an account? <a href="{% url 'core:login' %}">Log in</a></p>
 </body>
-</html>
+
+{% endblock %}

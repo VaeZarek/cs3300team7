@@ -14,7 +14,9 @@ services:
       start_period: 30s
       timeout: 10s
   web:
-    build: .
+    build: 
+        context: .
+        dockerfile: Dockerfile
     depends_on:
       db:
         condition: service_healthy
