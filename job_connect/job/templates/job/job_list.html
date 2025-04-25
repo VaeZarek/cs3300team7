@@ -16,6 +16,6 @@
         {% endfor %}
     </ul>
     {% if request.user.is_recruiter %}
-        <p><a href="{% url 'job:job_create' %}">Post a New Job</a> | <a href="{% url 'recruiter_dashboard' %}">Recruiter Dashboard</a></p>
+        <p><a href="{% url 'job:job_create' %}">Post a New Job</a> | <a href="{% url 'recruiter:recruiter_dashboard' %}">Recruiter Dashboard</a></p>
     {% endif %}
 {% endblock content %}

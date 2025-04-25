@@ -117,3 +117,18 @@ class ApplicationUpdateStatusView(RecruiterRequiredMixin, UpdateView):
             str: The success URL.
         """
         return self.success_url.format(job_id=self.object.job.id)
+
+@login_required
+def application_detail(request, application_id):
+    """
+    Displays the details of a specific application.
+
+    Args:
+        request (django.http.HttpRequest): The HTTP request object.
+        application_id (int): The ID of the application to display.
+
+    Returns:
+        django.shortcuts.render: Renders the application detail template.
+    """
+    application = get_object_or_404(Application, pk=application_id)
+    return render(request, 'application/application_detail.html', {'application': application})
