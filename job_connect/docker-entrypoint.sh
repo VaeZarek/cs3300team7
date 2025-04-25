@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Collect static files
+# Set up DB
 echo "Migrate from SQLite to PostgreSQL"
 python3 manage.py makemigrations --merge --noinput
 python3 manage.py migrate
