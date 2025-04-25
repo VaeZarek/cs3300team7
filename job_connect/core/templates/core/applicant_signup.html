@@ -1,9 +1,8 @@
 {% extends 'core/base.html' %}
 
-<head>
-    <title>Applicant Sign Up</title>
-</head>
-<body>
+{% block title %}Applicant Sign Up{% endblock title %}
+
+{% block content %}
     <h1>Applicant Sign Up</h1>
     <form method="post">
         {% csrf_token %}
@@ -11,5 +10,4 @@
         <button type="submit">Sign Up</button>
     </form>
     <p>Already have an account? <a href="{% url 'core:login' %}">Log in</a></p>
-</body>
-{% endblock %}
+{% endblock content %}
