@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Your Applications</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block title %}Your Applications - Job Connect{% endblock title %}
+
+{% block content %}
     <h1>Your Job Applications</h1>
 
     {% if applications %}
@@ -18,5 +17,4 @@
     {% endif %}
 
     <p><a href="{% url 'applicant:applicant_dashboard' %}">Back to Dashboard</a></p>
-</body>
-</html>
+{% endblock content %}

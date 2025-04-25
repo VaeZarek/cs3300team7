@@ -1,3 +1,4 @@
+import os
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
@@ -193,3 +194,64 @@ class ApplicationConfirmationViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'application/application_confirmation.html')
         self.assertEqual(response.context['job'], self.job)
+
+
+class ApplicationDetailViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        # Create a user, applicant profile, recruiter profile, and job
+        cls.user = User.objects.create_user(username='testuser', password='testpassword')
+        cls.applicant_profile = ApplicantProfile.objects.create(user=cls.user)
+        cls.recruiter_user = User.objects.create_user(username='recruiter', password='testpassword')
+        cls.recruiter_profile = RecruiterProfile.objects.create(user=cls.recruiter_user)
+        cls.job = Job.objects.create(
+            recruiter=cls.recruiter_profile,
+            title='Test Job',
+            description='Test Description'
+        )
+
+        # Create a dummy resume file
+        resume_content = b"This is a dummy resume file."
+        cls.resume_file = SimpleUploadedFile("resume.txt", resume_content)
+
+        # Create an application - check if one exists first
+        if not Application.objects.filter(applicant=cls.applicant_profile, job=cls.job).exists():
+            cls.application = Application.objects.create(
+                applicant=cls.applicant_profile,
+                job=cls.job,
+                resume=cls.resume_file  # Assign the dummy resume
+            )
+        else:
+            cls.application = Application.objects.filter(applicant=cls.applicant_profile, job=cls.job).first()
+
+        cls.url = reverse('application:application_detail', kwargs={'application_id': cls.application.id})
+
+    def setUp(self):
+        self.client = Client()
+        self.client.login(username='testuser', password='testpassword')
+
+    def test_application_detail_view_authenticated_user(self):
+        """
+        Test that an authenticated user can access the application detail view.
+        """
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'application/application_detail.html')
+        self.assertEqual(response.context['application'], self.application)
+
+    def test_application_detail_view_unauthenticated_user(self):
+        """
+        Test that an unauthenticated user is redirected to the login page.
+        """
+        self.client.logout()
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 302)  # Redirect
+        self.assertIn('/login/?next=', response.url)
+
+    @classmethod
+    def tearDownClass(cls):
+        # Clean up the dummy file after the tests
+        if hasattr(cls, 'resume_file') and cls.resume_file:
+            if os.path.exists(cls.application.resume.path):
+                os.remove(cls.application.resume.path)
+            cls.application.resume.delete()  # Delete the file from storage

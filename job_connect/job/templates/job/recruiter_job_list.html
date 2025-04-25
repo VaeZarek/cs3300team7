@@ -1,46 +1,52 @@
-<h1>Your Job Postings</h1>
+{% extends "core/base.html" %}
 
-{% if jobs %}
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Posted Date</th>
-        <th>Deadline</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for job in jobs %}
-        <tr>
-          <td>{{ job.title }}</td>
-          <td>{{ job.posted_date|date:"F j, Y" }}</td>
-          <td>
-            {% if job.application_deadline %}
-              {{ job.application_deadline|date:"F j, Y" }}
-            {% else %}
-              -
-            {% endif %}
-          </td>
-          <td>
-            {% if job.is_active %}
-              Active
-            {% else %}
-              Inactive
-            {% endif %}
-          </td>
-          <td>
-            <a href="{% url 'job:job_detail' job.pk %}">View</a> |
-            <a href="{% url 'job:job_update' job.pk %}">Edit</a> |
-            <a href="{% url 'job:job_delete' job.pk %}">Delete</a>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% else %}
-  <p>You haven't posted any jobs yet.</p>
-{% endif %}
+{% block title %}Your Job Postings{% endblock title %}
 
-<p><a href="{% url 'job:job_create' %}">Create a New Job Posting</a></p>
+{% block content %}
+    <h1>Your Job Postings</h1>
+
+    {% if jobs %}
+        <table>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Posted Date</th>
+                <th>Deadline</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for job in jobs %}
+                <tr>
+                    <td>{{ job.title }}</td>
+                    <td>{{ job.posted_date|date:"F j, Y" }}</td>
+                    <td>
+                        {% if job.application_deadline %}
+                            {{ job.application_deadline|date:"F j, Y" }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if job.is_active %}
+                            Active
+                        {% else %}
+                            Inactive
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'job:job_detail' job.pk %}">View</a> |
+                        <a href="{% url 'job:job_update' job.pk %}">Edit</a> |
+                        <a href="{% url 'job:job_delete' job.pk %}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You haven't posted any jobs yet.</p>
+    {% endif %}
+
+    <p><a href="{% url 'job:job_create' %}">Create a New Job Posting</a></p>
+{% endblock content %}

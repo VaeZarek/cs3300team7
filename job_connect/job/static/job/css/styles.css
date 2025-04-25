@@ -6,7 +6,7 @@ body {
     padding: 0;
 }
 
-/* Fixed navbar with logo AND links */
+/* Fixed navbar with logo AND  links */
 .navbar {
     background-color: #ffffff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -50,18 +50,7 @@ body {
 main {
     margin-top: 250px;
     display: flex;
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center children horizontally within the column */
-    /* justify-content: center; is removed as it centers along the column (vertical) axis */
-    padding: 0 20px; /* Add some horizontal padding to prevent content from touching edges */
-}
-
-/* Add spacing between the direct children of main */
-main > * {
-    margin-bottom: 20px; /* Add bottom margin for vertical separation */
-    max-width: 800px; /* Optional: Limit the maximum width of content for readability */
-    width: 100%; /* Ensure elements like the div take up available width up to max-width */
-    box-sizing: border-box; /* Include padding and border in the element's total width */
+    justify-content: center;
 }
 
 /* Container for forms like login/signup */
@@ -70,28 +59,20 @@ main > * {
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    /* Remove fixed width if you want it to be responsive within the main > * rules */
-    /* width: 350px; */
+    width: 350px;
     text-align: center;
-    /* Add margin-bottom if not already handled by main > * */
-    /* margin-bottom: 20px; */
 }
 
 /* Headings */
 h1 {
     color: #333;
-    /* margin-bottom might be handled by main > * now */
-    /* margin-bottom: 1.5rem; */
+    margin-bottom: 1.5rem;
     font-size: 1.5rem;
-    text-align: center; /* Center headings */
 }
 
 /* Form layout */
 form {
     text-align: left;
-    width: 100%; /* Ensure form takes full width within its container */
-    max-width: 500px; /* Optional: Limit form width */
-    margin: 0 auto; /* Center the form if it has a max-width */
 }
 
 form p {
@@ -108,7 +89,6 @@ input[type="password"] {
     border-radius: 5px;
     margin-top: 0.3rem;
     font-size: 1rem;
-    box-sizing: border-box; /* Include padding and border in the element's total width */
 }
 
 /* Button styling */
@@ -132,8 +112,6 @@ button:hover {
 /* Bottom link after forms */
 .login-link {
     margin-top: 1rem;
-    text-align: center; /* Center this link */
-    display: block; /* Ensure it takes up its own line */
 }
 
 /* General link styling */
@@ -145,3 +123,4 @@ a {
 a:hover {
     text-decoration: underline;
 }
+

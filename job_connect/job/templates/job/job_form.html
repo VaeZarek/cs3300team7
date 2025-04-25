@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{% if form.instance.pk %}Edit Job{% else %}Post a New Job{% endif %}</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block title %}{% if form.instance.pk %}Edit Job{% else %}Post a New Job{% endif %}{% endblock title %}
+
+{% block content %}
     <h1>{% if form.instance.pk %}Edit Job{% else %}Post a New Job{% endif %}</h1>
     <form method="post">
         {% csrf_token %}
@@ -11,5 +10,4 @@
         <button type="submit">Save Job</button>
     </form>
     <p><a href="{% url 'recruiter:recruiter_job_list' %}">Back to My Job Listings</a></p>
-</body>
-</html>
+{% endblock content %}

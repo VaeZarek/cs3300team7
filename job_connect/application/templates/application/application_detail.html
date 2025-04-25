@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+
+{% block title %}Application Details{% endblock title %}
+
+{% block content %}
+    <h1>Application Details</h1>
+    <p>Job: {{ application.job.title }}</p>
+    <p>Applicant: {{ application.applicant.user.username }}</p>
+    <p>Submission Date: {{ application.application_date }}</p>
+    <p>Status: {{ application.get_status_display }}</p>
+    <p>Resume: <a href="{{ application.resume.url }}">Download</a></p>
+    <p>Cover Letter: {{ application.cover_letter }}</p>
+    {# Display other application details here #}
+
+    <a href="{% url 'recruiter:recruiter_dashboard' %}">Back to Dashboard</a>
+{% endblock content %}

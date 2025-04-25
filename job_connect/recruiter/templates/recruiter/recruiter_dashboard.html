@@ -1,25 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Recruiter Dashboard</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block title %}Recruiter Dashboard{% endblock title %}
+
+{% block content %}
     <h1>Recruiter Dashboard</h1>
 
     <section id="job-postings">
         <h2>Your Job Postings</h2>
-        </section>
+        <ul>
+            {% for job in jobs %}
+                <li>
+                    {{ job.title }} - {{ job.description }}
+                    <ul>
+                        {% for application in job.applications.all %}
+                            <li>
+                                Applicant: {{ application.applicant.user.username }}
+                                Status: {{ application.get_status_display }}  {# Use get_status_display() #}
+                                <a href="{% url 'application:application_detail' application.id %}">View Details</a>
+                            </li>
+                            {% empty %}
+                            <li>No applications for this job yet.</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% empty %}
+                <li>No job postings yet.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'job:job_create' %}">Create a New Job Posting</a>
+    </section>
 
     <section id="applications">
         <h2>Job Applications</h2>
-        </section>
+        {#  This section can be used for other application-related content #}
+    </section>
 
     <section id="profile">
         <h2>Your Profile</h2>
-        </section>
+    </section>
 
     <nav>
-        </nav>
-
-</body>
-</html>
+    </nav>
+{% endblock content %}

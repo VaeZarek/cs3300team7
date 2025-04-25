@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ job.title }}</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block title %}{{ job.title }}{% endblock title %}
+
+{% block content %}
     <h1>{{ job.title }}</h1>
     <p><strong>Company:</strong> {{ job.recruiter.company_name }}</p>
     <p><strong>Location:</strong> {{ job.location }}</p>
@@ -28,8 +27,7 @@
         </ul>
     {% endif %}
     {% if request.user.is_applicant %}
-        <p><a href="{% url 'apply_for_job' job.id %}">Apply for this Job</a></p>
+        <p><a href="{% url 'application:apply_for_job' job.id %}">Apply for this Job</a></p>
     {% endif %}
     <p><a href="{% url 'job:job_list' %}">Back to Job Listings</a></p>
-</body>
-</html>
+{% endblock content %}

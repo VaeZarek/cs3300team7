@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Applicant Dashboard</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block title %}Applicant Dashboard - Job Connect{% endblock title %}
+
+{% block content %}
     <h1>Welcome to your Applicant Dashboard, {{ request.user.username }}!</h1>
     <p>Here you can view job listings, manage your applications, and update your profile.</p>
 
@@ -15,5 +14,4 @@
             <li><a href="{% url 'applicant:applicant_applications' %}">View Your Applications</a></li>
             </ul>
     </div>
-</body>
-</html>
+{% endblock content %}
